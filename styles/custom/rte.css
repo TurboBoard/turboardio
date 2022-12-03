@@ -1,0 +1,19 @@
+.rte h1 {
+	@apply mb-8;
+}
+
+.rte h2,
+.rte h3,
+.rte h4,
+.rte h5,
+.rte h6 {
+	@apply my-7;
+}
+
+.rte p {
+	@apply mb-6;
+}
+
+.rte a {
+	@apply accent-link;
+}
