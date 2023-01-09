@@ -3,9 +3,9 @@ export default function Page() {
         <div>
             <h1>Hello, Next.js!</h1>
 
-            <a className="opacity-link" href="/api/auth/logout">
+            {/* <a className="opacity-link" href="/api/auth/logout">
                 logout
-            </a>
+            </a> */}
         </div>
     );
 }
