@@ -17,10 +17,6 @@ const Layout = ({ children }: any) => {
     const router = useRouter();
 
     useEffect(() => {
-        window.location.replace("https://twitter.com/TurboBoardIO");
-    }, []);
-
-    useEffect(() => {
         router.events.on("routeChangeComplete", handle_route_change);
 
         return () => {
