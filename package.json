@@ -18,12 +18,22 @@
     },
     "homepage": "https://turboboard.io",
     "dependencies": {
+        "@auth0/nextjs-auth0": "^2.0.1",
+        "@contentful/rich-text-react-renderer": "^15.16.2",
+        "aws-sdk": "^2.1289.0",
+        "contentful": "^9.2.14",
+        "downshift": "^7.0.5",
+        "lodash": "^4.17.21",
+        "nanoid": "^4.0.0",
         "next": "^12.3.4",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "sharp": "^0.31.3"
     },
     "devDependencies": {
-        "@types/node": "^18.11.10",
+        "@contentful/rich-text-types": "^16.0.2",
+        "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+        "@types/node": "^18.11.18",
         "@types/react": "^18.0.26",
         "autoprefixer": "^10.4.13",
         "eslint": "8.29.0",

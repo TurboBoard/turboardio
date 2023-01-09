@@ -1,3 +1,11 @@
 export default function Page() {
-    return <h1>Hello, Next.js!</h1>;
+    return (
+        <div>
+            <h1>Hello, Next.js!</h1>
+
+            <a className="opacity-link" href="/api/auth/logout">
+                logout
+            </a>
+        </div>
+    );
 }

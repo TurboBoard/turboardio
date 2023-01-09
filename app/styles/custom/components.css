@@ -1,0 +1,166 @@
+@layer components {
+    /*
+		HTML Elements
+	*/
+    .button {
+        @apply fade-link;
+
+        @apply px-7;
+        @apply py-6;
+
+        @apply rounded-md;
+
+        @apply bg-highlight;
+        @apply text-light;
+
+        @apply tracking-wider;
+
+        @apply shadow;
+    }
+
+    .heading {
+        @apply font-heading;
+
+        @apply text-accent;
+    }
+
+    .input,
+    .textarea {
+        @apply w-full;
+
+        @apply bg-transparent;
+
+        @apply border-b;
+        @apply border-grey;
+
+        @apply outline-0;
+
+        @apply caret-byzantium;
+
+        @apply in-out-smooth;
+
+        &:focus {
+            @apply border-highlight;
+        }
+    }
+
+    .input {
+        @apply py-4;
+
+        &:disabled {
+            @apply text-grey;
+
+            @apply cursor-not-allowed;
+        }
+
+        &:invalid {
+            @apply border-warning;
+        }
+
+        &:valid {
+            @apply border-copy;
+
+            &:focus {
+                @apply border-highlight;
+            }
+        }
+    }
+
+    .label {
+        @apply block;
+
+        @apply mb-5;
+    }
+
+    .section {
+        @apply gutter;
+
+        @apply py-7;
+        @apply md:py-8;
+        @apply lg:py-9;
+    }
+
+    .textarea {
+        @apply pt-4;
+
+        @apply h-12;
+    }
+
+    /*
+		Custom Elements
+	*/
+    .divider {
+        @apply h-6;
+        @apply md:h-7;
+        @apply lg:h-8;
+    }
+
+    .divider--left-up {
+        clip-path: polygon(100% 0, 0 0, 100% 100%);
+    }
+
+    .divider--left-down {
+        clip-path: polygon(0 0, 0 100%, 100% 100%);
+    }
+
+    .divider--right-down {
+        clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+    }
+
+    .divider--right-up {
+        clip-path: polygon(0 0, 0% 100%, 100% 0);
+    }
+
+    .downshift {
+        &-item {
+            @apply flex;
+            @apply items-center;
+
+            @apply space-x-6;
+
+            @apply p-5;
+
+            @apply cursor-pointer;
+
+            &--highlighted {
+                @apply bg-highlight;
+
+                .downshift-item__title,
+                .downshift-item__released {
+                    @apply text-white;
+                }
+            }
+
+            &__image {
+                @apply shrink-0;
+
+                @apply h-9;
+                @apply w-9;
+
+                @apply rounded-full;
+
+                @apply shadow;
+            }
+
+            &__released {
+                @apply text-grey;
+
+                @apply text-sm;
+            }
+
+            &__title {
+                @apply leading-tight;
+            }
+        }
+
+        &__list {
+            @apply list-none;
+        }
+    }
+
+    .user-image {
+        @apply rounded-full;
+
+        @apply shadow;
+    }
+}
