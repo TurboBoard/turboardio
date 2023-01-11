@@ -18,12 +18,13 @@
         "paths": {
             "@Apis/*": ["app/apis/*"],
             "@Components/*": ["app/components/*"],
+            "@Context/*": ["app/context/*"],
             "@Layouts/*": ["app/layouts/*"],
             "@Lib": ["app/lib/index.ts"],
-            "@Props": ["app/types/props.ts"],
-            "@Styles": ["app/styles/globals.css"],
+            "@Props": ["types/props.ts"],
+            "@Styles": ["styles/globals.css"],
             "@Svgs/*": ["app/svgs/*"],
-            "@Types": ["app/types/types.ts"]
+            "@Types": ["types/types.ts"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

@@ -47,7 +47,7 @@
     }
 
     h1 {
-        @apply mb-8;
+        @apply mb-9;
 
         @apply text-6xl;
     }

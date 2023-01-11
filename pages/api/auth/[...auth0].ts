@@ -10,19 +10,20 @@ import aws from "@Apis/aws";
 import { User } from "@Types";
 
 const create_turboardio_user = async ({ name, nickname, picture, sub }: User): Promise<User["turboardio_user_id"]> => {
-    const image_id = await process_image(picture);
     const user_id = nanoid();
+
     const user_name = nickname || name;
 
     await aws.dynamo.put_item({
         TableName: "turboardio_users",
         Item: {
             auth0_sub: aws.dynamo.input(sub),
-            image_id: aws.dynamo.input(image_id),
             user_id: aws.dynamo.input(user_id),
             user_name: aws.dynamo.input(user_name),
         },
     });
+
+    await process_image(picture, user_id);
 
     return user_id;
 };
@@ -47,10 +48,8 @@ const get_turboardio_user_id = async (sub: User["sub"]): Promise<User["turboardi
     }
 };
 
-const process_image = async (picture: User["picture"]) => {
+const process_image = async (picture: User["picture"], user_id: User["turboardio_user_id"]) => {
     if (!picture) return null;
-
-    const image_id = nanoid();
 
     const response = await fetch(picture);
 
@@ -62,16 +61,14 @@ const process_image = async (picture: User["picture"]) => {
 
     await aws.s3.upload({
         Bucket: "turboardio-user-images",
-        Key: `${image_id}.jpg`,
+        Key: `${user_id}.jpg`,
         Body,
         ContentType: "image/jpeg",
     });
-
-    return image_id;
 };
 
 const afterCallback = async (req: NextApiRequest, res: NextApiResponse<any>, session: any) => {
-    // We store their user_id in the session so that any additional calls will get their turboboard UUID directly from the session
+    // // We store their user_id in the session so that any additional calls will get their turboboard UUID directly from the session
     const turboardio_user_id = await get_turboardio_user_id(session.user.sub);
 
     if (turboardio_user_id) {

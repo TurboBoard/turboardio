@@ -16,6 +16,12 @@
         @apply tracking-wider;
 
         @apply shadow;
+
+        &:disabled {
+            @apply brightness-50;
+
+            @apply cursor-not-allowed;
+        }
     }
 
     .heading {
@@ -46,6 +52,8 @@
 
     .input {
         @apply py-4;
+
+        @apply cursor-pointer;
 
         &:disabled {
             @apply text-grey;
@@ -159,6 +167,8 @@
     }
 
     .user-image {
+        @apply h-[256px];
+        @apply w-[256px];
         @apply rounded-full;
 
         @apply shadow;

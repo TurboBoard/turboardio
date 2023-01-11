@@ -7,7 +7,6 @@ import { TurboardioUser } from "@Types";
 import { blur } from "@Lib";
 
 type State = {
-    image_id: TurboardioUser["image_id"];
     pronouns: TurboardioUser["pronouns"];
     src_handle: TurboardioUser["src_handle"];
     twitch_handle: TurboardioUser["twitch_handle"];
@@ -15,9 +14,8 @@ type State = {
     user_name: TurboardioUser["user_name"];
 };
 
-const Form = ({ email, handle_update, turboardio_user }: { email: string; handle_update: Function; turboardio_user: TurboardioUser }) => {
+const Form = ({ email, handle_update, is_loading, turboardio_user }: { email: string; handle_update: Function; is_loading: boolean; turboardio_user: TurboardioUser }) => {
     const [state, set_state] = useState<State>({
-        image_id: turboardio_user.image_id,
         pronouns: turboardio_user.pronouns || "",
         src_handle: turboardio_user.src_handle || "",
         twitch_handle: turboardio_user.twitch_handle || "",
@@ -25,7 +23,7 @@ const Form = ({ email, handle_update, turboardio_user }: { email: string; handle
         user_name: turboardio_user.user_name,
     });
 
-    const handle_change = (key: "image_id" | "user_name", value: string) =>
+    const handle_change = (key: string, value: string) =>
         set_state({
             ...state,
             [key]: value,
@@ -34,9 +32,11 @@ const Form = ({ email, handle_update, turboardio_user }: { email: string; handle
     const handle_submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        handle_update(state);
-
         blur();
+
+        if (is_loading) return;
+
+        handle_update(state);
     };
 
     return (
@@ -53,12 +53,9 @@ const Form = ({ email, handle_update, turboardio_user }: { email: string; handle
 
             <Input handle_change={handle_change} id="twitter_handle" label="Twitter.com Handle" value={state.twitter_handle} />
 
-            <h3>User Image</h3>
-            <img alt="User Image" className="user-image" src={`https://${process.env.NEXT_PUBLIC_USER_IMAGES_CDN}/${state.image_id}.jpg`} />
-
-            <input name="user-image" accept="image/png, image/jpeg" type="file" />
-
-            <button className="button w-full">Update</button>
+            <button className="button w-full" disabled={is_loading}>
+                Update Details
+            </button>
         </form>
     );
 };

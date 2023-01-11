@@ -1,4 +1,6 @@
-import UserDetails from "@Components/account/UserDetails";
+import UserProfile from "@Components/account/UserProfile";
+
+import { UserProvider } from "@Context/User";
 
 import { AccountProps } from "@Props";
 
@@ -7,7 +9,17 @@ const Page = ({ user }: AccountProps) => (
         <section>
             <h1>Welcome</h1>
 
-            <UserDetails email={user.email} turboardio_user_id={user.turboardio_user_id} />
+            <div className="mb-9">
+                <UserProvider>
+                    <UserProfile email={user.email} turboardio_user_id={user.turboardio_user_id} />
+                </UserProvider>
+            </div>
+
+            <div>
+                <a className="button inline-block" href="/api/auth/logout">
+                    Logout
+                </a>
+            </div>
         </section>
     </div>
 );

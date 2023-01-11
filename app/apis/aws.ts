@@ -6,11 +6,16 @@ AWS.config.update({
     region: "us-east-1",
 });
 
+const cloudfront = new AWS.CloudFront();
+
 const dynamoDB = new AWS.DynamoDB();
 
 const s3 = new AWS.S3();
 
 export default {
+    cloudfront: {
+        create_invalidation: async (params: AWS.CloudFront.CreateInvalidationRequest) => cloudfront.createInvalidation(params).promise(),
+    },
     dynamo: {
         batch_write_items: async (params: AWS.DynamoDB.BatchWriteItemInput) => dynamoDB.batchWriteItem(params).promise(),
         delete_item: async (params: AWS.DynamoDB.DeleteItemInput) => dynamoDB.deleteItem(params).promise(),

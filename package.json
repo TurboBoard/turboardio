@@ -24,6 +24,7 @@
         "contentful": "^9.2.14",
         "downshift": "^7.0.5",
         "lodash": "^4.17.21",
+        "multiparty": "^4.2.3",
         "nanoid": "^4.0.0",
         "next": "^12.3.4",
         "react": "^18.2.0",
@@ -33,6 +34,7 @@
     "devDependencies": {
         "@contentful/rich-text-types": "^16.0.2",
         "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+        "@types/lodash": "^4.14.191",
         "@types/node": "^18.11.18",
         "@types/react": "^18.0.26",
         "autoprefixer": "^10.4.13",

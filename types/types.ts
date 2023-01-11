@@ -5,7 +5,6 @@ import { UserProfile } from "@auth0/nextjs-auth0/client";
 export type Entry = EntryType<any>;
 
 export type TurboardioUser = {
-    image_id: string;
     pronouns: string | null;
     src_handle: string | null;
     twitch_handle: string | null;
