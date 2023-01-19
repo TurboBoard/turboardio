@@ -1,13 +1,13 @@
-import Form from "@Components/forms/CreateBounty";
+import CreateBounty from "@Components/create/Bounty";
 
 import { CreateBountyProps } from "@Props";
 
-const Page = ({ user }: CreateBountyProps) => (
+const Page = ({}: CreateBountyProps) => (
     <div>
         <section>
             <h1>Create Bounty</h1>
 
-            <Form />
+            <CreateBounty />
         </section>
     </div>
 );

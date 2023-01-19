@@ -2,47 +2,63 @@ import { useState } from "react";
 
 import Form from "@Components/forms/UserImage";
 
-import { debounce } from "lodash";
-
 import { TurboardioUser } from "@Types";
 
-const _update_user_image = async (form_data: any, set_is_loading: Function) => {
+type State = {
+    is_loading: boolean;
+    success: boolean;
+};
+
+const update_image = async (form_data: any) => {
     const response = await fetch(`/api/user/update_image`, {
         method: "POST",
         body: form_data,
     });
 
-    const json = await response.json();
-
-    console.log("json response", json);
-
-    set_is_loading(false);
+    return await response.json();
 };
 
-const update_user_image = debounce(_update_user_image, 250);
-
-const Component = ({ user_id }: { user_id: TurboardioUser["user_id"] }) => {
-    const [is_loading, set_is_loading] = useState<boolean>(false);
+const Component = ({ user }: { user: TurboardioUser }) => {
+    const [state, set_state] = useState<State>({
+        is_loading: false,
+        success: false,
+    });
 
     const handle_update = async (file: any) => {
-        set_is_loading(true);
+        set_state({
+            is_loading: true,
+            success: false,
+        });
 
         let form_data = new FormData();
 
-        form_data.append("file", file);
+        form_data.append("user_image", file);
 
-        await update_user_image(form_data, set_is_loading);
+        const { success } = await update_image(form_data);
+
+        set_state({
+            is_loading: false,
+            success,
+        });
     };
+
+    if (state.success) {
+        return (
+            <div>
+                <h2>User Image</h2>
+
+                <p>Your image is processing and will update shortly.</p>
+            </div>
+        );
+    }
 
     return (
         <div>
             <h2>User Image</h2>
 
-            <div className="mb-6">
-                <img alt="User Image" className="user-image" src={`${process.env.NEXT_PUBLIC_USER_IMAGES_CDN}/${user_id}.jpg`} />
-            </div>
+            <img alt="User image" className="user-image mb-7" src={`${process.env.NEXT_PUBLIC_USER_IMAGES_CDN}/${user.id}.jpg`} />
 
-            <Form handle_update={handle_update} is_loading={is_loading} />
+            <Form handle_update={handle_update} is_loading={state.is_loading} />
         </div>
     );
 };

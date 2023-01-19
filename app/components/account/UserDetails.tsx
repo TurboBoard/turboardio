@@ -1,42 +1,38 @@
 import { useState } from "react";
 
-import { useRouter } from "next/router";
-
 import Form from "@Components/forms/UserDetails";
-
-import { debounce } from "lodash";
 
 import { TurboardioUser, User } from "@Types";
 
-const _update_user_details = async (data: TurboardioUser, set_is_loading: Function) => {
+const update_details = async (updated_user: TurboardioUser) => {
     const response = await fetch("/api/user/update_details", {
         method: "post",
-        body: JSON.stringify(data),
+        body: JSON.stringify(updated_user),
     });
 
-    const { success } = await response.json();
-
-    if (success) {
-        set_is_loading(false);
-    }
+    return await response.json();
 };
 
-const update_user_details = debounce(_update_user_details, 250);
-
-const Component = ({ email, turboardio_user, update_turboardio_user }: { email: User["email"]; turboardio_user: TurboardioUser; update_turboardio_user: Function }) => {
+const Component = ({ email, refresh_user, user }: { email: User["email"]; refresh_user: Function; user: TurboardioUser }) => {
     const [is_loading, set_is_loading] = useState<boolean>(false);
 
-    const handle_update = async (data: TurboardioUser) => {
+    const handle_update_details = async (updated_user: TurboardioUser) => {
         set_is_loading(true);
 
-        await update_user_details(data, set_is_loading);
+        const { success } = await update_details(updated_user);
+
+        if (!success) return;
+
+        await refresh_user();
+
+        set_is_loading(false);
     };
 
     return (
         <div>
             <h2>User Details</h2>
 
-            <Form email={email} handle_update={handle_update} is_loading={is_loading} turboardio_user={turboardio_user} />
+            <Form email={email} handle_update={handle_update_details} is_loading={is_loading} user={user} />
         </div>
     );
 };

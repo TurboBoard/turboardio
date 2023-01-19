@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import Button from "@Components/inputs/Button";
+
 import { blur } from "@Lib";
 
 const Form = ({ handle_update, is_loading }: { handle_update: Function; is_loading: boolean }) => {
@@ -23,14 +25,12 @@ const Form = ({ handle_update, is_loading }: { handle_update: Function; is_loadi
     return (
         <form className="space-y-8" onSubmit={handle_submit}>
             <div>
-                <label className="text-sm">For best results image should be 256x256</label>
+                <label className="text-sm">For best results, image should be 256x256</label>
 
                 <input className="border-b-0" onChange={handle_change} type="file" />
             </div>
 
-            <button className="button w-full" disabled={is_loading || !file}>
-                Update Image
-            </button>
+            <Button is_disabled={is_loading || !file} is_loading={is_loading} text="Update Image" />
         </form>
     );
 };

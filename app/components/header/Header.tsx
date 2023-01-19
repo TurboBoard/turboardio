@@ -15,7 +15,7 @@ const Component = () => (
                     </Link>
                 </div>
 
-                <Link href="bounties">
+                <Link href="/bounties">
                     <a className="opacity-link font-heading text-xl md:text-2xl lg:text-4xl leading-none tracking-wide whitespace-nowrap">Bounty Board</a>
                 </Link>
 

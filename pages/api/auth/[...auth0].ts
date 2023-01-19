@@ -34,7 +34,7 @@ const get_turboardio_user_id = async (sub: User["sub"]): Promise<User["turboardi
             TableName: "turboardio_users",
             FilterExpression: "auth0_sub = :auth0_sub",
             ExpressionAttributeValues: {
-                ":auth0_sub": { S: sub },
+                ":auth0_sub": aws.dynamo.input(sub),
             },
         });
 
@@ -69,6 +69,7 @@ const process_image = async (picture: User["picture"], user_id: User["turboardio
 
 const afterCallback = async (req: NextApiRequest, res: NextApiResponse<any>, session: any) => {
     // // We store their user_id in the session so that any additional calls will get their turboboard UUID directly from the session
+    // const turboardio_user_id = await get_turboardio_user_id(session.user.sub);
     const turboardio_user_id = await get_turboardio_user_id(session.user.sub);
 
     if (turboardio_user_id) {
@@ -77,9 +78,9 @@ const afterCallback = async (req: NextApiRequest, res: NextApiResponse<any>, ses
         return session;
     }
 
-    const new_turboardio_user_id = create_turboardio_user(session.user);
+    const new_turboardio_user_id = await create_turboardio_user(session.user);
 
-    session.user.turbo_board_user_id = new_turboardio_user_id;
+    session.user.turboardio_user_id = new_turboardio_user_id;
 
     return session;
 };

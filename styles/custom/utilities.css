@@ -81,6 +81,11 @@
         @apply hover:brightness-75;
     }
 
+    .highlight-link {
+        @apply focus:text-highlight;
+        @apply hover:text-highlight;
+    }
+
     .opacity-link {
         @apply focus:opacity-60;
         @apply hover:opacity-60;

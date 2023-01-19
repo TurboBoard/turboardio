@@ -19,7 +19,7 @@ const update_details = async (req: NextApiRequest, res: NextApiResponse) => {
         let Item = {
             auth0_sub: aws.dynamo.input(sub),
             user_id: aws.dynamo.input(turboardio_user_id),
-            user_name: aws.dynamo.input(body.user_name),
+            user_name: aws.dynamo.input(body.name),
         };
 
         for (const key of ["pronouns", "src_handle", "twitch_handle", "twitter_handle"]) {

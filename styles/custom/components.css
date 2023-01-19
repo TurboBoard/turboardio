@@ -3,8 +3,6 @@
 		HTML Elements
 	*/
     .button {
-        @apply fade-link;
-
         @apply px-7;
         @apply py-6;
 
@@ -17,10 +15,20 @@
 
         @apply shadow;
 
+        &:enabled {
+            @apply fade-link;
+        }
+
         &:disabled {
-            @apply brightness-50;
+            @apply bg-copy;
+
+            @apply opacity-50;
 
             @apply cursor-not-allowed;
+        }
+
+        &--loading {
+            @apply cursor-wait;
         }
     }
 
@@ -28,6 +36,8 @@
         @apply font-heading;
 
         @apply text-accent;
+
+        @apply tracking-wide;
     }
 
     .input,
@@ -36,7 +46,6 @@
 
         @apply bg-transparent;
 
-        @apply border-b;
         @apply border-grey;
 
         @apply outline-0;
@@ -53,7 +62,7 @@
     .input {
         @apply py-4;
 
-        @apply cursor-pointer;
+        @apply border-b;
 
         &:disabled {
             @apply text-grey;
@@ -89,14 +98,35 @@
     }
 
     .textarea {
-        @apply pt-4;
-
         @apply h-12;
+
+        @apply p-4;
+
+        @apply border;
+
+        @apply rounded;
     }
 
     /*
 		Custom Elements
 	*/
+    .bounties {
+        /* @apply divide-y;
+
+        .game {
+            &__image {
+                @apply h-10;
+                @apply w-10;
+            }
+
+            &__title {
+                @apply mb-2;
+
+                @apply text-3xl;
+            }
+        } */
+    }
+
     .divider {
         @apply h-6;
         @apply md:h-7;
@@ -119,24 +149,69 @@
         clip-path: polygon(0 0, 0% 100%, 100% 0);
     }
 
-    .downshift {
+    .game {
+        @apply flex;
+
+        @apply items-center;
+
+        @apply space-x-7;
+
+        &__image {
+            @apply h-[120px];
+            @apply w-[120px];
+
+            @apply shrink-0;
+
+            @apply rounded-full;
+
+            @apply shadow;
+
+            @apply object-cover;
+        }
+
+        &__released {
+            @apply text-grey;
+        }
+
+        &__title {
+            @apply heading;
+
+            @apply mb-3;
+
+            @apply text-4xl;
+
+            @apply highlight-link;
+        }
+    }
+
+    .search {
+        @apply relative;
+
+        &--loading {
+            input {
+                @apply cursor-wait;
+            }
+        }
+
         &-item {
-            @apply flex;
-            @apply items-center;
+            @apply border-grey;
 
-            @apply space-x-6;
+            &__button {
+                @apply fade-link;
 
-            @apply p-5;
+                @apply w-full;
 
-            @apply cursor-pointer;
+                @apply flex;
+                @apply items-center;
 
-            &--highlighted {
-                @apply bg-highlight;
+                @apply space-x-6;
 
-                .downshift-item__title,
-                .downshift-item__released {
-                    @apply text-white;
-                }
+                @apply px-5;
+                @apply py-6;
+
+                @apply text-left;
+
+                @apply cursor-pointer;
             }
 
             &__image {
@@ -162,13 +237,30 @@
         }
 
         &__list {
+            @apply absolute;
+
+            @apply left-0;
+            @apply right-0;
+
+            @apply z-10;
+
+            @apply divide-y;
+
+            @apply border-l;
+            @apply border-r;
+            @apply border-b;
+            @apply border-grey;
+
+            @apply rounded-bl;
+            @apply rounded-br;
+
+            @apply bg-body;
+
             @apply list-none;
         }
     }
 
     .user-image {
-        @apply h-[256px];
-        @apply w-[256px];
         @apply rounded-full;
 
         @apply shadow;

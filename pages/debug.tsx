@@ -2,15 +2,19 @@ const Page = () => <div>debug</div>;
 
 import aws from "@Apis/aws";
 
+import { nanoid } from "nanoid";
+
 export async function getStaticProps() {
-    // for (const {id, image_id, name, user_sub} of data) {
+    // for (const { bounty_id, user_id, amount } of data) {
+    //     const pledge_id = nanoid();
+
     //     await aws.dynamo.put_item({
-    //         TableName: "turboardio_users",
+    //         TableName: "turboardio_pledges",
     //         Item: {
-    //             auth0_sub: aws.dynamo.input(user_sub),
-    //             image_id: aws.dynamo.input(image_id),
-    //             user_id: aws.dynamo.input(id),
-    //             name: aws.dynamo.input(name),
+    //             pledge_id: aws.dynamo.input(pledge_id),
+    //             bounty_id: aws.dynamo.input(bounty_id),
+    //             user_id: aws.dynamo.input(user_id),
+    //             amount: aws.dynamo.input(amount),
     //         },
     //     });
     // }

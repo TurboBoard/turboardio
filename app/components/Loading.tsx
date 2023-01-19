@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Loading = () => {
+const Component = () => {
     const [dots, set_dots] = useState("");
 
     useEffect(() => {
@@ -18,4 +18,4 @@ const Loading = () => {
     return <span>Loading{dots}</span>;
 };
 
-export default Loading;
+export default Component;

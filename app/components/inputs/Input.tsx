@@ -1,3 +1,5 @@
+import Label from "@Components/inputs/Label";
+
 type Input = {
     disabled?: boolean;
     handle_change?: Function;
@@ -41,9 +43,7 @@ const Component = ({ disabled, handle_change, id, label, max_length, placeholder
 
     return (
         <div>
-            <label>
-                {label} {required && <span>*</span>}
-            </label>
+            <Label required={required || false} text={label} />
 
             <input {...props} />
         </div>

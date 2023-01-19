@@ -23,7 +23,7 @@ const parse_form = (req: NextApiRequest): Promise<string> =>
         form.parse(req, (err, fields, files) => {
             if (err) return reject(err);
 
-            return resolve(files.file[0].path);
+            return resolve(files.user_image[0].path);
         });
     });
 
