@@ -30,7 +30,7 @@ const Component = ({ email, refresh_user, user }: { email: User["email"]; refres
 
     return (
         <div>
-            <h2>User Details</h2>
+            <h2>Your Details</h2>
 
             <Form email={email} handle_update={handle_update_details} is_loading={is_loading} user={user} />
         </div>

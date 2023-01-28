@@ -81,6 +81,13 @@
         @apply hover:brightness-75;
     }
 
+    .generic-link {
+        @apply opacity-link;
+
+        @apply underline;
+        @apply underline-offset-4;
+    }
+
     .highlight-link {
         @apply focus:text-highlight;
         @apply hover:text-highlight;
@@ -94,6 +101,21 @@
     /*
 		Effects
 	*/
+    .blink {
+        animation: blink 10s cubic-bezier(0, 0, 0.5, 1) infinite;
+    }
+
+    @keyframes blink {
+        0%,
+        10% {
+            opacity: 0.75;
+        }
+
+        5% {
+            opacity: 0.5;
+        }
+    }
+
     .cubic {
         transition-timing-function: cubic-bezier(0, 0, 0.5, 1);
     }

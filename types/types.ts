@@ -4,27 +4,37 @@ import { UserProfile } from "@auth0/nextjs-auth0/client";
 
 export type Entry = EntryType<any>;
 
+export type Bounties = {
+    admin: {
+        id: TurboardioUser["id"];
+        name: TurboardioUser["name"];
+    };
+    claimed: boolean;
+    created_at: Bounty["created_at"];
+    id: Bounty["id"];
+    game: Bounty["game"];
+    pledges: Bounty["pledges"];
+}[];
+
 export type Bounty = {
     admin: TurboardioUser;
-    claimed: boolean;
+    claims: Claim[] | null;
+    created_at: string;
     details: string;
     game: Game;
     id: string;
-    winning_claim?: Claim;
+    pledges: Pledge[] | null;
+    prize: number | null;
+    winning_claim: Claim | null;
 };
 
-export type Bounties = {
-    claimed: Bounty["claimed"];
-    id: Bounty["id"];
-    game: Bounty["game"];
-    pledges?: {
-        amount: Pledge["amount"];
-        user_id: Pledge["user"]["id"];
-    }[];
-}[];
-
 export type Claim = {
+    comment: string | null;
+    created_at: string;
+    id: string;
+    link: string | null;
     user: TurboardioUser;
+    video?: Video;
 };
 
 export type Game = {
@@ -34,9 +44,17 @@ export type Game = {
     title: string;
 };
 
+export type Meta = {
+    description?: string;
+    image?: string;
+    title?: string;
+    url: string;
+};
+
 export type Pledge = {
     amount: number;
-    user: TurboardioUser;
+    id: string;
+    user_id: TurboardioUser["id"];
 };
 
 export type TurboardioUser = {
@@ -51,3 +69,8 @@ export type TurboardioUser = {
 export interface User extends UserProfile {
     turboardio_user_id: string;
 }
+
+export type Video = {
+    id: string;
+    type: "twitch" | "youtube";
+};

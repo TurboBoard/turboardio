@@ -44,6 +44,8 @@
     h4,
     h5 {
         @apply heading;
+
+        @apply text-accent;
     }
 
     h1 {
@@ -90,6 +92,10 @@
         @apply leading-relaxed;
     }
 
+    small {
+        @apply text-grey;
+    }
+
     a {
         @apply in-out-smooth;
     }
@@ -117,5 +123,9 @@
 
     section {
         @apply section;
+    }
+
+    hr {
+        @apply my-8;
     }
 }

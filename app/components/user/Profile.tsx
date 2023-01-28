@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import UserDetails from "@Components/account/UserDetails";
-import UserImage from "@Components/account/UserImage";
+import Details from "@Components/user/Details";
+import Image from "@Components/user/Image";
 
 import { TurboardioUser, User } from "@Types";
 
@@ -26,15 +26,13 @@ const Component = ({ email }: { email: User["email"] }) => {
 
     if (!user) return null;
 
-    console.log("user", user.name);
-
     return (
         <div>
             <div className="mb-9">
-                <UserDetails email={email} refresh_user={refresh_user} user={user} />
+                <Details email={email} refresh_user={refresh_user} user={user} />
             </div>
 
-            <UserImage user={user} />
+            <Image user={user} />
         </div>
     );
 };

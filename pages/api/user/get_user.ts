@@ -14,9 +14,7 @@ const get_user = async (req: NextApiRequest, res: NextApiResponse) => {
     const { Item } = await aws.dynamo.get_item({
         TableName: "turboardio_users",
         Key: {
-            user_id: {
-                S: turboardio_user_id,
-            },
+            user_id: aws.dynamo.input(turboardio_user_id),
         },
     });
 

@@ -4,18 +4,25 @@ import aws from "@Apis/aws";
 
 import { nanoid } from "nanoid";
 
+const data = [];
+
 export async function getStaticProps() {
-    // for (const { bounty_id, user_id, amount } of data) {
-    //     const pledge_id = nanoid();
+    // for (const { bounty_id, claim_id, created_at, comment, link, user_id } of data) {
+    //     let Item = {
+    //         claim_id: aws.dynamo.input(claim_id),
+    //         bounty_id: aws.dynamo.input(bounty_id),
+    //         user_id: aws.dynamo.input(user_id),
+    //         created_at: aws.dynamo.input(new Date(created_at).toISOString()),
+    //         link: aws.dynamo.input(link),
+    //     };
+
+    //     if (comment) {
+    //         Item.comment = aws.dynamo.input(comment);
+    //     }
 
     //     await aws.dynamo.put_item({
-    //         TableName: "turboardio_pledges",
-    //         Item: {
-    //             pledge_id: aws.dynamo.input(pledge_id),
-    //             bounty_id: aws.dynamo.input(bounty_id),
-    //             user_id: aws.dynamo.input(user_id),
-    //             amount: aws.dynamo.input(amount),
-    //         },
+    //         TableName: "turboardio_claims",
+    //         Item,
     //     });
     // }
 

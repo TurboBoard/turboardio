@@ -8,7 +8,7 @@ const Component = ({ cover, id, released, title }: Game) => (
 
         <div>
             <Link href={`/game/${id}`}>
-                <a className="game__title">{title}</a>
+                <a className="game__title highlight-link">{title}</a>
             </Link>
 
             <div className="game__released">{released}</div>

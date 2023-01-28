@@ -1,11 +1,20 @@
 import aws from "@Apis/aws";
 
-import Layout from "@Layouts/Bounties";
+import Layout from "@Layouts/Game";
 
 import { Bounty, Game, TurboardioUser } from "@Types";
-import { BountiesProps } from "@Props";
+import { GameProps } from "@Props";
 
-const Page = (props: BountiesProps) => {
+import { format } from "@Lib";
+
+type Item = {
+    admin_id: string;
+    bounty_id: string;
+    claim_id: string;
+    created_at: string;
+};
+
+const Page = (props: GameProps) => {
     if (Object.keys(props).length === 0) return null;
 
     return <Layout {...props} />;
@@ -27,7 +36,30 @@ const get_admin = async (admin_id: TurboardioUser["id"]): Promise<{ id: Turboard
     };
 };
 
-const get_game = async (game_id: number): Promise<Game> => {
+const get_items = async (game_id: Game["id"]): Promise<Item[] | null> => {
+    const { Items } = await aws.dynamo.scan({
+        TableName: "turboardio_bounties",
+        FilterExpression: "game_id = :game_id",
+        ExpressionAttributeValues: {
+            ":game_id": aws.dynamo.input(game_id),
+        },
+    });
+
+    if (!Items.length) return [];
+
+    return Items.map((Item) => {
+        const { admin_id, bounty_id, claim_id, created_at } = aws.dynamo.unmarshall(Item);
+
+        return {
+            admin_id,
+            bounty_id,
+            claim_id,
+            created_at,
+        };
+    });
+};
+
+const get_game = async (game_id: Game["id"]): Promise<GameProps["game"]> => {
     const response = await fetch(process.env.IGDB_GAME_ENDPOINT, {
         method: "post",
         headers: {
@@ -35,7 +67,7 @@ const get_game = async (game_id: number): Promise<Game> => {
             "X-Turbo-Key": process.env.API_TOKEN,
         },
         body: JSON.stringify({
-            game_id: game_id.toString(),
+            game_id,
         }),
     });
 
@@ -64,48 +96,54 @@ const get_pledges = async (bounty_id: Bounty["id"]): Promise<Bounty["pledges"]> 
     });
 };
 
-export async function getStaticProps() {
-    const { Items } = await aws.dynamo.scan({
-        TableName: "turboardio_bounties",
-    });
+export async function getStaticProps({ params }: { params: { game_id: string } }) {
+    const game_id = parseInt(params.game_id);
+
+    const game = await get_game(game_id);
+
+    const items = await get_items(game_id);
 
     let bounties = [];
 
-    const sorted = Items.map((Item) => aws.dynamo.unmarshall(Item)).sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf());
+    const sorted = items.sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf());
 
-    for (const { admin_id, bounty_id, claim_id, created_at, game_id } of sorted) {
+    for (const { admin_id, bounty_id, claim_id, created_at } of sorted) {
         const admin = await get_admin(admin_id);
 
         const claimed = claim_id ? true : false;
 
-        const game = await get_game(game_id);
-
         const pledges = await get_pledges(bounty_id);
-
-        const split = created_at.split("T")[0].split("-");
 
         bounties.push({
             admin,
             claimed,
-            created_at: `${split[1]}/${split[2]}/${split[0]}`,
+            created_at: format.created_at(created_at),
             game,
             id: bounty_id,
             pledges,
         });
     }
 
-    const props: BountiesProps = {
+    const props: GameProps = {
         bounties,
+        game,
         meta: {
-            description: "View the latest bounties or search for your favourite game.",
-            title: "Latest bounties",
-            url: `https://turboboard.io/bounties`,
+            description: `View all ${game.title} bounties.`,
+            title: `${game.title} Bounties`,
+            url: `https://turboboard.io/game/${game.id}`,
         },
     };
 
     return {
         props,
-        revalidate: 60,
+        revalidate: 1,
+    };
+}
+
+export async function getStaticPaths() {
+    return {
+        paths: [],
+        fallback: true,
     };
 }
 

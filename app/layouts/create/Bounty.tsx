@@ -1,4 +1,4 @@
-import CreateBounty from "@Components/create/Bounty";
+import CreateBounty from "@Components/bounty/Create";
 
 import { CreateBountyProps } from "@Props";
 

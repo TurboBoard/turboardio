@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import Envelope from "@Svgs/Envelope";
 import Discord from "@Svgs/Discord";
-// import Github from "@Svgs/Github";
+import Github from "@Svgs/Github";
 import Logo from "@Svgs/Logo";
 import Twitter from "@Svgs/Twitter";
 
@@ -26,8 +26,8 @@ const Component = () => (
                     {[
                         { href: "https://twitter.com/TurboBoardIO", icon: <Twitter />, key: "twitter" },
                         { href: "https://discord.gg/7cZvW3AZ7M", icon: <Discord />, key: "discord" },
-                        // { href: "#", icon: <Github />, key: "github" },
-                        { href: "mailto:mail@turboboard.io", icon: <Envelope />, key: "envelope" },
+                        { href: "https://github.com/TurboBoard/turboardio", icon: <Github />, key: "github" },
+                        { href: "mailto:hello@turboboard.io", icon: <Envelope />, key: "envelope" },
                     ].map(({ href, icon, key }) => (
                         <a key={key} className="opacity-link block h-7 text-light" href={href} rel="noreferrer" target="_blank">
                             {icon}

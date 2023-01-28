@@ -1,14 +1,25 @@
-export default function Page() {
-    return (
-        <div>
-            <h1>Hello, Next.js!</h1>
+import Layout from "@Layouts/Home";
 
-            <div>
-                {/* eslint-disable */}
-                <a className="button inline-block" href="/api/auth/logout">
-                    Logout
-                </a>
-            </div>
-        </div>
-    );
+import { HomeProps } from "@Props";
+
+const Page = (props: HomeProps) => {
+    if (Object.keys(props).length === 0) return null;
+
+    return <Layout {...props} />;
+};
+
+export async function getStaticProps() {
+    const props: HomeProps = {
+        meta: {
+            description: "Video Game Bounty Board. Create/Pledge/Claim.",
+            url: "https://turboboard.io",
+        },
+    };
+
+    return {
+        props,
+        revalidate: 60,
+    };
 }
+
+export default Page;

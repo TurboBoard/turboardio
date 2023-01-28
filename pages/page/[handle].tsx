@@ -11,10 +11,10 @@ const Page = (props: PageProps) => {
     return <Layout {...props} />;
 };
 
-export async function getStaticProps({ params }: { params: { handle: string } }) {
+export async function getStaticProps({ params: { handle } }: { params: { handle: string } }) {
     const { items } = await contentful.getEntries({
         content_type: "page",
-        "fields.handle": params.handle,
+        "fields.handle": handle,
         limit: 1,
     });
 
@@ -22,6 +22,10 @@ export async function getStaticProps({ params }: { params: { handle: string } })
 
     const props: PageProps = {
         content: fields.content,
+        meta: {
+            title: fields.title,
+            url: `https://turboboard.io/page/${handle}`,
+        },
         title: fields.title,
     };
 

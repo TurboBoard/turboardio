@@ -54,9 +54,9 @@ const Component = ({ user }: { user: TurboardioUser }) => {
 
     return (
         <div>
-            <h2>User Image</h2>
+            <h2>Your Image</h2>
 
-            <img alt="User image" className="user-image mb-7" src={`${process.env.NEXT_PUBLIC_USER_IMAGES_CDN}/${user.id}.jpg`} />
+            <img alt="Your Image" className="circle-image mb-7" src={`${process.env.NEXT_PUBLIC_USER_IMAGES_CDN}/${user.id}.jpg`} />
 
             <Form handle_update={handle_update} is_loading={state.is_loading} />
         </div>

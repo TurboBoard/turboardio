@@ -1,4 +1,4 @@
-import UserProfile from "@Components/account/UserProfile";
+import Profile from "@Components/user/Profile";
 
 import { AccountProps } from "@Props";
 
@@ -8,7 +8,7 @@ const Page = ({ user }: AccountProps) => (
             <h1>Welcome</h1>
 
             <div className="mb-9">
-                <UserProfile email={user.email} />
+                <Profile email={user.email} />
             </div>
 
             <div>

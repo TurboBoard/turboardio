@@ -12,6 +12,8 @@ const dynamoDB = new AWS.DynamoDB();
 
 const s3 = new AWS.S3();
 
+const ses = new AWS.SES();
+
 export default {
     cloudfront: {
         create_invalidation: async (params: AWS.CloudFront.CreateInvalidationRequest) => cloudfront.createInvalidation(params).promise(),
@@ -31,5 +33,8 @@ export default {
     s3: {
         delete: (params: AWS.S3.DeleteObjectRequest) => s3.deleteObject(params).promise(),
         upload: (params: AWS.S3.PutObjectRequest) => s3.upload(params).promise(),
+    },
+    ses: {
+        send_email: async (params: AWS.SES.SendEmailRequest) => ses.sendEmail(params).promise(),
     },
 };

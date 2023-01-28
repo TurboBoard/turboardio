@@ -11,6 +11,7 @@ module.exports = {
                 dark: "#171717",
                 light: "#fafafa",
                 pink: "#FF3399",
+                teal: "#0cc",
                 warning: "#F43F5E",
             },
         },

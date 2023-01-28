@@ -1,20 +1,18 @@
-import X from "@Svgs/X";
 import Game from "@Components/igdb/Game";
 import Search from "@Components/igdb/Search";
+import X from "@Svgs/X";
 
 import { Game as GameType } from "@Types";
 
 const Component = ({ game, set_game }: { game: GameType | null; set_game: Function }) => {
     if (game) {
         return (
-            <div className="relative">
-                <div className="absolute z-10 opacity-0 focus:opacity-100 hover:opacity-100 in-out-smooth">
-                    <button className="game__image flex justify-center items-center p-7 bg-highlight text-white" onClick={() => set_game(null)}>
-                        <X />
-                    </button>
-                </div>
+            <div className="flex space-x-5">
+                <Game {...game} />
 
-                {/* <Game {...game} /> */}
+                <button className="highlight-link h-7 w-7" onClick={() => set_game(null)}>
+                    <X />
+                </button>
             </div>
         );
     }

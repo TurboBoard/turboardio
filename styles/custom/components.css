@@ -27,15 +27,37 @@
             @apply cursor-not-allowed;
         }
 
+        &--highlight {
+            @apply focus:bg-highlight;
+            @apply hover:bg-highlight;
+        }
+
         &--loading {
             @apply cursor-wait;
+        }
+
+        &-social {
+            @apply inline-flex;
+            @apply items-center;
+
+            @apply space-x-5;
+
+            &--discord {
+                @apply bg-[#5865F2];
+            }
+
+            &--github {
+                @apply bg-[#171515];
+            }
+
+            &__icon {
+                @apply h-7;
+            }
         }
     }
 
     .heading {
         @apply font-heading;
-
-        @apply text-accent;
 
         @apply tracking-wide;
     }
@@ -70,7 +92,7 @@
             @apply cursor-not-allowed;
         }
 
-        &:invalid {
+        &:invalid:not([value=""]) {
             @apply border-warning;
         }
 
@@ -110,21 +132,12 @@
     /*
 		Custom Elements
 	*/
-    .bounties {
-        /* @apply divide-y;
+    .circle-image {
+        @apply object-cover;
 
-        .game {
-            &__image {
-                @apply h-10;
-                @apply w-10;
-            }
+        @apply rounded-full;
 
-            &__title {
-                @apply mb-2;
-
-                @apply text-3xl;
-            }
-        } */
+        @apply shadow;
     }
 
     .divider {
@@ -157,16 +170,14 @@
         @apply space-x-7;
 
         &__image {
-            @apply h-[120px];
-            @apply w-[120px];
+            @apply circle-image;
+
+            @apply h-10;
+            @apply w-10;
+            @apply lg:h-11;
+            @apply lg:w-11;
 
             @apply shrink-0;
-
-            @apply rounded-full;
-
-            @apply shadow;
-
-            @apply object-cover;
         }
 
         &__released {
@@ -176,11 +187,40 @@
         &__title {
             @apply heading;
 
-            @apply mb-3;
+            @apply block;
 
-            @apply text-4xl;
+            @apply mb-5;
 
-            @apply highlight-link;
+            @apply text-accent;
+
+            @apply text-3xl;
+            @apply lg:text-4xl;
+
+            @apply leading-none;
+        }
+    }
+
+    .jumbo {
+        @apply absolute;
+        @apply z-[-1];
+        @apply top-1/2;
+        @apply left-1/2;
+
+        @apply transform;
+        @apply -translate-x-1/2;
+        @apply -translate-y-1/2;
+
+        &__text {
+            @apply heading;
+
+            @apply opacity-10;
+
+            @apply text-grey;
+
+            @apply text-7xl;
+            @apply lg:text-8xl;
+
+            @apply uppercase;
         }
     }
 
@@ -258,11 +298,5 @@
 
             @apply list-none;
         }
-    }
-
-    .user-image {
-        @apply rounded-full;
-
-        @apply shadow;
     }
 }

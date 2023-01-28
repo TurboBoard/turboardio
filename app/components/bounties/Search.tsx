@@ -1,15 +1,32 @@
-import Select from "@Components/igdb/Select";
+import { useState } from "react";
 
-import { Game } from "@Types";
+import Bounties from "@Components/bounties/Bounties";
+import Input from "@Components/inputs/Input";
 
-const Component = () => {
-    const handle_set_game = async (game: Game | null) => {
-        console.log("game", game);
-    };
+const Component = ({ bounties }) => {
+    const [query, set_query] = useState<string>("");
+
+    const handle_change = (key, value) => set_query(value);
+
+    const filtered_bounties = query.length
+        ? bounties.filter(({ game }) =>
+              game.title
+                  .toLowerCase()
+                  .normalize("NFD")
+                  .replace(/[\u0300-\u036f]/g, "")
+                  .includes(query)
+          )
+        : null;
 
     return (
-        <div className="space-y-8">
-            <Select game={null} set_game={handle_set_game} />
+        <div>
+            <Input handle_change={handle_change} id="query" label="Search by Game Title" placeholder="Legend of Zelda, Super Mario 64, Mega Man, etc..." value={query} />
+
+            {filtered_bounties && (
+                <div className="mt-9">
+                    <Bounties bounties={filtered_bounties} />
+                </div>
+            )}
         </div>
     );
 };
