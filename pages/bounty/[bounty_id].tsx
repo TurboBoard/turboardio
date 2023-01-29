@@ -194,8 +194,22 @@ export async function getStaticProps({ params: { bounty_id } }: { params: { boun
 }
 
 export async function getStaticPaths() {
+    const { Items } = await aws.dynamo.scan({
+        TableName: "turboardio_bounties",
+    });
+
+    const paths = Items.map((Item) => {
+        const { bounty_id } = aws.dynamo.unmarshall(Item);
+
+        return {
+            params: {
+                bounty_id,
+            },
+        };
+    });
+
     return {
-        paths: [],
+        paths,
         fallback: true,
     };
 }
