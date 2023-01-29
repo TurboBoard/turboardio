@@ -185,8 +185,39 @@ export async function getStaticProps({ params: { bounty_id } }: { params: { boun
 }
 
 export async function getStaticPaths() {
+    const ids = [
+        "4TUKKmUst_e5HyLQEdJfF",
+        "jO5MSBVju7d6yzOQn7SnF",
+        "v5Ocf4GFK17CONWpDJJuA",
+        "_9jszQdNXA4dj29MBRdv8",
+        "pN9i0wxy1KpYoUqZVItHB",
+        "HkP_VmOleFJUhRP_6gsJg",
+        "MEq2JSfPz2ef8208S4FNF",
+        "ESjLnX5ptZSM_XvUOngvN",
+        "RO7SAma9kLsSs_EV6HLrL",
+        "lwbflmzJkttRa7a9pcL15",
+        "oOPH4S8bL-V9ZKR-3zsFv",
+        "5DeqTY4JzhKqmFTLogTRI",
+        "WVi2hWe9sjAvDE8F_1CYG",
+        "qoLVWOLsdBGd2pKgwMcTo",
+        "RGmWQfQiunX19nwQjRIMQ",
+        "fDa-SmNMIfg556k68NfVt",
+        "'-mBfc6h-Nxoz7j55mCzNd",
+        "UpS4KAz4RZohdVOneJxv4",
+        "kdDwm1B194DqxkYYyO8Aq",
+        "s6g7R6GkaxZLdQtqAV4fD",
+        "'-dKsdt4-MbKvd7cKVAsby",
+        "J8AWNiXTrC3MSFwQbx6af",
+    ];
+
+    const paths = ids.map((bounty_id) => ({
+        params: {
+            bounty_id,
+        },
+    }));
+
     return {
-        paths: [],
+        paths,
         fallback: true,
     };
 }
