@@ -64,7 +64,7 @@ const get_game = async (game_id: Game["id"]): Promise<GameProps["game"]> => {
         method: "post",
         headers: {
             Accept: "application/json",
-            "X-Turbo-Key": process.env.API_TOKEN,
+            "X-Turbo-Key": process.env.CLOUDFLARE_API_TOKEN,
         },
         body: JSON.stringify({
             game_id,

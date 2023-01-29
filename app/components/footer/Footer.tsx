@@ -15,10 +15,8 @@ const Component = () => (
         <div className="gutter py-7">
             <div className="relative flex flex-col">
                 <div className="flex justify-start">
-                    <Link href="/">
-                        <a className="opacity-link block h-9 mb-7">
-                            <Logo />
-                        </a>
+                    <Link className="opacity-link block h-9 mb-7" href="/">
+                        <Logo />
                     </Link>
                 </div>
 
@@ -42,8 +40,8 @@ const Component = () => (
                         { handle: "privacy-policy", text: "Privacy Policy" },
                         { handle: "terms-and-conditions", text: "Terms & Conditions" },
                     ].map(({ handle, text }) => (
-                        <Link key={handle} href={`/page/${handle}`}>
-                            <a className="opacity-link text-light">{text}</a>
+                        <Link key={handle} className="opacity-link text-light" href={`/page/${handle}`}>
+                            {text}
                         </Link>
                     ))}
                 </div>

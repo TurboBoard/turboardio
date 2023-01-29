@@ -11,10 +11,8 @@ const Component = () => {
 
     if (user) {
         return (
-            <Link href="/account">
-                <a className="opacity-link block h-[17px] md:h-7 lg:h-[26px]">
-                    <User />
-                </a>
+            <Link className="opacity-link block h-[17px] md:h-7 lg:h-[26px]" href="/account">
+                <User />
             </Link>
         );
     }

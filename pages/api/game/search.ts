@@ -7,7 +7,7 @@ const search = async (req: NextApiRequest, res: NextApiResponse) => {
         method: "post",
         headers: {
             Accept: "application/json",
-            "X-Turbo-Key": process.env.API_TOKEN,
+            "X-Turbo-Key": process.env.CLOUDFLARE_API_TOKEN,
         },
         body: JSON.stringify({
             query,

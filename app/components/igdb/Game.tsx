@@ -7,8 +7,8 @@ const Component = ({ cover, id, released, title }: Game) => (
         <img className="game__image" alt={`${title} cover`} src={cover} />
 
         <div>
-            <Link href={`/game/${id}`}>
-                <a className="game__title highlight-link">{title}</a>
+            <Link className="game__title highlight-link" href={`/game/${id}`}>
+                {title}
             </Link>
 
             <div className="game__released">{released}</div>

@@ -14,7 +14,7 @@ const Component = () => (
             </h1>
 
             {/* prettier-ignore */}
-            <p className="mb-8">Create/Pledge/Claim video game bounties.<br />Read the <Link href="/page/faq"><a className="generic-link">FAQ</a></Link> or check out the <Link href="/bounties"><a className="generic-link">Bounty Board.</a></Link></p>
+            <p className="mb-8">Create/Pledge/Claim video game bounties.<br />Read the <Link href="/page/faq" className="generic-link">FAQ</Link> or check out the <Link href="/bounties" className="generic-link">Bounty Board.</Link></p>
 
             <div className="space-x-6">
                 <a className="button button--highlight button-social button-social--discord" href="https://discord.gg/7cZvW3AZ7M" target="_blank">

@@ -38,33 +38,31 @@ const Component = ({ bounties }: { bounties: Bounties }) => {
                         </div>
                     )}
 
-                    <Link href={`/bounty/${id}`}>
-                        <a className="fade-link">
-                            <div className="flex justify-between items-center mb-5">
-                                <div className="game">
-                                    <img alt={`{game.title} cover`} className="game__image" src={game.cover} />
+                    <Link className="fade-link" href={`/bounty/${id}`}>
+                        <div className="flex justify-between items-center mb-5">
+                            <div className="game">
+                                <img alt={`{game.title} cover`} className="game__image" src={game.cover} />
 
-                                    <div>
-                                        <div className="game__title">{game.title}</div>
+                                <div>
+                                    <div className="game__title">{game.title}</div>
 
-                                        <div className="game__released">{game.released}</div>
-                                    </div>
+                                    <div className="game__released">{game.released}</div>
                                 </div>
-
-                                {pledges && (
-                                    <div className="hidden xs:block">
-                                        <Pledges pledges={pledges} />
-                                    </div>
-                                )}
                             </div>
 
-                            <div className="text-center">
-                                {/* prettier-ignore */}
-                                <small>
+                            {pledges && (
+                                <div className="hidden xs:block">
+                                    <Pledges pledges={pledges} />
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="text-center">
+                            {/* prettier-ignore */}
+                            <small>
                                     Bounty created on {created_at} by <span className="text-black">{admin.name}</span>
                                 </small>
-                            </div>
-                        </a>
+                        </div>
                     </Link>
                 </div>
             ))}
