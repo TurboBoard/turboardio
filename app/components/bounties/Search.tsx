@@ -23,7 +23,7 @@ const Component = ({ bounties }) => {
             <Input handle_change={handle_change} id="query" label="Search by Game Title" placeholder="Legend of Zelda, Super Mario 64, Mega Man, etc..." value={query} />
 
             {filtered_bounties && (
-                <div className="mt-9">
+                <div className="mt-5">
                     <Bounties bounties={filtered_bounties} />
                 </div>
             )}

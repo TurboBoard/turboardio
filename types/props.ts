@@ -5,7 +5,6 @@ export type AccountProps = {
 };
 
 export type BountiesProps = {
-    bounties: Bounties;
     meta: Meta;
 };
 

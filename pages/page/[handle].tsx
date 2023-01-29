@@ -31,14 +31,14 @@ export async function getStaticProps({ params: { handle } }: { params: { handle:
 
     return {
         props,
-        revalidate: 1,
+        revalidate: 60,
     };
 }
 
 export async function getStaticPaths() {
     const { items } = await contentful.getEntries({
         content_type: "page",
-        limit: 100,
+        limit: 10,
     });
 
     const paths = items.map(({ fields }: Entry) => ({
