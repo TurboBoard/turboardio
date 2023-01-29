@@ -74,7 +74,7 @@ const get_users = async (): Promise<{ [key: string]: { id: TurboardioUser["id"];
     return users;
 };
 
-const search = async (req: NextApiRequest, res: NextApiResponse) => {
+const get = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         let bounties = [];
 
@@ -82,9 +82,8 @@ const search = async (req: NextApiRequest, res: NextApiResponse) => {
             TableName: "turboardio_bounties",
         });
 
-        const sorted = Items.map((Item) => aws.dynamo.unmarshall(Item))
-            .sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf())
-            .slice(0, 5);
+        console.log("started");
+        const sorted = Items.map((Item) => aws.dynamo.unmarshall(Item)).sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf());
 
         const games = await get_games(sorted);
 
@@ -111,6 +110,8 @@ const search = async (req: NextApiRequest, res: NextApiResponse) => {
             });
         }
 
+        console.log(JSON.stringify(bounties));
+
         res.status(200).json({ bounties });
     } catch (err) {
         console.log("err", err);
@@ -119,4 +120,4 @@ const search = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 };
 
-export default search;
+export default get;
