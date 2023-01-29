@@ -1,5 +1,8 @@
+import aws from "@Apis/aws";
+
 import Layout from "@Layouts/Bounties";
 
+import { Bounty, Game, TurboardioUser } from "@Types";
 import { BountiesProps } from "@Props";
 
 const Page = (props: BountiesProps) => {
@@ -8,144 +11,111 @@ const Page = (props: BountiesProps) => {
     return <Layout {...props} />;
 };
 
-const bounties = [
-    {
-        admin: { id: "FBOGBxFSd0uTAY8YrXrjv", name: "First Try I Swear" },
-        claimed: false,
-        created_at: "11/11/2022",
-        game: { cover: "//images.igdb.com/igdb/image/upload/t_cover_big/co2r7p.jpg", id: 10801, released: 2014, title: "Runers" },
-        id: "RO7SAma9kLsSs_EV6HLrL",
-        pledges: [
-            { amount: 100, id: "UD0bBr6q7a--ucgCHLWaj", user_id: "sFAJlPood4Qv4IoGQT3pH" },
-            { amount: 100, id: "lNjIvejmWR6zFwwo5FEQf", user_id: "FBOGBxFSd0uTAY8YrXrjv" },
-        ],
-    },
-    {
-        admin: { id: "whGtp5MxwBCO0RoBgVmsu", name: "Mild Goth Daddy" },
-        claimed: true,
-        created_at: "11/09/2022",
-        game: { cover: "//images.igdb.com/igdb/image/upload/t_cover_big/co4l30.jpg", id: 125263, released: 2018, title: "Spiders" },
-        id: "lwbflmzJkttRa7a9pcL15",
-        pledges: [
-            { amount: 20, id: "kj3FbI-ZnydHiHECnUH87", user_id: "sFAJlPood4Qv4IoGQT3pH" },
-            { amount: 30, id: "a2UoyEoJl0cXINgOJPrIL", user_id: "whGtp5MxwBCO0RoBgVmsu" },
-        ],
-    },
-    {
-        admin: { id: "FBOGBxFSd0uTAY8YrXrjv", name: "First Try I Swear" },
-        claimed: true,
-        created_at: "10/13/2022",
-        game: { cover: "//images.igdb.com/igdb/image/upload/t_cover_big/co2r7p.jpg", id: 10801, released: 2014, title: "Runers" },
-        id: "oOPH4S8bL-V9ZKR-3zsFv",
-        pledges: null,
-    },
-    {
-        admin: { id: "whGtp5MxwBCO0RoBgVmsu", name: "Mild Goth Daddy" },
-        claimed: true,
-        created_at: "08/25/2022",
-        game: { cover: "//images.igdb.com/igdb/image/upload/t_cover_big/co2eh6.jpg", id: 594, released: 2001, title: "Aliens versus Predator 2" },
-        id: "5DeqTY4JzhKqmFTLogTRI",
-        pledges: [
-            { amount: 20, id: "5yRLSFoj9kwqVcIQ7Ep8S", user_id: "sFAJlPood4Qv4IoGQT3pH" },
-            { amount: 20, id: "9MxdVLwGsmFRwkOEYhSnT", user_id: "whGtp5MxwBCO0RoBgVmsu" },
-        ],
-    },
-    {
-        admin: { id: "sFAJlPood4Qv4IoGQT3pH", name: "Turbo Board" },
-        claimed: true,
-        created_at: "08/08/2022",
-        game: { cover: "//images.igdb.com/igdb/image/upload/t_cover_big/co2eh6.jpg", id: 594, released: 2001, title: "Aliens versus Predator 2" },
-        id: "WVi2hWe9sjAvDE8F_1CYG",
-        pledges: [{ amount: 50, id: "it9ab7scGrgMvDspkahHn", user_id: "sFAJlPood4Qv4IoGQT3pH" }],
-    },
-    {
-        admin: { id: "sFAJlPood4Qv4IoGQT3pH", name: "Turbo Board" },
-        claimed: true,
-        created_at: "08/08/2022",
-        game: { cover: "//images.igdb.com/igdb/image/upload/t_cover_big/co2eh6.jpg", id: 594, released: 2001, title: "Aliens versus Predator 2" },
-        id: "qoLVWOLsdBGd2pKgwMcTo",
-        pledges: [{ amount: 20, id: "gRPXtg7wWJQFc2kjSkxfn", user_id: "sFAJlPood4Qv4IoGQT3pH" }],
-    },
-    {
-        admin: { id: "sFAJlPood4Qv4IoGQT3pH", name: "Turbo Board" },
-        claimed: true,
-        created_at: "08/08/2022",
-        game: { cover: "//images.igdb.com/igdb/image/upload/t_cover_big/co2eh6.jpg", id: 594, released: 2001, title: "Aliens versus Predator 2" },
-        id: "RGmWQfQiunX19nwQjRIMQ",
-        pledges: [{ amount: 20, id: "5uDmaGrwxjzOgRMT-ts6n", user_id: "sFAJlPood4Qv4IoGQT3pH" }],
-    },
-    {
-        admin: { id: "sFAJlPood4Qv4IoGQT3pH", name: "Turbo Board" },
-        claimed: true,
-        created_at: "08/08/2022",
-        game: { cover: "//images.igdb.com/igdb/image/upload/t_cover_big/co2eh6.jpg", id: 594, released: 2001, title: "Aliens versus Predator 2" },
-        id: "fDa-SmNMIfg556k68NfVt",
-        pledges: [{ amount: 10, id: "_W9Jr0HqroJHv5w9D6ya-", user_id: "sFAJlPood4Qv4IoGQT3pH" }],
-    },
-    {
-        admin: { id: "sFAJlPood4Qv4IoGQT3pH", name: "Turbo Board" },
-        claimed: true,
-        created_at: "08/08/2022",
-        game: { cover: "//images.igdb.com/igdb/image/upload/t_cover_big/co2eh6.jpg", id: 594, released: 2001, title: "Aliens versus Predator 2" },
-        id: "'-mBfc6h-Nxoz7j55mCzNd",
-        pledges: [{ amount: 20, id: "w4m2YUoP6Bq5J__IusCRm", user_id: "sFAJlPood4Qv4IoGQT3pH" }],
-    },
-    {
-        admin: { id: "sFAJlPood4Qv4IoGQT3pH", name: "Turbo Board" },
-        claimed: true,
-        created_at: "08/08/2022",
-        game: { cover: "//images.igdb.com/igdb/image/upload/t_cover_big/co2eh6.jpg", id: 594, released: 2001, title: "Aliens versus Predator 2" },
-        id: "UpS4KAz4RZohdVOneJxv4",
-        pledges: [{ amount: 10, id: "A7sjU-T2tln4zAKq-9KQk", user_id: "sFAJlPood4Qv4IoGQT3pH" }],
-    },
-    {
-        admin: { id: "sFAJlPood4Qv4IoGQT3pH", name: "Turbo Board" },
-        claimed: true,
-        created_at: "07/31/2022",
-        game: { cover: "//images.igdb.com/igdb/image/upload/t_cover_big/co2eh6.jpg", id: 594, released: 2001, title: "Aliens versus Predator 2" },
-        id: "kdDwm1B194DqxkYYyO8Aq",
-        pledges: [{ amount: 100, id: "fxPziajOZ6bSBa2U7Jw3h", user_id: "sFAJlPood4Qv4IoGQT3pH" }],
-    },
-    {
-        admin: { id: "sFAJlPood4Qv4IoGQT3pH", name: "Turbo Board" },
-        claimed: true,
-        created_at: "07/31/2022",
-        game: { cover: "//images.igdb.com/igdb/image/upload/t_cover_big/co2eh6.jpg", id: 594, released: 2001, title: "Aliens versus Predator 2" },
-        id: "s6g7R6GkaxZLdQtqAV4fD",
-        pledges: [{ amount: 100, id: "lkhIwcyvt05eAcNudJh1q", user_id: "sFAJlPood4Qv4IoGQT3pH" }],
-    },
-    {
-        admin: { id: "sFAJlPood4Qv4IoGQT3pH", name: "Turbo Board" },
-        claimed: true,
-        created_at: "07/31/2022",
-        game: { cover: "//images.igdb.com/igdb/image/upload/t_cover_big/co2eh6.jpg", id: 594, released: 2001, title: "Aliens versus Predator 2" },
-        id: "'-dKsdt4-MbKvd7cKVAsby",
-        pledges: [{ amount: 100, id: "9L0E2cXKJ4OQz_gwKTemC", user_id: "sFAJlPood4Qv4IoGQT3pH" }],
-    },
-    {
-        admin: { id: "hHxa9hOoh-NmBlxEddkKZ", name: "Krukar" },
-        claimed: false,
-        created_at: "07/05/2022",
-        game: { cover: "//images.igdb.com/igdb/image/upload/t_cover_big/co26f8.jpg", id: 4275, released: 1992, title: "Flashback: The Quest for Identity" },
-        id: "J8AWNiXTrC3MSFwQbx6af",
-        pledges: [{ amount: 250, id: "0RrhvHlhDvolmzm5hYl9u", user_id: "hHxa9hOoh-NmBlxEddkKZ" }],
-    },
-];
-
-export async function getStaticProps() {
-    const props: BountiesProps = {
-        bounties,
-        meta: {
-            description: "View the latest bounties or search for your favourite game.",
-            title: "Latest bounties",
-            url: `https://turboboard.io/bounties`,
+const get_admin = async (admin_id: TurboardioUser["id"]): Promise<{ id: TurboardioUser["id"]; name: TurboardioUser["name"] }> => {
+    const { Item } = await aws.dynamo.get_item({
+        TableName: "turboardio_users",
+        Key: {
+            user_id: aws.dynamo.input(admin_id),
         },
-    };
+    });
+
+    const { user_id, user_name } = aws.dynamo.unmarshall(Item);
 
     return {
-        props,
-        revalidate: 60,
+        id: user_id,
+        name: user_name,
     };
+};
+
+const get_game = async (game_id: number): Promise<Game> => {
+    const response = await fetch(process.env.IGDB_GAME_ENDPOINT, {
+        method: "post",
+        headers: {
+            Accept: "application/json",
+            "X-Turbo-Key": process.env.CLOUDFLARE_API_TOKEN,
+        },
+        body: JSON.stringify({
+            game_id: game_id.toString(),
+        }),
+    });
+
+    return await response.json();
+};
+
+const get_pledges = async (bounty_id: Bounty["id"]): Promise<Bounty["pledges"]> => {
+    const { Items } = await aws.dynamo.scan({
+        TableName: "turboardio_pledges",
+        FilterExpression: "bounty_id = :bounty_id",
+        ExpressionAttributeValues: {
+            ":bounty_id": aws.dynamo.input(bounty_id),
+        },
+    });
+
+    if (!Items.length) return null;
+
+    return Items.map((Item) => {
+        const { amount, pledge_id, user_id } = aws.dynamo.unmarshall(Item);
+
+        return {
+            amount,
+            id: pledge_id,
+            user_id,
+        };
+    });
+};
+
+export async function getStaticProps() {
+    try {
+        const { Items } = await aws.dynamo.scan({
+            TableName: "turboardio_bounties",
+        });
+
+        let bounties = [];
+
+        const sorted = Items.map((Item) => aws.dynamo.unmarshall(Item)).sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf());
+
+        for (const { admin_id, bounty_id, claim_id, created_at, game_id } of sorted) {
+            const admin = await get_admin(admin_id);
+
+            const claimed = claim_id ? true : false;
+
+            const game = await get_game(game_id);
+
+            const pledges = await get_pledges(bounty_id);
+
+            const split = created_at.split("T")[0].split("-");
+
+            bounties.push({
+                admin,
+                claimed,
+                created_at: `${split[1]}/${split[2]}/${split[0]}`,
+                game,
+                id: bounty_id,
+                pledges,
+            });
+        }
+
+        const props: BountiesProps = {
+            bounties,
+            meta: {
+                description: "View the latest bounties or search for your favourite game.",
+                title: "Latest bounties",
+                url: `https://turboboard.io/bounties`,
+            },
+        };
+
+        return {
+            props,
+            revalidate: 60,
+        };
+    } catch (err) {
+        console.log("ERR", err);
+
+        return {
+            props: {},
+            revalidate: 60,
+        };
+    }
 }
 
 export default Page;
