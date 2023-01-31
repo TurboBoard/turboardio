@@ -7,9 +7,9 @@ const Page = ({ bounties }: BountiesProps) => {
     return (
         <div>
             <section>
-                <h1>Bounty Search</h1>
+                <h1>Game Search</h1>
 
-                <Search bounties={bounties} />
+                <Search />
             </section>
 
             <section>

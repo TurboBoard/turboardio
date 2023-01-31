@@ -47,8 +47,10 @@ const Component = ({ disabled, handle_change, id, label, max_length, placeholder
                 <Label required={required || false} text={label} />
 
                 {max_length && (
-                    <div className="text-grey text-sm">
-                        {value.length} / {max_length}
+                    <div>
+                        <small>
+                            {value.length} / {max_length}
+                        </small>
                     </div>
                 )}
             </div>

@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 
 import Head from "next/head";
 
+import Script from "next/script";
+
 import Footer from "@Components/footer/Footer";
 import Header from "@Components/header/Header";
 
@@ -30,7 +32,7 @@ const Layout = ({ children }: any) => {
         page_title += ` - ${children.props.meta.title}`;
     }
 
-    const meta_image = children.props.meta?.image || "https://images.ctfassets.net/2ecc939ll7aj/2U76tHCloaJHfeGWLJ462G/f72b92d861db93ecd33a4c02a172c59e/header.jpg?w=1200&h=630&fit=fill&fm=jpg";
+    const meta_image = children.props.meta?.image || "https://images.ctfassets.net/2ecc939ll7aj/2U76tHCloaJHfeGWLJ462G/64252429efe5c250d5f27a3d4eaa92be/meta.jpg?w=1200&h=630&fit=fill&fm=jpg";
 
     return (
         <>
@@ -63,6 +65,23 @@ const Layout = ({ children }: any) => {
 
                 <title>{page_title}</title>
             </Head>
+
+            {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && (
+                <>
+                    {/* Google Analytics */}
+                    <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`} strategy="afterInteractive" />
+
+                    <Script id="google-analytics" strategy="afterInteractive">
+                        {`
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){window.dataLayer.push(arguments);}
+                            gtag('js', new Date());
+
+                            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');
+                        `}
+                    </Script>
+                </>
+            )}
 
             <Header />
 

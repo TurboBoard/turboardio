@@ -169,6 +169,15 @@
 
         @apply space-x-7;
 
+        &--small {
+            @apply space-x-6;
+
+            .game__image {
+                @apply h-9;
+                @apply w-9;
+            }
+        }
+
         &__image {
             @apply circle-image;
 

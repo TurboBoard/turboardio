@@ -14,6 +14,7 @@ export type Bounties = {
     id: Bounty["id"];
     game: Bounty["game"];
     pledges: Bounty["pledges"];
+    prize: Bounty["prize"];
 }[];
 
 export type Bounty = {

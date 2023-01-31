@@ -1,22 +1,6 @@
 import Link from "next/link";
 
-import { Bounties, Pledge } from "@Types";
-
-const Pledges = ({ pledges }: { pledges: Pledge[] }) => {
-    const total = pledges.reduce((acc, { amount }) => acc + amount, 0);
-
-    return (
-        <div>
-            <div className="heading text-accent text-5xl lg:text-6xl">${total}</div>
-
-            <div className="hidden lg:flex lg:justify-end space-x-5 lg:mt-5">
-                {pledges.map(({ user_id }) => (
-                    <img key={user_id} alt="User profile picture" className="circle-image h-8 w-8" src={`${process.env.NEXT_PUBLIC_USER_IMAGES_CDN}/${user_id}.jpg`} />
-                ))}
-            </div>
-        </div>
-    );
-};
+import { Bounties } from "@Types";
 
 const Component = ({ bounties }: { bounties: Bounties }) => {
     if (bounties.length === 0) {
@@ -30,8 +14,8 @@ const Component = ({ bounties }: { bounties: Bounties }) => {
 
     return (
         <div className="divide-y">
-            {bounties.map(({ admin, claimed, created_at, id, game, pledges }) => (
-                <div key={id} className="relative py-7">
+            {bounties.map(({ admin, claimed, created_at, id, game, pledges, prize }) => (
+                <div key={id} className="relative py-7 border-grey">
                     {claimed && (
                         <div className="jumbo">
                             <div className="jumbo__text">claimed</div>
@@ -50,18 +34,24 @@ const Component = ({ bounties }: { bounties: Bounties }) => {
                                 </div>
                             </div>
 
-                            {pledges && (
-                                <div className="hidden xs:block">
-                                    <Pledges pledges={pledges} />
-                                </div>
-                            )}
+                            <div className="hidden xs:block">
+                                {prize && <div className="heading text-accent text-5xl lg:text-6xl">${prize}</div>}
+
+                                {pledges && (
+                                    <div className="hidden lg:flex lg:justify-end space-x-5 lg:mt-5">
+                                        {pledges.map(({ user_id }) => (
+                                            <img key={user_id} alt="User profile picture" className="circle-image h-8 w-8" src={`${process.env.NEXT_PUBLIC_USER_IMAGES_CDN}/${user_id}.jpg`} />
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
                         </div>
 
                         <div className="text-center">
                             {/* prettier-ignore */}
                             <small>
-                                    Bounty created on {created_at} by <span className="text-black">{admin.name}</span>
-                                </small>
+                                Bounty created on {created_at} by <span className="text-black">{admin.name}</span>
+                            </small>
                         </div>
                     </Link>
                 </div>
