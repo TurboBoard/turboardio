@@ -26,6 +26,10 @@ export async function getStaticProps() {
     //     });
     // }
 
+    //
+    //
+    // KS_2oTbRdYJSF1N0HX9y2
+
     return {
         props: {},
         revalidate: 1,

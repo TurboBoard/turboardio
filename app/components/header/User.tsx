@@ -11,14 +11,14 @@ const Component = () => {
 
     if (user) {
         return (
-            <Link className="opacity-link block h-[17px] md:h-7 lg:h-[26px]" href="/account">
+            <Link className="fade-link block h-[17px] md:h-7 lg:h-[26px]" href="/account">
                 <User />
             </Link>
         );
     }
 
     return (
-        <a className="button" href="/api/auth/login">
+        <a className="button fade-link" href="/api/auth/login">
             Log In
         </a>
     );

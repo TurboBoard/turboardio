@@ -19,7 +19,7 @@ export async function getStaticProps({ params: { bounty_id } }: { params: { boun
     let meta_description = `${bounty.game.title} bounty.`;
 
     if (bounty.prize) {
-        meta_description = ` Prize: ${bounty.prize}`;
+        meta_description = ` Prize: $${bounty.prize}`;
     }
 
     if (bounty.winning_claim) {

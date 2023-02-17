@@ -126,7 +126,7 @@ const get_bounty = async (bounty_id: Bounty["id"]): Promise<Bounty> => {
         },
     });
 
-    const { admin_id, claim_id, created_at, details, game_id } = aws.dynamo.unmarshall(Item);
+    const { admin_id, claim_id, created_at, details, discord_link, game_id } = aws.dynamo.unmarshall(Item);
 
     const admin = await get_user(admin_id);
 
@@ -145,6 +145,7 @@ const get_bounty = async (bounty_id: Bounty["id"]): Promise<Bounty> => {
         claims,
         created_at: format.created_at(created_at),
         details,
+        discord_link: discord_link || null,
         game,
         id: bounty_id,
         pledges,

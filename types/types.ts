@@ -22,6 +22,7 @@ export type Bounty = {
     claims: Claim[] | null;
     created_at: string;
     details: string;
+    discord_link: string | null;
     game: Game;
     id: string;
     pledges: Pledge[] | null;
@@ -33,7 +34,7 @@ export type Claim = {
     comment: string | null;
     created_at: string;
     id: string;
-    link: string | null;
+    link: string;
     user: TurboardioUser;
     video?: Video;
 };

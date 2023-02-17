@@ -20,9 +20,19 @@
         }
 
         &:disabled {
-            @apply bg-copy;
+            @apply button--disabled;
+        }
 
-            @apply opacity-50;
+        &--anchor {
+            @apply block;
+
+            @apply text-center;
+
+            @apply fade-link;
+        }
+
+        &--disabled {
+            @apply bg-zinc-500;
 
             @apply cursor-not-allowed;
         }

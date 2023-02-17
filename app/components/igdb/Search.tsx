@@ -1,18 +1,7 @@
 import { useState } from "react";
 
-import Input from "@Components/inputs/Input";
-
-type Item = {
-    cover: string;
-    id: number;
-    released: number;
-    title: string;
-};
-
-type State = {
-    items: Item[];
-    query: string;
-};
+import Form from "@Forms/Search";
+import Game from "@Components/igdb/Game";
 
 const get_new_items = async (query: string) => {
     const response = await fetch("/api/game/search", {
@@ -29,84 +18,34 @@ const get_new_items = async (query: string) => {
     }
 };
 
-const Component = ({ set_game }: { set_game: Function }) => {
-    const [state, set_state] = useState<State>({
-        items: [],
-        query: "",
-    });
+const Component = () => {
+    const [items, set_items] = useState([]);
 
-    const [timer, set_timer] = useState<any>(null);
+    const [is_loading, set_is_loading] = useState<boolean>(false);
 
-    const handle_change = (key: "query", query: string) => {
-        set_state({
-            items: [],
-            [key]: query,
-        });
+    const handle_search = async (state: { query: string }) => {
+        set_is_loading(true);
 
-        clearTimeout(timer);
+        const new_items = await get_new_items(state.query);
 
-        if (query.length < 3) {
-            return;
-        }
+        set_items(new_items);
 
-        const new_timer = setTimeout(async () => {
-            set_state({
-                items: [],
-                query,
-            });
-
-            const items = await get_new_items(query);
-
-            set_state({
-                items,
-                query,
-            });
-
-            set_timer(null);
-        }, 500);
-
-        set_timer(new_timer);
+        set_is_loading(false);
     };
-
-    const handle_click = (item: Item) => {
-        set_state({
-            items: [],
-            query: item.title,
-        });
-
-        set_game(item);
-    };
-
-    let class_name = "search";
-
-    if (timer) class_name += " search--loading";
-
-    const is_open = state.items.length > 0;
 
     return (
         <div>
-            <div className={class_name}>
-                <Input handle_change={handle_change} id="query" label="Search by Game Title" placeholder="Super Mario 64, Legend of Zelda, Mega Man X..." type="search" value={state.query} />
+            <Form handle_search={handle_search} is_loading={is_loading} />
 
-                {is_open && (
-                    <ul className="search__list">
-                        {state.items.map((item) => (
-                            <li key={item.id} className="search-item">
-                                <button className="search-item__button" onClick={() => handle_click(item)}>
-                                    <img className="search-item__image" alt={`${item.title} cover`} src={item.cover} />
-
-                                    <div>
-                                        <div className="search-item__title">{item.title}</div>
-                                        <div className="search-item__released">{item.released}</div>
-                                    </div>
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-            </div>
-
-            {is_open && <div className="search__cover" />}
+            {items.length > 0 && (
+                <div className="divide-y">
+                    {items.map((game) => (
+                        <div key={game.id} className="py-7 border-silver">
+                            <Game {...game} />
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

@@ -33,6 +33,10 @@
         background-color: var(--highlight);
     }
 
+    .bg-silver {
+        background-color: var(--silver);
+    }
+
     .border-accent {
         border-color: var(--accent);
     }
@@ -51,6 +55,10 @@
 
     .border-highlight {
         border-color: var(--highlight);
+    }
+
+    .border-silver {
+        border-color: var(--silver);
     }
 
     .text-accent {
@@ -73,6 +81,10 @@
         color: var(--highlight);
     }
 
+    .text-silver {
+        color: var(--silver);
+    }
+
     /*
 		Links
 	*/
@@ -82,7 +94,8 @@
     }
 
     .generic-link {
-        @apply opacity-link;
+        @apply focus:opacity-50;
+        @apply hover:opacity-50;
 
         @apply underline;
         @apply underline-offset-4;
@@ -92,12 +105,6 @@
         @apply focus:text-highlight;
         @apply hover:text-highlight;
     }
-
-    .opacity-link {
-        @apply focus:opacity-60;
-        @apply hover:opacity-60;
-    }
-
     /*
 		Effects
 	*/

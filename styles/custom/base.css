@@ -9,20 +9,18 @@
 
 @layer base {
     body {
-        --accent: theme("colors.pink");
-        --highlight: theme("colors.byzantium");
-    }
-
-    body {
         --body: theme("colors.light");
         --copy: theme("colors.dark");
-        --grey: #71717a;
+        --grey: theme("colors.grey");
+        --accent: theme("colors.pink");
+        --highlight: theme("colors.byzantium");
+        --silver: #404040;
     }
 
     body.dark {
         --body: theme("colors.dark");
         --copy: theme("colors.light");
-        --grey: #a1a1aa;
+        --silver: #e5e5e5;
     }
 
     body {
@@ -36,6 +34,12 @@
         @apply leading-none;
 
         @apply custom-scrollbar;
+    }
+
+    ::selection {
+        @apply bg-pink;
+
+        @apply text-white;
     }
 
     h1,
@@ -93,7 +97,7 @@
     }
 
     small {
-        @apply text-grey;
+        @apply text-silver;
     }
 
     a {

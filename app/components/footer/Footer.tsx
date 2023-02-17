@@ -15,7 +15,7 @@ const Component = () => (
         <div className="gutter py-7">
             <div className="relative flex flex-col">
                 <div className="flex justify-start">
-                    <Link className="opacity-link block h-9 mb-7" href="/">
+                    <Link className="fade-link block h-9 mb-7" href="/">
                         <Logo />
                     </Link>
                 </div>
@@ -27,7 +27,7 @@ const Component = () => (
                         { href: "https://github.com/TurboBoard/turboardio", icon: <Github />, key: "github" },
                         { href: "mailto:hello@turboboard.io", icon: <Envelope />, key: "envelope" },
                     ].map(({ href, icon, key }) => (
-                        <a key={key} className="opacity-link block h-7 text-light" href={href} rel="noreferrer" target="_blank">
+                        <a key={key} className="fade-link block h-7 text-light" href={href} rel="noreferrer" target="_blank">
                             {icon}
                         </a>
                     ))}
@@ -40,7 +40,7 @@ const Component = () => (
                         { handle: "privacy-policy", text: "Privacy Policy" },
                         { handle: "terms-and-conditions", text: "Terms & Conditions" },
                     ].map(({ handle, text }) => (
-                        <Link key={handle} className="opacity-link text-light" href={`/page/${handle}`}>
+                        <Link key={handle} className="fade-link text-light" href={`/page/${handle}`}>
                             {text}
                         </Link>
                     ))}

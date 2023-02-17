@@ -1,4 +1,4 @@
-import Claim from "@Components/claim/Claim";
+import Claim from "@Components/home/Claim";
 import Contact from "@Components/home/Contact";
 import Information from "@Components/home/Information";
 import Leaderboard from "@Components/home/Leaderboard";

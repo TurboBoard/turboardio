@@ -3,7 +3,9 @@ import ArrowUpRight from "@Svgs/ArrowUpRight";
 import { Bounty, Claim } from "@Types";
 
 const Component = ({ claims, winning_claim_id }: { claims: Bounty["claims"]; winning_claim_id: Claim["id"] }) => {
-    if (!claims) return null;
+    if (!claims) {
+        return <p className="mb-0">There are currently no claims for this bounty.</p>;
+    }
 
     return (
         <div className="divide-y">
@@ -16,7 +18,7 @@ const Component = ({ claims, winning_claim_id }: { claims: Bounty["claims"]; win
                     )}
 
                     <div className="sm:flex sm:items-center">
-                        <div className="flex-1 flex justify-center sm:justify-start mb-5">
+                        <div className="flex-1 flex justify-center sm:justify-start mb-5 sm:mb-0">
                             <img alt={`{user.name} profile picture`} className="circle-image h-10 w-10 lg:h-11 lg:w-11" src={`${process.env.NEXT_PUBLIC_USER_IMAGES_CDN}/${user.id}.jpg`} />
                         </div>
 

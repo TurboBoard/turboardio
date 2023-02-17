@@ -39,7 +39,7 @@ const Component = () => {
     };
 
     return (
-        <button className="opacity-link h-8" onClick={handle_click}>
+        <button className="fade-link h-8" onClick={handle_click}>
             <span className="h-full block dark:hidden">
                 <SwitchOn />
             </span>

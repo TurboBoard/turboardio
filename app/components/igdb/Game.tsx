@@ -4,12 +4,12 @@ import { Game } from "@Types";
 
 const Component = ({ cover, id, released, title }: Game) => (
     <div className="game">
-        <img className="game__image" alt={`${title} cover`} src={cover} />
+        <Link className="fade-link" href={`/game/${id}`}>
+            <img className="game__image" alt={`${title} cover`} src={cover} />
+        </Link>
 
         <div>
-            <Link className="game__title highlight-link" href={`/game/${id}`}>
-                {title}
-            </Link>
+            <div className="game__title">{title}</div>
 
             <div className="game__released">{released}</div>
         </div>

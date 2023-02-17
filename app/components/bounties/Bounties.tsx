@@ -5,17 +5,17 @@ import { Bounties } from "@Types";
 const Component = ({ bounties }: { bounties: Bounties }) => {
     if (bounties.length === 0) {
         return (
-            <div className="rte">
+            <>
                 {/* prettier-ignore */}
-                <p className="mb-0">There are currently no bounties for this game. Would you like to <Link href="/create/bounty">Create</Link> one?</p>
-            </div>
+                <p className="mb-0">There are currently no bounties for this game. Would you like to <Link className="generic-link" href="/create/bounty">Create</Link> one?</p>
+            </>
         );
     }
 
     return (
         <div className="divide-y">
             {bounties.map(({ admin, claimed, created_at, id, game, pledges, prize }) => (
-                <div key={id} className="relative py-7 border-grey">
+                <div key={id} className="relative py-7 border-silver">
                     {claimed && (
                         <div className="jumbo">
                             <div className="jumbo__text">claimed</div>
@@ -50,7 +50,7 @@ const Component = ({ bounties }: { bounties: Bounties }) => {
                         <div className="text-center">
                             {/* prettier-ignore */}
                             <small>
-                                Bounty created on {created_at} by <span className="text-black">{admin.name}</span>
+                                Bounty created on {created_at} by <span className="text-black dark:text-silver">{admin.name}</span>
                             </small>
                         </div>
                     </Link>

@@ -3,6 +3,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 const search = async (req: NextApiRequest, res: NextApiResponse) => {
     const { query } = JSON.parse(req.body);
 
+    console.log("query", query);
+
     const response = await fetch(process.env.IGDB_SEARCH_ENDPOINT, {
         method: "post",
         headers: {

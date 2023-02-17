@@ -15,6 +15,7 @@ export type BountyProps = {
 };
 
 export type CreateBountyProps = {
+    game: Game;
     meta: Meta;
 };
 
@@ -27,7 +28,7 @@ export type GameProps = {
 export type HomeProps = {
     claim: Claim;
     leaderboard: {
-        prize: number;
+        prize: Bounty["prize"];
         user: TurboardioUser;
     }[];
     meta: Meta;
@@ -38,3 +39,5 @@ export type PageProps = {
     meta: Meta;
     title: string;
 };
+
+export type SearchProps = {};

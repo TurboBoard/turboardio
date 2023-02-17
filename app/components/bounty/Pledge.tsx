@@ -2,35 +2,37 @@ import { useState } from "react";
 
 import { useRouter } from "next/router";
 
-import Form from "@Components/forms/ClaimSubmit";
+import Form from "@Forms/pledge/Create";
 
 import { Bounty } from "@Types";
 
-const submit_claim = async ({ bounty_id, comment, link }) => {
-    const response = await fetch(`/api/claim/submit`, {
+const submit_pledge = async (body: string) => {
+    const response = await fetch(`/api/pledge/create`, {
         method: "POST",
-        body: JSON.stringify({
-            bounty_id,
-            comment: comment.length ? comment : null,
-            link,
-        }),
+        body,
     });
 
     return await response.json();
 };
 
-const Component = ({ bounty_id }: { bounty_id: Bounty["id"] }) => {
+const Component = ({ bounty_id, claimed }: { bounty_id: Bounty["id"]; claimed: boolean }) => {
+    if (claimed) {
+        return <p className="mb-0">This bounty has been claimed.</p>;
+    }
+
     const router = useRouter();
 
     const [is_loading, set_is_loading] = useState<boolean>(false);
 
-    const handle_create = async ({ comment, link }: { comment: string; link: string }) => {
+    const handle_create = async (state: { amount: number }) => {
         set_is_loading(true);
 
-        const { success } = await submit_claim({ bounty_id, comment, link });
+        const { success } = await submit_pledge(JSON.stringify({ amount: state.amount, bounty_id }));
 
         if (success) {
             router.reload();
+
+            return;
         }
 
         set_is_loading(false);

@@ -1,5 +1,6 @@
+import Link from "next/link";
+
 import Bounties from "@Components/bounties/Bounties";
-import Search from "@Components/bounties/Search";
 
 import { BountiesProps } from "@Props";
 
@@ -7,9 +8,10 @@ const Page = ({ bounties }: BountiesProps) => {
     return (
         <div>
             <section>
-                <h1>Game Search</h1>
+                <h1>Search</h1>
 
-                <Search />
+                {/* prettier-ignore */}
+                <p className="mb-0">Looking for a specific game?<br /><Link className="generic-link" href="/search">Click Here</Link> to search through 200,000+ games.</p>
             </section>
 
             <section>

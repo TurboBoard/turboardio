@@ -1,62 +1,75 @@
+import Claim from "@Components/bounty/Claim";
 import Claims from "@Components/bounty/Claims";
+import Discord from "@Svgs/Discord";
 import Game from "@Components/igdb/Game";
+import Pledge from "@Components/bounty/Pledge";
 import Pledges from "@Components/bounty/Pledges";
-import SubmitClaim from "@Components/claim/Submit";
 
 import { BountyProps } from "@Props";
 
-const Page = ({ bounty: { admin, claims, created_at, details, game, id, pledges, winning_claim } }: BountyProps) => {
-    const total = pledges ? pledges.reduce((acc, { amount }) => acc + amount, 0) : null;
+const Page = ({ bounty: { admin, claims, created_at, details, discord_link, game, id, pledges, prize, winning_claim } }: BountyProps) => (
+    <div>
+        <section>
+            <div className="flex justify-between mb-9">
+                <Game {...game} />
 
-    return (
-        <div>
-            <section>
-                <div className="flex justify-between mb-9">
-                    <Game {...game} />
+                {prize && (
+                    <div className="hidden sm:block">
+                        <div className="heading text-accent text-4xl lg:text-6xl">${prize}</div>
+                    </div>
+                )}
+            </div>
 
-                    {total && (
-                        <div className="hidden sm:block">
-                            <div className="heading text-accent text-4xl lg:text-6xl">${total}</div>
-                        </div>
-                    )}
-                </div>
+            <div>
+                <h2>Details</h2>
+
+                <p className="whitespace-pre-line">{details}</p>
 
                 <div>
-                    <h2>Bounty Details</h2>
-
-                    <p className="mb-0 whitespace-pre-line">{details}</p>
+                    {/* prettier-ignore */}
+                    <small>
+                        Bounty created on {created_at} by <span className="text-black">{admin.name}</span>
+                    </small>
                 </div>
-            </section>
+            </div>
 
-            {claims && (
-                <section>
-                    <h2>Claims</h2>
+            {discord_link && (
+                <div className="mt-7">
+                    <h3>Links</h3>
 
-                    <Claims claims={claims} winning_claim_id={winning_claim?.id || null} />
-                </section>
+                    <div className="flex space-x-6">
+                        <a className="fade-link block h-8" href={discord_link} rel="noreferrer" target="_blank">
+                            <Discord />
+                        </a>
+                    </div>
+                </div>
             )}
+        </section>
 
-            {!winning_claim && (
-                <section>
-                    <h2>Submit Claim</h2>
+        <section>
+            <h2>Claims</h2>
 
-                    <SubmitClaim bounty_id={id} />
-                </section>
-            )}
+            <Claims claims={claims} winning_claim_id={winning_claim?.id || null} />
+        </section>
 
-            {pledges && (
-                <section>
-                    <h2>Pledges</h2>
+        <section>
+            <h2>Claim</h2>
 
-                    <Pledges pledges={pledges} />
-                </section>
-            )}
+            <Claim bounty_id={id} claimed={winning_claim ? true : false} />
+        </section>
 
-            {/* <section>Submit Pledge</section> */}
+        <section>
+            <h2>Pledges</h2>
 
-            {/* <section>admin section</section> */}
-        </div>
-    );
-};
+            <Pledges pledges={pledges} />
+        </section>
+
+        <section>
+            <h2>Pledge</h2>
+
+            <Pledge bounty_id={id} claimed={winning_claim ? true : false} />
+        </section>
+    </div>
+);
 
 export default Page;

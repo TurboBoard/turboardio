@@ -9,7 +9,7 @@ type Input = {
     placeholder?: string;
     required?: boolean;
     type?: string;
-    value: string;
+    value: string | number;
 };
 
 const Component = ({ disabled, handle_change, id, label, max_length, placeholder, required = false, type = "text", value }: Input) => {

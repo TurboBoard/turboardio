@@ -16,3 +16,9 @@
 -   Updated placeholder image
 -   Added Google Anallytics
 -   Added latest winner to homepage
+-   Added leaderboard to homepage
+
+**Version 1.1.0**
+
+-   Added much needed functionality to bounties
+-   Minor bug fixes

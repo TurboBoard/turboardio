@@ -8,8 +8,9 @@ module.exports = {
         extend: {
             colors: {
                 byzantium: "#660099",
-                dark: "#171717",
-                light: "#fafafa",
+                dark: "#171717", // Neutral 900
+                grey: "#71717a", // Neutral 500
+                light: "#fafafa", // Neutral 50
                 pink: "#FF3399",
                 teal: "#0cc",
                 warning: "#F43F5E",
