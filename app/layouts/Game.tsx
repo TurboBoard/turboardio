@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import Bounties from "@Components/bounties/Bounties";
 
 import { GameProps } from "@Props";
@@ -20,7 +22,12 @@ const Page = ({ bounties, game }: GameProps) => (
             <div>
                 <h2>Bounties</h2>
 
-                <Bounties bounties={bounties} />
+                {bounties.length ? (
+                    <Bounties bounties={bounties} />
+                ) : (
+                    /* prettier-ignore */
+                    <p className="mb-0">There are currently no bounties for this game. Would you like to <Link className="generic-link" href={`/create/bounty/${game.id}`}>Create</Link> one?</p>
+                )}
             </div>
         </section>
     </div>

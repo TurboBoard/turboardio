@@ -7,7 +7,7 @@ import { nanoid } from "nanoid";
 import aws from "@Apis/aws";
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
-    const { details, discord_link, game_id } = JSON.parse(req.body);
+    const { details, discord_link, end_date, game_id, start_date } = JSON.parse(req.body);
 
     const {
         user: { turboardio_user_id },
@@ -29,6 +29,14 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (discord_link) {
         Item.discord_link = aws.dynamo.input(discord_link);
+    }
+
+    if (end_date) {
+        Item.end_date = aws.dynamo.input(end_date);
+    }
+
+    if (start_date) {
+        Item.start_date = aws.dynamo.input(start_date);
     }
 
     await aws.dynamo.put_item({

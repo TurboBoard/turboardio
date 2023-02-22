@@ -126,7 +126,7 @@ const get_bounty = async (bounty_id: Bounty["id"]): Promise<Bounty> => {
         },
     });
 
-    const { admin_id, claim_id, created_at, details, discord_link, game_id } = aws.dynamo.unmarshall(Item);
+    const { admin_id, claim_id, created_at, details, discord_link, end_date, game_id, start_date } = aws.dynamo.unmarshall(Item);
 
     const admin = await get_user(admin_id);
 
@@ -146,10 +146,12 @@ const get_bounty = async (bounty_id: Bounty["id"]): Promise<Bounty> => {
         created_at: format.created_at(created_at),
         details,
         discord_link: discord_link || null,
+        end_date: end_date || null,
         game,
         id: bounty_id,
         pledges,
         prize,
+        start_date: start_date || null,
         winning_claim,
     };
 

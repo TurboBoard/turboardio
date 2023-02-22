@@ -22,3 +22,9 @@
 
 -   Added much needed functionality to bounties
 -   Minor bug fixes
+
+**Version 1.1.1**
+
+-   Adjusted spacing of design in a few spots
+-   Bounty board now displays 10 latest bounties instead of 5
+-   Added start and end dates to Bounties

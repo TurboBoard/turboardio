@@ -23,10 +23,12 @@ export type Bounty = {
     created_at: string;
     details: string;
     discord_link: string | null;
+    end_date: string | null;
     game: Game;
     id: string;
     pledges: Pledge[] | null;
     prize: number | null;
+    start_date: string | null;
     winning_claim: Claim | null;
 };
 

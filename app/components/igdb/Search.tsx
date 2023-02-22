@@ -35,7 +35,9 @@ const Component = () => {
 
     return (
         <div>
-            <Form handle_search={handle_search} is_loading={is_loading} />
+            <div className="mb-7">
+                <Form handle_search={handle_search} is_loading={is_loading} />
+            </div>
 
             {items.length > 0 && (
                 <div className="divide-y">

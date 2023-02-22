@@ -21,20 +21,21 @@ const Page = ({ game }: CreateBountyProps) => {
 
     const [is_loading, set_is_loading] = useState<boolean>(false);
 
-    const handle_create = async ({ details, discord_link }: { details: string; discord_link: string }) => {
+    const handle_create = async ({ details, discord_link, end_date, start_date }: { details: string; discord_link: string; end_date: string; start_date: string }) => {
         set_is_loading(true);
 
         const { bounty_id } = await create_bounty(
             JSON.stringify({
                 details,
                 discord_link: discord_link.length ? discord_link : null,
+                end_date: end_date || null,
                 game_id: game.id,
+                start_date: start_date || null,
             })
         );
 
         if (bounty_id) {
             router.push(`/bounty/${bounty_id}`);
-
             return;
         }
 

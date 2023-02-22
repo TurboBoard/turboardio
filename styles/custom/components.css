@@ -191,10 +191,8 @@
         &__image {
             @apply circle-image;
 
-            @apply h-10;
-            @apply w-10;
-            @apply lg:h-11;
-            @apply lg:w-11;
+            @apply h-10.5;
+            @apply w-10.5;
 
             @apply shrink-0;
         }
