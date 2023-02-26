@@ -9,16 +9,17 @@ export type Bounties = {
         id: TurboardioUser["id"];
         name: TurboardioUser["name"];
     };
-    claimed: boolean;
+    amount: Bounty["amount"];
     created_at: Bounty["created_at"];
     id: Bounty["id"];
+    is_claimed: boolean;
     game: Bounty["game"];
     pledges: Bounty["pledges"];
-    prize: Bounty["prize"];
 }[];
 
 export type Bounty = {
     admin: TurboardioUser;
+    amount: number | null;
     claims: Claim[] | null;
     created_at: string;
     details: string;
@@ -27,9 +28,8 @@ export type Bounty = {
     game: Game;
     id: string;
     pledges: Pledge[] | null;
-    prize: number | null;
     start_date: string | null;
-    winning_claim: Claim | null;
+    winners: Winners | null;
 };
 
 export type Claim = {
@@ -78,3 +78,8 @@ export type Video = {
     id: string;
     type: "twitch" | "youtube";
 };
+
+export type Winners = {
+    amount: Bounty["amount"];
+    user: TurboardioUser;
+}[];

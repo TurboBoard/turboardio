@@ -4,9 +4,9 @@ import { Bounties } from "@Types";
 
 const Component = ({ bounties }: { bounties: Bounties }) => (
     <div className="divide-y">
-        {bounties.map(({ admin, claimed, created_at, id, game, pledges, prize }) => (
+        {bounties.map(({ admin, amount, created_at, id, is_claimed, game, pledges }) => (
             <div key={id} className="relative py-7 border-silver">
-                {claimed && (
+                {is_claimed && (
                     <div className="jumbo">
                         <div className="jumbo__text">claimed</div>
                     </div>
@@ -25,7 +25,7 @@ const Component = ({ bounties }: { bounties: Bounties }) => (
                         </div>
 
                         <div className="hidden xs:block">
-                            {prize && <div className="heading text-accent text-5xl lg:text-6xl">${prize}</div>}
+                            {amount && <div className="heading text-accent text-5xl lg:text-6xl">${amount}</div>}
 
                             {pledges && (
                                 <div className="hidden lg:flex lg:justify-end space-x-5 lg:mt-5">
@@ -40,8 +40,8 @@ const Component = ({ bounties }: { bounties: Bounties }) => (
                     <div className="text-center">
                         {/* prettier-ignore */}
                         <small>
-                                Bounty created on {created_at} by <span className="text-black dark:text-silver">{admin.name}</span>
-                            </small>
+                            Bounty created on {created_at} by <span className="text-black dark:text-silver">{admin.name}</span>
+                        </small>
                     </div>
                 </Link>
             </div>

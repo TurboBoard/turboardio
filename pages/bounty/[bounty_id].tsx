@@ -18,12 +18,12 @@ export async function getStaticProps({ params: { bounty_id } }: { params: { boun
 
     let meta_description = `${bounty.game.title} bounty.`;
 
-    if (bounty.prize) {
-        meta_description = ` Prize: $${bounty.prize}`;
+    if (bounty.amount) {
+        meta_description = ` Prize: $${bounty.amount}`;
     }
 
-    if (bounty.winning_claim) {
-        meta_description += ` Bounty has been claimed by ${bounty.winning_claim.user.name}.`;
+    if (bounty.winners) {
+        meta_description += ` Bounty has been claimed by ${bounty.winners.map(({ user }) => user.name).join(", ")}.`;
     }
 
     const props: BountyProps = {

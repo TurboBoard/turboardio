@@ -1,10 +1,8 @@
 import aws from "@Apis/aws";
 
-import { get_bounty } from "@Helpers";
-
 import Layout from "@Layouts/Home";
 
-import { Bounty, Claim, TurboardioUser } from "@Types";
+import { Claim, TurboardioUser } from "@Types";
 import { HomeProps } from "@Props";
 
 import { convert } from "@Lib";
@@ -15,65 +13,70 @@ const Page = (props: HomeProps) => {
     return <Layout {...props} />;
 };
 
-const get_prize = async (bounty_id: Bounty["id"]): Promise<number> => {
+const get_latest_winning_claim = async (): Promise<HomeProps["claim"]> => {
     const { Items } = await aws.dynamo.scan({
-        TableName: "turboardio_pledges",
-        FilterExpression: "bounty_id = :bounty_id",
-        ExpressionAttributeValues: {
-            ":bounty_id": aws.dynamo.input(bounty_id),
-        },
+        TableName: "turboardio_bounties",
     });
 
-    return Items.reduce((prize, Item) => {
-        const { amount } = aws.dynamo.unmarshall(Item);
+    const sorted = Items.map((Item) => aws.dynamo.unmarshall(Item)).sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf());
 
-        return (prize += amount);
-    }, 0);
+    for (const item of sorted) {
+        const { Count, Items } = await aws.dynamo.scan({
+            TableName: "turboardio_claims",
+            FilterExpression: "bounty_id = :bounty_id",
+            ExpressionAttributeValues: {
+                ":bounty_id": aws.dynamo.input(item.bounty_id),
+            },
+        });
+
+        if (Count === 0) continue;
+
+        const { claim_id, created_at, comment, link, user_id } = aws.dynamo.unmarshall(Items[0]);
+
+        const user = await get_user(user_id);
+
+        const video = convert.link_to_video(link);
+
+        // If there is no video then we don't embed it on the homepage
+        if (!video) continue;
+
+        return {
+            comment,
+            created_at,
+            id: claim_id,
+            link,
+            user,
+            video,
+        };
+    }
 };
 
-const get_user = async (user_id: TurboardioUser["id"]): Promise<TurboardioUser> => {
-    const { Item } = await aws.dynamo.get_item({
-        TableName: "turboardio_users",
-        Key: {
-            user_id: aws.dynamo.input(user_id),
-        },
-    });
-
-    return convert.turboardio_user(aws.dynamo.unmarshall(Item));
-};
-
-const get_user_id = async (claim_id: Claim["id"]): Promise<TurboardioUser["id"]> => {
-    const { Item } = await aws.dynamo.get_item({
-        TableName: "turboardio_claims",
-        Key: {
-            claim_id: aws.dynamo.input(claim_id),
-        },
-    });
-
-    const { user_id } = aws.dynamo.unmarshall(Item);
-
-    return user_id;
-};
-
-const get_leaderboard = async (Items: {}[]) => {
+const get_leaderboard = async (): Promise<HomeProps["leaderboard"]> => {
     const users: {
         [user_id: TurboardioUser["id"]]: {
-            prize: number;
+            amount: number;
             user: TurboardioUser;
         };
     } = {};
 
+    const { Items } = await aws.dynamo.scan({
+        TableName: "turboardio_winners",
+    });
+
     for (const Item of Items) {
-        const { bounty_id, claim_id } = aws.dynamo.unmarshall(Item);
+        const { amount, claim_id } = aws.dynamo.unmarshall(Item);
 
-        if (!claim_id) continue;
+        const response = await aws.dynamo.get_item({
+            TableName: "turboardio_claims",
+            Key: {
+                claim_id: aws.dynamo.input(claim_id),
+            },
+        });
 
-        const user_id = await get_user_id(claim_id);
-
-        let prize = await get_prize(bounty_id);
+        const { user_id } = aws.dynamo.unmarshall(response.Item);
 
         if (users[user_id]) {
-            users[user_id].prize += prize;
+            users[user_id].amount += amount;
 
             continue;
         }
@@ -81,31 +84,34 @@ const get_leaderboard = async (Items: {}[]) => {
         const user = await get_user(user_id);
 
         users[user_id] = {
+            amount,
             user,
-            prize,
         };
     }
 
     return Object.values(users)
-        .sort((a, b) => b.prize - a.prize)
+        .sort((a, b) => b.amount - a.amount)
         .slice(0, 5);
 };
 
-export async function getStaticProps() {
-    const { Items } = await aws.dynamo.scan({
-        TableName: "turboardio_bounties",
+const get_user = async (turboardio_id: TurboardioUser["id"]): Promise<TurboardioUser> => {
+    const { Item } = await aws.dynamo.get_item({
+        TableName: "turboardio_users",
+        Key: {
+            user_id: aws.dynamo.input(turboardio_id),
+        },
     });
 
-    const leaderboard = await get_leaderboard(Items);
+    return convert.turboardio_user(aws.dynamo.unmarshall(Item));
+};
 
-    const sorted = Items.map((Item) => aws.dynamo.unmarshall(Item))
-        .sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf())
-        .filter(({ claim_id }) => claim_id);
+export async function getStaticProps() {
+    const latest_winning_claim: Claim = await get_latest_winning_claim();
 
-    const { winning_claim } = await get_bounty(sorted[0].bounty_id);
+    const leaderboard = await get_leaderboard();
 
     const props: HomeProps = {
-        claim: winning_claim,
+        claim: latest_winning_claim,
         leaderboard,
         meta: {
             description: "Video Game Bounty Board. Create/Pledge/Claim.",

@@ -1,7 +1,7 @@
 import Claim from "@Components/home/Claim";
 import Contact from "@Components/home/Contact";
 import Information from "@Components/home/Information";
-import Leaderboard from "@Components/home/Leaderboard";
+import Winners from "@Components/Winners";
 
 import { HomeProps } from "@Props";
 
@@ -19,8 +19,12 @@ const Page = ({ claim, leaderboard }: HomeProps) => (
             <section className="lg:w-1/2">
                 <h1 className="text-center">Leaderboard</h1>
 
-                <Leaderboard leaderboard={leaderboard} />
+                <Winners winners={leaderboard} />
             </section>
+        </div>
+
+        <div className="gutter">
+            <hr />
         </div>
 
         <Contact />

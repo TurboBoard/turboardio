@@ -21,19 +21,19 @@ export async function getStaticProps() {
 
     const sorted = Items.map((Item) => aws.dynamo.unmarshall(Item))
         .sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf())
-        .slice(0, 10);
+        .slice(0, 5);
 
     for (const { bounty_id } of sorted) {
-        const { admin, created_at, game, id, pledges, prize, winning_claim } = await get_bounty(bounty_id);
+        const { admin, amount, created_at, game, id, pledges, winners } = await get_bounty(bounty_id);
 
         bounties.push({
             admin,
-            claimed: winning_claim ? true : false,
+            amount,
             created_at,
             id,
+            is_claimed: winners?.length > 0 ? true : false,
             game,
             pledges,
-            prize,
         });
     }
 

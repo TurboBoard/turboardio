@@ -12,10 +12,10 @@ const Form = ({ handle_create, is_loading }: { handle_create: Function; is_loadi
         amount: 0,
     });
 
-    const handle_change = (key: "amount", value: number) =>
+    const handle_change = (key: "amount", value: string) =>
         set_state({
             ...state,
-            [key]: value,
+            [key]: parseInt(value),
         });
 
     const handle_submit = (e: React.FormEvent<HTMLFormElement>) => {

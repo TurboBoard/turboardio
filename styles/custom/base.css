@@ -130,6 +130,9 @@
     }
 
     hr {
-        @apply my-8;
+        @apply border-dark;
+        @apply dark:border-light;
+
+        @apply opacity-25;
     }
 }

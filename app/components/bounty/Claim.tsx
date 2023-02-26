@@ -15,11 +15,7 @@ const submit_claim = async (body: string) => {
     return await response.json();
 };
 
-const Component = ({ bounty_id, claimed }: { bounty_id: Bounty["id"]; claimed: boolean }) => {
-    if (claimed) {
-        return <p className="mb-0">This bounty has been claimed.</p>;
-    }
-
+const Component = ({ bounty_id }: { bounty_id: Bounty["id"] }) => {
     const router = useRouter();
 
     const [is_loading, set_is_loading] = useState<boolean>(false);

@@ -1,104 +1,109 @@
-// @ts-nocheck
-import dynamic from "next/dynamic";
-
 import Claim from "@Components/bounty/Claim";
 import Claims from "@Components/bounty/Claims";
-import Discord from "@Svgs/Discord";
+import Details from "@Components/bounty/Details";
 import Game from "@Components/igdb/Game";
 import Pledge from "@Components/bounty/Pledge";
 import Pledges from "@Components/bounty/Pledges";
-
-const Date = dynamic(() => import("@Components/bounty/Date"), {
-    ssr: false,
-});
+import Winners from "@Components/Winners";
 
 import { BountyProps } from "@Props";
 
-const Page = ({ bounty: { admin, claims, created_at, details, discord_link, end_date, game, id, pledges, prize, start_date, winning_claim } }: BountyProps) => (
-    <div>
-        <section>
-            <div className="flex justify-between mb-9">
-                <Game {...game} />
+const Page = ({ bounty: { admin, amount, claims, created_at, details, discord_link, end_date, game, id, pledges, start_date, winners } }: BountyProps) => {
+    const is_claimed = winners?.length > 0;
 
-                {prize && (
-                    <div className="hidden sm:block">
-                        <div className="heading text-accent text-4xl lg:text-6xl">${prize}</div>
-                    </div>
-                )}
-            </div>
+    return (
+        <div>
+            {/* The Game and Bounty Details are always shown */}
+            <section>
+                <div className="flex justify-between mb-9">
+                    <Game {...game} />
 
-            <div className="space-y-7">
-                <div>
-                    <h2>Details</h2>
-
-                    <p className="whitespace-pre-line">{details}</p>
-
-                    <div>
-                        {/* prettier-ignore */}
-                        <small>
-                            Bounty created on {created_at} by <span className="text-black">{admin.name}</span>
-                        </small>
-                    </div>
+                    {amount && (
+                        <div className="hidden sm:block">
+                            <div className="heading text-accent text-4xl lg:text-6xl">${amount}</div>
+                        </div>
+                    )}
                 </div>
 
-                {discord_link && (
-                    <div>
-                        <h3>Links</h3>
+                <Details admin={admin} created_at={created_at} details={details} discord_link={discord_link} end_date={end_date} start_date={start_date} />
+            </section>
 
-                        <div className="flex space-x-6">
-                            <a className="fade-link block h-8" href={discord_link} rel="noreferrer" target="_blank">
-                                <Discord />
-                            </a>
-                        </div>
-                    </div>
-                )}
-
-                {(start_date || end_date) && (
-                    <div className="grid grid-cols-2 space-x-8">
-                        {start_date && (
-                            <div>
-                                <h3>Start Date</h3>
-
-                                <Date date_string={start_date} />
-                            </div>
-                        )}
-
-                        {end_date && (
-                            <div>
-                                <h3>End Date</h3>
-
-                                <Date date_string={end_date} />
-                            </div>
-                        )}
-                    </div>
-                )}
+            <div className="gutter">
+                <hr />
             </div>
-        </section>
 
-        <section>
-            <h2>Claims</h2>
+            {/* Only show the winners if there are winners */}
+            {is_claimed && (
+                <>
+                    <section>
+                        <h2>Winner{winners.length > 1 && "s"}</h2>
 
-            <Claims claims={claims} winning_claim_id={winning_claim?.id || null} />
-        </section>
+                        <Winners winners={winners} />
+                    </section>
 
-        <section>
-            <h2>Claim</h2>
+                    <div className="gutter">
+                        <hr />
+                    </div>
+                </>
+            )}
 
-            <Claim bounty_id={id} claimed={winning_claim ? true : false} />
-        </section>
+            {/* Only show claims if there are claims */}
+            {claims && (
+                <>
+                    <section>
+                        <h2>Claims</h2>
 
-        <section>
-            <h2>Pledges</h2>
+                        <Claims claims={claims} />
+                    </section>
 
-            <Pledges pledges={pledges} />
-        </section>
+                    <div className="gutter">
+                        <hr />
+                    </div>
+                </>
+            )}
 
-        <section>
-            <h2>Pledge</h2>
+            {/* Only show the claim form if the bounty has not been claimed */}
+            {!is_claimed && (
+                <>
+                    <section>
+                        <h2>Claim</h2>
 
-            <Pledge bounty_id={id} claimed={winning_claim ? true : false} />
-        </section>
-    </div>
-);
+                        <Claim bounty_id={id} />
+                    </section>
+
+                    <div className="gutter">
+                        <hr />
+                    </div>
+                </>
+            )}
+
+            {/* Only show pledges if there are pledges */}
+            {pledges && (
+                <>
+                    <section>
+                        <h2>Pledges</h2>
+
+                        <Pledges pledges={pledges} />
+                    </section>
+
+                    <div className="gutter">
+                        <hr />
+                    </div>
+                </>
+            )}
+
+            {/* Only show pledge form if the bounty has not been claimed */}
+            {!is_claimed && (
+                <>
+                    <section>
+                        <h2>Pledge</h2>
+
+                        <Pledge bounty_id={id} />
+                    </section>
+                </>
+            )}
+        </div>
+    );
+};
 
 export default Page;

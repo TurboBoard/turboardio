@@ -24,6 +24,8 @@ const Page = ({}: AccountProps) => (
                     </Link>
                 </div>
 
+                <hr />
+
                 <div>
                     <h2>Your Bounties</h2>
 
@@ -36,6 +38,8 @@ const Page = ({}: AccountProps) => (
                         Coming Soon
                     </Link>
                 </div>
+
+                <hr />
 
                 <div>
                     <h2>Your Claims</h2>
@@ -50,6 +54,8 @@ const Page = ({}: AccountProps) => (
                     </Link>
                 </div>
 
+                <hr />
+
                 <div>
                     <h2>Your Pledges</h2>
 
@@ -62,6 +68,8 @@ const Page = ({}: AccountProps) => (
                         Coming Soon
                     </Link>
                 </div>
+
+                <hr />
 
                 <div>
                     <h3>Goodbye</h3>

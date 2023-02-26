@@ -22,12 +22,20 @@ const Page = ({ bounties, game }: GameProps) => (
             <div>
                 <h2>Bounties</h2>
 
-                {bounties.length ? (
-                    <Bounties bounties={bounties} />
-                ) : (
-                    /* prettier-ignore */
-                    <p className="mb-0">There are currently no bounties for this game. Would you like to <Link className="generic-link" href={`/create/bounty/${game.id}`}>Create</Link> one?</p>
-                )}
+                <div className="mb-9">
+                    {bounties.length ? (
+                        <Bounties bounties={bounties} />
+                    ) : (
+                        /* prettier-ignore */
+                        <p className="mb-0">There are currently no bounties for this game.</p>
+                    )}
+                </div>
+
+                <div>
+                    <Link className="button button--anchor" href={`/create/bounty/${game.id}`}>
+                        Create {game.title} Bounty
+                    </Link>
+                </div>
             </div>
         </section>
     </div>

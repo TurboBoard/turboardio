@@ -28,3 +28,11 @@
 -   Adjusted spacing of design in a few spots
 -   Bounty board now displays 10 latest bounties instead of 5
 -   Added start and end dates to Bounties
+
+**Version 1.1.2**
+
+-   Fixed pledge amount being a string
+-   Added create bounty button on game page
+-   Added <hr /> when needed
+-   Bounty Details component created
+-   Bounty page now hides unnecessary information

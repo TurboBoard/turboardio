@@ -1,6 +1,6 @@
 import aws from "@Apis/aws";
 
-import { Bounty, Claim, Game, TurboardioUser } from "@Types";
+import { Bounty, Game, TurboardioUser } from "@Types";
 
 import { convert, format } from "@Lib";
 
@@ -34,7 +34,7 @@ const get_claims = async (bounty_id: Bounty["id"]): Promise<Bounty["claims"]> =>
     return claims;
 };
 
-const get_game = async (game_id: Game["id"]): Promise<Game> => {
+const get_game = async (game_id: Game["id"]): Promise<Bounty["game"]> => {
     const response = await fetch(process.env.IGDB_GAME_ENDPOINT, {
         method: "post",
         headers: {
@@ -86,36 +86,33 @@ const get_user = async (admin_id: TurboardioUser["id"]): Promise<TurboardioUser>
     return convert.turboardio_user(aws.dynamo.unmarshall(Item));
 };
 
-const get_winning_claim = (claims: Bounty["claims"], winning_claim_id: Claim["id"]): Bounty["winning_claim"] => {
-    if (!winning_claim_id) return null;
+const get_winners = async (bounty_id: Bounty["id"], claims: Bounty["claims"]): Promise<Bounty["winners"]> => {
+    if (!claims) return null;
 
-    const winning_claim = claims.find(({ id }) => id === winning_claim_id);
+    const { Count, Items } = await aws.dynamo.scan({
+        TableName: "turboardio_winners",
+        FilterExpression: "bounty_id = :bounty_id",
+        ExpressionAttributeValues: {
+            ":bounty_id": aws.dynamo.input(bounty_id),
+        },
+    });
 
-    const youtube_id = convert.link_to_youtube_id(winning_claim.link);
+    if (!Count) return null;
 
-    if (youtube_id) {
-        return {
-            ...winning_claim,
-            video: {
-                id: youtube_id,
-                type: "youtube",
-            },
-        };
+    const winners: Bounty["winners"] = [];
+
+    for (const Item of Items) {
+        const { amount, bounty_id, claim_id } = aws.dynamo.unmarshall(Item);
+
+        const claim = claims.find(({ id }) => id === claim_id);
+
+        winners.push({
+            amount,
+            user: claim.user,
+        });
     }
 
-    const twitch_id = convert.link_to_twitch_id(winning_claim.link);
-
-    if (twitch_id) {
-        return {
-            ...winning_claim,
-            video: {
-                id: twitch_id,
-                type: "twitch",
-            },
-        };
-    }
-
-    return winning_claim;
+    return winners;
 };
 
 const get_bounty = async (bounty_id: Bounty["id"]): Promise<Bounty> => {
@@ -126,7 +123,7 @@ const get_bounty = async (bounty_id: Bounty["id"]): Promise<Bounty> => {
         },
     });
 
-    const { admin_id, claim_id, created_at, details, discord_link, end_date, game_id, start_date } = aws.dynamo.unmarshall(Item);
+    const { admin_id, created_at, details, discord_link, end_date, game_id, start_date } = aws.dynamo.unmarshall(Item);
 
     const admin = await get_user(admin_id);
 
@@ -134,14 +131,15 @@ const get_bounty = async (bounty_id: Bounty["id"]): Promise<Bounty> => {
 
     const pledges = await get_pledges(bounty_id);
 
-    const prize = pledges ? pledges.reduce((acc, { amount }) => acc + amount, 0) : null;
+    const amount = pledges ? pledges.reduce((acc, { amount }) => acc + amount, 0) : null;
 
     const claims = await get_claims(bounty_id);
 
-    const winning_claim = get_winning_claim(claims, claim_id);
+    const winners = await get_winners(bounty_id, claims);
 
     const bounty: Bounty = {
         admin,
+        amount,
         claims,
         created_at: format.created_at(created_at),
         details,
@@ -150,9 +148,8 @@ const get_bounty = async (bounty_id: Bounty["id"]): Promise<Bounty> => {
         game,
         id: bounty_id,
         pledges,
-        prize,
         start_date: start_date || null,
-        winning_claim,
+        winners,
     };
 
     return bounty;
