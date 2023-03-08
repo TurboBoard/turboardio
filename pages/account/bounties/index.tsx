@@ -1,10 +1,8 @@
 import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 
-import Layout from "@Layouts/account/Index";
+import Layout from "@Layouts/account/Bounties";
 
-import { AccountProps } from "@Props";
-
-const Page = (props: AccountProps) => <Layout {...props} />;
+const Page = (props) => <Layout {...props} />;
 
 export async function getStaticProps() {
     return {

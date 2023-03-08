@@ -1,6 +1,6 @@
 import aws from "@Apis/aws";
 
-import Layout from "@Layouts/Home";
+import Layout from "@Layouts/Index";
 
 import { Claim, TurboardioUser } from "@Types";
 import { HomeProps } from "@Props";
@@ -60,23 +60,16 @@ const get_leaderboard = async (): Promise<HomeProps["leaderboard"]> => {
     } = {};
 
     const { Items } = await aws.dynamo.scan({
-        TableName: "turboardio_winners",
+        TableName: "turboardio_claims",
     });
 
     for (const Item of Items) {
-        const { amount, claim_id } = aws.dynamo.unmarshall(Item);
+        const { amount, user_id } = aws.dynamo.unmarshall(Item);
 
-        const response = await aws.dynamo.get_item({
-            TableName: "turboardio_claims",
-            Key: {
-                claim_id: aws.dynamo.input(claim_id),
-            },
-        });
-
-        const { user_id } = aws.dynamo.unmarshall(response.Item);
+        if (!amount) continue;
 
         if (users[user_id]) {
-            users[user_id].amount += amount;
+            users[user_id].amount += parseInt(amount);
 
             continue;
         }

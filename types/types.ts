@@ -11,9 +11,9 @@ export type Bounties = {
     };
     amount: Bounty["amount"];
     created_at: Bounty["created_at"];
-    id: Bounty["id"];
-    is_claimed: boolean;
     game: Bounty["game"];
+    id: Bounty["id"];
+    is_claimed: Bounty["is_claimed"];
     pledges: Bounty["pledges"];
 }[];
 
@@ -27,9 +27,10 @@ export type Bounty = {
     end_date: string | null;
     game: Game;
     id: string;
+    is_claimed: boolean;
     pledges: Pledge[] | null;
     start_date: string | null;
-    winners: Winners | null;
+    winners: Leaderboard | null;
 };
 
 export type Claim = {
@@ -47,6 +48,11 @@ export type Game = {
     released: number;
     title: string;
 };
+
+export type Leaderboard = {
+    amount: Bounty["amount"];
+    user: TurboardioUser;
+}[];
 
 export type Meta = {
     description?: string;
@@ -78,8 +84,3 @@ export type Video = {
     id: string;
     type: "twitch" | "youtube";
 };
-
-export type Winners = {
-    amount: Bounty["amount"];
-    user: TurboardioUser;
-}[];

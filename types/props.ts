@@ -1,6 +1,16 @@
-import { Bounties, Bounty, Claim, Game, Meta, User, Winners } from "@Types";
+import { Bounties, Bounty, Claim, Game, Leaderboard, Meta, User } from "@Types";
 
 export type AccountProps = {
+    user: User;
+};
+
+export type AccountBountiesProps = {
+    bounties: {
+        created_at: Bounty["created_at"];
+        id: Bounty["id"];
+        is_claimed: Bounty["is_claimed"];
+        game: Bounty["game"];
+    }[];
     user: User;
 };
 
@@ -19,6 +29,14 @@ export type CreateBountyProps = {
     meta: Meta;
 };
 
+export type EditDetailsProps = {
+    user: User;
+};
+
+export type EditImageProps = {
+    user: User;
+};
+
 export type GameProps = {
     bounties: Bounties;
     game: Game;
@@ -27,7 +45,7 @@ export type GameProps = {
 
 export type HomeProps = {
     claim: Claim;
-    leaderboard: Winners;
+    leaderboard: Leaderboard;
     meta: Meta;
 };
 

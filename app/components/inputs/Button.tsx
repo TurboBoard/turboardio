@@ -1,4 +1,4 @@
-import Loading from "@Components/Loading";
+import Dots from "@Components/Dots";
 
 const Component = ({ is_disabled, is_loading, text }: { is_disabled?: boolean; is_loading?: boolean; text: string }) => {
     let button_class_name = "button w-full";
@@ -8,8 +8,15 @@ const Component = ({ is_disabled, is_loading, text }: { is_disabled?: boolean; i
     }
 
     return (
-        <button className={button_class_name} disabled={is_disabled}>
-            {is_loading ? <Loading /> : text}
+        <button className={button_class_name} disabled={is_disabled || is_loading}>
+            {is_loading ? (
+                <span>
+                    Loading
+                    <Dots />
+                </span>
+            ) : (
+                text
+            )}
         </button>
     );
 };

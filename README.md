@@ -36,3 +36,7 @@
 -   Added <hr /> when needed
 -   Bounty Details component created
 -   Bounty page now hides unnecessary information
+
+**Version 1.2.0**
+
+-   Refactored components, layouts and folder structures

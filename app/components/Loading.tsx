@@ -1,21 +1,19 @@
-import { useEffect, useState } from "react";
+import Dots from "@Components/Dots";
+import Tiger from "@Svgs/Tiger";
 
-const Component = () => {
-    const [dots, set_dots] = useState("");
+const Component = () => (
+    <div className="relative h-[30vw] flex justify-center">
+        <div className="h-full opacity-25">
+            <Tiger />
+        </div>
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            set_dots((prev) => {
-                if (prev.length >= 3) return "";
-
-                return `${prev}.`;
-            });
-        }, 750);
-
-        return () => clearInterval(interval);
-    }, []);
-
-    return <span>Loading{dots}</span>;
-};
+        <div className="absolute inset-0 flex justify-center items-center">
+            <h1 className="h1">
+                Loading
+                <Dots />
+            </h1>
+        </div>
+    </div>
+);
 
 export default Component;

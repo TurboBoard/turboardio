@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import Bounties from "@Components/bounties/Bounties";
+import Bounties from "@Components/Bounties";
 
 import { GameProps } from "@Props";
 

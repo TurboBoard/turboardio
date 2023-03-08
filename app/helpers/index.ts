@@ -1,3 +1,7 @@
-import get_bounty from "./get_bounty";
+import BountyHelper from "./bounty";
+import ClaimHelper from "./claim";
+import GameHelper from "./game";
+import PledgeHelper from "./pledge";
+import TurboardioUserHelper from "./turboardio_user";
 
-export { get_bounty };
+export { BountyHelper, ClaimHelper, GameHelper, PledgeHelper, TurboardioUserHelper };
