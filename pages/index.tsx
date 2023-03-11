@@ -31,7 +31,9 @@ const get_latest_winning_claim = async (): Promise<HomeProps["claim"]> => {
 
         if (Count === 0) continue;
 
-        const { claim_id, created_at, comment, link, user_id } = aws.dynamo.unmarshall(Items[0]);
+        const { amount, claim_id, created_at, comment, link, user_id } = aws.dynamo.unmarshall(Items[0]);
+
+        if (!amount) continue;
 
         const user = await get_user(user_id);
 
