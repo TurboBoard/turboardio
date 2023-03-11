@@ -1,11 +1,12 @@
 import aws from "@Apis/aws";
 
+import { ClaimHelper, GameHelper, PledgeHelper, TurboardioUserHelper } from "@Helpers";
+
 import Layout from "@Layouts/Game";
 
-import { Game } from "@Types";
 import { GameProps } from "@Props";
 
-import { get_bounty } from "@Helpers";
+import { format } from "@Lib";
 
 const Page = (props: GameProps) => {
     if (Object.keys(props).length === 0) return null;
@@ -13,22 +14,9 @@ const Page = (props: GameProps) => {
     return <Layout {...props} />;
 };
 
-const get_game = async (game_id: Game["id"]): Promise<GameProps["game"]> => {
-    const response = await fetch(process.env.IGDB_GAME_ENDPOINT, {
-        method: "post",
-        headers: {
-            Accept: "application/json",
-            "X-Turbo-Key": process.env.CLOUDFLARE_API_TOKEN,
-        },
-        body: JSON.stringify({
-            game_id,
-        }),
-    });
+export async function getStaticProps({ params }: { params: { game_id: string } }) {
+    const game_id = parseInt(params.game_id);
 
-    return await response.json();
-};
-
-const get_bounties = async (game_id: Game["id"]): Promise<GameProps["bounties"]> => {
     const { Items } = await aws.dynamo.scan({
         TableName: "turboardio_bounties",
         FilterExpression: "game_id = :game_id",
@@ -37,34 +25,32 @@ const get_bounties = async (game_id: Game["id"]): Promise<GameProps["bounties"]>
         },
     });
 
-    let bounties = [];
+    const game = await GameHelper.get_game(game_id);
 
-    if (!Items.length) return bounties;
+    const bounties: GameProps["bounties"] = [];
 
-    const sorted = Items.map((Item) => {
-        const { bounty_id, created_at } = aws.dynamo.unmarshall(Item);
+    const sorted = Items.map((Item) => aws.dynamo.unmarshall(Item)).sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf());
 
-        return {
-            bounty_id,
-            created_at,
-        };
-    }).sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf());
+    for (const { admin_id, bounty_id, created_at } of sorted) {
+        const admin = await TurboardioUserHelper.get_turboardio_user(admin_id);
 
-    for (const { bounty_id } of sorted) {
-        const bounty = await get_bounty(bounty_id);
+        const is_claimed = await ClaimHelper.get_is_claimed(bounty_id);
 
-        bounties.push(bounty);
+        const pledges = await PledgeHelper.get_pledges(bounty_id);
+
+        bounties.push({
+            admin: {
+                id: admin.id,
+                name: admin.name,
+            },
+            amount: pledges ? pledges.reduce((acc, { amount }) => (acc += amount), 0) : null,
+            created_at: format.iso(created_at),
+            game,
+            id: bounty_id,
+            is_claimed,
+            pledges,
+        });
     }
-
-    return bounties;
-};
-
-export async function getStaticProps({ params }: { params: { game_id: string } }) {
-    const game_id = parseInt(params.game_id);
-
-    const game = await get_game(game_id);
-
-    const bounties = await get_bounties(game_id);
 
     const props: GameProps = {
         bounties,

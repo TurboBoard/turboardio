@@ -28,6 +28,7 @@
         "next": "^13.1.6",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "react-linkify-it": "^1.0.7",
         "sharp": "^0.31.3"
     },
     "devDependencies": {

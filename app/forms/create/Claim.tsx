@@ -22,7 +22,7 @@ const submit_claim = async (body: string) => {
     return await response.json();
 };
 
-const Component = ({ bounty_id }: { bounty_id: Bounty["id"] }) => {
+const Form = ({ bounty_id }: { bounty_id: Bounty["id"] }) => {
     const router = useRouter();
 
     const [state, set_state] = useState<State>({
@@ -43,7 +43,9 @@ const Component = ({ bounty_id }: { bounty_id: Bounty["id"] }) => {
 
         set_is_loading(true);
 
-        const { success } = await submit_claim(JSON.stringify({ bounty_id, comment: state.comment.length ? state.comment : null, link: state.link }));
+        const body: string = JSON.stringify({ bounty_id, comment: state.comment.length ? state.comment : null, link: state.link });
+
+        const { success } = await submit_claim(body);
 
         if (success) {
             router.reload();
@@ -65,4 +67,4 @@ const Component = ({ bounty_id }: { bounty_id: Bounty["id"] }) => {
     );
 };
 
-export default Component;
+export default Form;

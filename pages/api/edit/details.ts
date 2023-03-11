@@ -33,8 +33,11 @@ const update_details = async (req: NextApiRequest, res: NextApiResponse) => {
             Item,
         });
 
+        // TODO: Get the new item in the return and updated item instead of success
+
         res.json({ success: true });
     } catch (err: any) {
+        console.log(err);
         res.status(500).json({ error: err.message });
     }
 };

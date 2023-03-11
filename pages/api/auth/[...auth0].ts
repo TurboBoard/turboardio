@@ -2,10 +2,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import { handleAuth, handleCallback, handleLogin } from "@auth0/nextjs-auth0";
 
+import aws from "@Apis/aws";
+
 import { nanoid } from "nanoid";
 import sharp from "sharp";
-
-import aws from "@Apis/aws";
 
 import { User } from "@Types";
 

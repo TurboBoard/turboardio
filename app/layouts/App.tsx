@@ -42,6 +42,7 @@ const Layout = ({ children }: any) => {
                     <>
                         {/* Social Sharing */}
                         {children.props.meta.description && <meta property="og:description" content={children.props.meta.description} />}
+
                         {meta_image && (
                             <>
                                 <meta property="og:image" content={meta_image} />

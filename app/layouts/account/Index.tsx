@@ -64,7 +64,7 @@ const Page = ({}: AccountProps) => (
                             <div>
                                 <h2>Your Claims</h2>
 
-                                <p>Edit and delete claims you've made.</p>
+                                <p>Edit and delete your claims.</p>
 
                                 {/* <Link className="button fade-link inline-block" href="/account/claims">
                             Edit Claims

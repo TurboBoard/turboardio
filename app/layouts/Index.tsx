@@ -1,5 +1,4 @@
 import Contact from "@Components/Contact";
-import Leaderboard from "@Components/Leaderboard";
 
 import Link from "next/link";
 
@@ -74,15 +73,23 @@ const Page = ({ claim: { comment, user, video }, leaderboard }: HomeProps) => (
             <section className="lg:w-1/2">
                 <h1 className="text-center">Leaderboard</h1>
 
-                <Leaderboard leaderboard={leaderboard} />
+                <div className="space-y-7">
+                    {leaderboard.map(({ amount, user }) => (
+                        <div key={user.id} className="flex justify-between">
+                            <User {...user} />
+
+                            <div className="hidden sm:block heading text-accent text-5xl">${amount}</div>
+                        </div>
+                    ))}
+                </div>
             </section>
         </div>
 
-        <div className="gutter">
-            <hr />
-        </div>
+        {/* TODO: Featured Bounty */}
 
-        <section>
+        <section className="md:w-2/3 md:mx-auto">
+            <h1 className="text-center">Get In Touch</h1>
+
             <Contact />
         </section>
     </div>

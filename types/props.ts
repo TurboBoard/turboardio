@@ -29,9 +29,11 @@ export type CreateBountyProps = {
     meta: Meta;
 };
 
-export type EditDetailsProps = {
-    user: User;
+export type EditBountyProps = {
+    bounty: Bounty;
 };
+
+export type EditDetailsProps = {};
 
 export type EditImageProps = {
     user: User;

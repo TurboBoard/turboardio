@@ -1,13 +1,13 @@
 import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 
-import { get_bounty } from "@Helpers";
+import get_bounty from "@Services/get_bounty";
+
+import { Bounty } from "@Types";
+import { EditBountyProps } from "@Props";
 
 import Layout from "@Layouts/edit/Bounty";
 
-import { Bounty } from "@Types";
-import { AccountBountyProps } from "@Props";
-
-const Page = (props: AccountBountyProps) => {
+const Page = (props: EditBountyProps) => {
     if (Object.keys(props).length === 0) return null;
 
     return <Layout {...props} />;
@@ -16,7 +16,7 @@ const Page = (props: AccountBountyProps) => {
 export async function getStaticProps({ params: { bounty_id } }: { params: { bounty_id: Bounty["id"] } }) {
     const bounty: Bounty = await get_bounty(bounty_id);
 
-    const props: AccountBountyProps = {
+    const props: EditBountyProps = {
         bounty,
     };
 

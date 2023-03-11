@@ -21,13 +21,14 @@ const get_claims = async (bounty_id: Bounty["id"]): Promise<Bounty["claims"]> =>
 
     const sorted = Items.map((Item) => aws.dynamo.unmarshall(Item)).sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf());
 
-    for (const { comment, created_at, claim_id, link, user_id } of sorted) {
+    for (const { amount, comment, created_at, claim_id, link, user_id } of sorted) {
         const user = await TurboardioUserHelper.get_turboardio_user(user_id);
 
         const claim: Claim = {
             comment: comment || null,
             created_at: format.iso(created_at),
             id: claim_id,
+            is_winner: amount ? true : false,
             link,
             user,
         };

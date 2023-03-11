@@ -1,5 +1,7 @@
 import aws from "@Apis/aws";
 
+import { TurboardioUserHelper } from "@Helpers";
+
 import Layout from "@Layouts/Index";
 
 import { Claim, TurboardioUser } from "@Types";
@@ -31,23 +33,28 @@ const get_latest_winning_claim = async (): Promise<HomeProps["claim"]> => {
 
         if (Count === 0) continue;
 
-        const { claim_id, created_at, comment, link, user_id } = aws.dynamo.unmarshall(Items[0]);
+        const claims = Items.map((Item) => aws.dynamo.unmarshall(Item)).sort((a, b) => b.amount - a.amount);
 
-        const user = await get_user(user_id);
+        const { claim_id, created_at, comment, link, user_id } = claims[0];
 
         const video = convert.link_to_video(link);
 
         // If there is no video then we don't embed it on the homepage
         if (!video) continue;
 
-        return {
+        const user = await TurboardioUserHelper.get_turboardio_user(user_id);
+
+        const claim: Claim = {
             comment,
             created_at,
             id: claim_id,
+            is_winner: true,
             link,
             user,
             video,
         };
+
+        return claim;
     }
 };
 
@@ -74,7 +81,7 @@ const get_leaderboard = async (): Promise<HomeProps["leaderboard"]> => {
             continue;
         }
 
-        const user = await get_user(user_id);
+        const user = await TurboardioUserHelper.get_turboardio_user(user_id);
 
         users[user_id] = {
             amount,
@@ -85,17 +92,6 @@ const get_leaderboard = async (): Promise<HomeProps["leaderboard"]> => {
     return Object.values(users)
         .sort((a, b) => b.amount - a.amount)
         .slice(0, 5);
-};
-
-const get_user = async (turboardio_id: TurboardioUser["id"]): Promise<TurboardioUser> => {
-    const { Item } = await aws.dynamo.get_item({
-        TableName: "turboardio_users",
-        Key: {
-            user_id: aws.dynamo.input(turboardio_id),
-        },
-    });
-
-    return convert.turboardio_user(aws.dynamo.unmarshall(Item));
 };
 
 export async function getStaticProps() {

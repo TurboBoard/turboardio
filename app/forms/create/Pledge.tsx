@@ -16,7 +16,7 @@ const submit_pledge = async (body: string) => {
     return await response.json();
 };
 
-const Component = ({ bounty_id }: { bounty_id: Bounty["id"] }) => {
+const Form = ({ bounty_id }: { bounty_id: Bounty["id"] }) => {
     const router = useRouter();
 
     const [amount, set_amount] = useState<number>(0);
@@ -30,7 +30,9 @@ const Component = ({ bounty_id }: { bounty_id: Bounty["id"] }) => {
 
         set_is_loading(true);
 
-        const { success } = await submit_pledge(JSON.stringify({ amount, bounty_id }));
+        const body: string = JSON.stringify({ amount, bounty_id });
+
+        const { success } = await submit_pledge(body);
 
         if (success) {
             router.reload();
@@ -50,4 +52,4 @@ const Component = ({ bounty_id }: { bounty_id: Bounty["id"] }) => {
     );
 };
 
-export default Component;
+export default Form;

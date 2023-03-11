@@ -24,6 +24,8 @@
             "@Layouts/*": ["app/layouts/*"],
             "@Lib": ["app/lib/index.ts"],
             "@Props": ["types/props.ts"],
+            "@Services/*": ["app/services/*"],
+            "@States": ["types/states.ts"],
             "@Styles": ["styles/globals.css"],
             "@Svgs/*": ["app/svgs/*"],
             "@Types": ["types/types.ts"]

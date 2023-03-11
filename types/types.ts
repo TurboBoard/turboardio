@@ -23,20 +23,19 @@ export type Bounty = {
     claims: Claim[] | null;
     created_at: string;
     details: string;
-    discord_link: string | null;
     end_date: string | null;
     game: Game;
     id: string;
     is_claimed: boolean;
     pledges: Pledge[] | null;
     start_date: string | null;
-    winners: Leaderboard | null;
 };
 
 export type Claim = {
     comment: string | null;
     created_at: string;
     id: string;
+    is_winner: boolean;
     link: string;
     user: TurboardioUser;
     video?: Video;

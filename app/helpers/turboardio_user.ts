@@ -1,18 +1,25 @@
 import aws from "@Apis/aws";
 
-import { TurboardioUser, User } from "@Types";
+import { TurboardioUser } from "@Types";
 
-import { convert } from "@Lib";
-
-const get_turboardio_user = async (user_id: User["id"]): Promise<TurboardioUser> => {
+const get_turboardio_user = async (turboardio_user_id: TurboardioUser["id"]): Promise<TurboardioUser> => {
     const { Item } = await aws.dynamo.get_item({
         TableName: "turboardio_users",
         Key: {
-            user_id: aws.dynamo.input(user_id),
+            user_id: aws.dynamo.input(turboardio_user_id),
         },
     });
 
-    return convert.turboardio_user(aws.dynamo.unmarshall(Item));
+    const { pronouns, src_handle, twitch_handle, twitter_handle, user_name } = aws.dynamo.unmarshall(Item);
+
+    return {
+        id: turboardio_user_id,
+        name: user_name,
+        pronouns: pronouns || null,
+        src_handle: src_handle || null,
+        twitch_handle: twitch_handle || null,
+        twitter_handle: twitter_handle || null,
+    };
 };
 
 const helpers = {

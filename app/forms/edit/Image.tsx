@@ -15,7 +15,7 @@ const update_image = async (form_data: any) => {
     return await response.json();
 };
 
-const Component = ({ turboardio_user_id }: { turboardio_user_id: TurboardioUser["id"] }) => {
+const Form = ({ turboardio_user_id }: { turboardio_user_id: TurboardioUser["id"] }) => {
     const [file, set_file] = useState(null);
 
     const [is_loading, set_is_loading] = useState<boolean>(false);
@@ -77,4 +77,4 @@ const Component = ({ turboardio_user_id }: { turboardio_user_id: TurboardioUser[
     );
 };
 
-export default Component;
+export default Form;

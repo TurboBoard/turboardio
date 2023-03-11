@@ -8,11 +8,13 @@ import Loading from "@Components/Loading";
 import { AccountBountiesProps } from "@Props";
 
 const get_bounties = async (set_bounties: Function) => {
-    // const response = await fetch("/api/account/bounties/get");
-    // const { bounties } = await response.json();
-    // if (bounties) {
-    //     set_bounties(bounties);
-    // }
+    const response = await fetch("/api/get/account_bounties");
+
+    const { bounties } = await response.json();
+
+    if (bounties) {
+        set_bounties(bounties);
+    }
 };
 
 const Layout = () => {
@@ -72,8 +74,8 @@ const Layout = () => {
                             <div className="text-center">
                                 {/* prettier-ignore */}
                                 <small>
-                            Bounty created on {created_at}
-                        </small>
+                                    Bounty created on {created_at}
+                            </small>
                             </div>
                         </div>
                     ))}

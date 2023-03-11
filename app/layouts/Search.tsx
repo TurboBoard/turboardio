@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import Button from "@Components/inputs/Button";
-import Game from "@Components/igdb/Game";
+import Game from "@Components/Game";
 import Input from "@Components/inputs/Input";
 
 import { SearchProps } from "@Props";

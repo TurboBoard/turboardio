@@ -40,3 +40,5 @@
 **Version 1.2.0**
 
 -   Refactored components, layouts and folder structures
+-   Added edit bounty feature
+-   Added ability to select winners

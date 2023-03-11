@@ -5,9 +5,9 @@ import Loading from "@Components/Loading";
 
 import { EditDetailsProps } from "@Props";
 
-const Layout = ({ user: { email } }: EditDetailsProps) => (
+const Layout = ({}: EditDetailsProps) => (
     <TurboardioUserContext.Consumer>
-        {({ turboardio_user }) => {
+        {({ edit_details, turboardio_user }) => {
             if (!turboardio_user)
                 return (
                     <section>
@@ -20,7 +20,8 @@ const Layout = ({ user: { email } }: EditDetailsProps) => (
                     <h1>Your Profile</h1>
 
                     <Details
-                        email={email}
+                        edit_details={edit_details}
+                        email={turboardio_user.email}
                         initial_state={{
                             name: turboardio_user.name,
                             pronouns: turboardio_user.pronouns || "",
