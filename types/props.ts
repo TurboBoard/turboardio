@@ -5,12 +5,7 @@ export type AccountProps = {
 };
 
 export type AccountBountiesProps = {
-    bounties: {
-        created_at: Bounty["created_at"];
-        id: Bounty["id"];
-        is_claimed: Bounty["is_claimed"];
-        game: Bounty["game"];
-    }[];
+    bounties: Bounties;
     user: User;
 };
 

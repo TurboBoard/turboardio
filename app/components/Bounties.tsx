@@ -3,9 +3,9 @@ import Link from "next/link";
 import { Bounties } from "@Types";
 
 const Component = ({ bounties }: { bounties: Bounties }) => (
-    <div className="divide-y">
+    <div className="divide-y divide-silver">
         {bounties.map(({ admin, amount, created_at, id, is_claimed, game, pledges }) => (
-            <div key={id} className="relative py-7 border-silver">
+            <div key={id} className="relative py-7">
                 {is_claimed && (
                     <div className="jumbo">
                         <div className="jumbo__text">claimed</div>
@@ -40,7 +40,7 @@ const Component = ({ bounties }: { bounties: Bounties }) => (
                     <div className="text-center">
                         {/* prettier-ignore */}
                         <small>
-                            Bounty created on {created_at} by <span className="text-black dark:text-silver">{admin.name}</span>
+                            Bounty created on {created_at} by {admin.name}
                         </small>
                     </div>
                 </Link>

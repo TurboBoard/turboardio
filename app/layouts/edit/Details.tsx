@@ -1,6 +1,6 @@
 import { TurboardioUserContext } from "@Context/TurboardioUser";
 
-import Details from "@Forms/edit/Details";
+import Edit from "@Components/edit/Details";
 import Loading from "@Components/Loading";
 
 import { EditDetailsProps } from "@Props";
@@ -19,9 +19,8 @@ const Layout = ({}: EditDetailsProps) => (
                 <section>
                     <h1>Your Profile</h1>
 
-                    <Details
+                    <Edit
                         edit_details={edit_details}
-                        email={turboardio_user.email}
                         initial_state={{
                             name: turboardio_user.name,
                             pronouns: turboardio_user.pronouns || "",

@@ -1,6 +1,6 @@
 import { TurboardioUserContext } from "@Context/TurboardioUser";
 
-import Image from "@Forms/edit/Image";
+import Edit from "@Components/edit/Image";
 import Loading from "@Components/Loading";
 
 import { EditImageProps } from "@Props";
@@ -19,7 +19,7 @@ const Layout = ({}: EditImageProps) => (
                 <section>
                     <h1>Your Image</h1>
 
-                    <Image turboardio_user_id={turboardio_user.id} />
+                    <Edit turboardio_user_id={turboardio_user.id} />
                 </section>
             );
         }}

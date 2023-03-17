@@ -33,10 +33,6 @@
         background-color: var(--highlight);
     }
 
-    .bg-silver {
-        background-color: var(--silver);
-    }
-
     .border-accent {
         border-color: var(--accent);
     }
@@ -57,10 +53,6 @@
         border-color: var(--highlight);
     }
 
-    .border-silver {
-        border-color: var(--silver);
-    }
-
     .text-accent {
         color: var(--accent);
     }
@@ -79,10 +71,6 @@
 
     .text-highlight {
         color: var(--highlight);
-    }
-
-    .text-silver {
-        color: var(--silver);
     }
 
     /*

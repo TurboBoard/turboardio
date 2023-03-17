@@ -7,7 +7,7 @@ import User from "@Components/User";
 
 import { AccountProps } from "@Props";
 
-const Page = ({}: AccountProps) => (
+const Layout = ({}: AccountProps) => (
     <TurboardioUserContext.Consumer>
         {({ turboardio_user }) => {
             if (!turboardio_user)
@@ -30,7 +30,7 @@ const Page = ({}: AccountProps) => (
                             <div>
                                 <h2>Your Details</h2>
 
-                                <p>Edit your username, social links.</p>
+                                <p>Edit your username, pronouns and social links.</p>
 
                                 <Link className="button fade-link inline-block" href="/edit/details">
                                     Edit Details
@@ -40,7 +40,7 @@ const Page = ({}: AccountProps) => (
                             <div>
                                 <h2>Your Avatar</h2>
 
-                                <p>Edit your avatar.</p>
+                                <p>Change your avatar.</p>
 
                                 <Link className="button fade-link inline-block" href="/edit/image">
                                     Edit Avatar
@@ -52,10 +52,10 @@ const Page = ({}: AccountProps) => (
                             <div>
                                 <h2>Your Bounties</h2>
 
-                                <p>View and edit your bounties.</p>
+                                <p>View your bounties.</p>
 
                                 <Link className="button fade-link inline-block" href="/account/bounties">
-                                    Edit Bounties
+                                    View Bounties
                                 </Link>
                             </div>
 
@@ -64,7 +64,7 @@ const Page = ({}: AccountProps) => (
                             <div>
                                 <h2>Your Claims</h2>
 
-                                <p>Edit and delete your claims.</p>
+                                <p>View your claims.</p>
 
                                 {/* <Link className="button fade-link inline-block" href="/account/claims">
                             Edit Claims
@@ -106,4 +106,4 @@ const Page = ({}: AccountProps) => (
     </TurboardioUserContext.Consumer>
 );
 
-export default Page;
+export default Layout;

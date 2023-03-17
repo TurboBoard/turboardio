@@ -5,7 +5,7 @@ import Form from "@Forms/Contact";
 import { ContactState } from "@States";
 
 const send_email = async (body: string) => {
-    const response = await fetch(`/api/email/contact`, {
+    const response = await fetch(`/api/contact`, {
         method: "POST",
         body,
     });

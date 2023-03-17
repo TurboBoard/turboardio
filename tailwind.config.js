@@ -10,6 +10,7 @@ module.exports = {
                 byzantium: "#660099",
                 dark: "#171717", // Neutral 900
                 grey: "#71717a", // Neutral 500
+                silver: "#b7b7bc", // Grey with 50% lightened
                 light: "#fafafa", // Neutral 50
                 pink: "#FF3399",
                 teal: "#0cc",

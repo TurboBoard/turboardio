@@ -22,11 +22,7 @@ const Form = ({ handle_create, is_loading }) => {
     const handle_submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        handle_create({
-            details: state.details,
-            end_date: state.end_date || null,
-            start_date: state.start_date || null,
-        });
+        handle_create(state);
     };
 
     return (

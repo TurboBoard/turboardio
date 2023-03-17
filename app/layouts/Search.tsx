@@ -21,7 +21,7 @@ const get_new_items = async (query: string) => {
     }
 };
 
-const Page = ({}: SearchProps) => {
+const Layout = ({}: SearchProps) => {
     const [items, set_items] = useState([]);
 
     const [query, set_query] = useState<string>("");
@@ -62,7 +62,7 @@ const Page = ({}: SearchProps) => {
             {items.length > 0 && (
                 <div className="divide-y">
                     {items.map((game) => (
-                        <div key={game.id} className="py-7 border-silver">
+                        <div key={game.id} className="py-7">
                             <Game {...game} />
                         </div>
                     ))}
@@ -72,4 +72,4 @@ const Page = ({}: SearchProps) => {
     );
 };
 
-export default Page;
+export default Layout;

@@ -33,12 +33,11 @@
 
 -   Fixed pledge amount being a string
 -   Added create bounty button on game page
--   Added <hr /> when needed
+-   Added hr when needed
 -   Bounty Details component created
 -   Bounty page now hides unnecessary information
 
 **Version 1.2.0**
 
 -   Refactored components, layouts and folder structures
--   Added edit bounty feature
--   Added ability to select winners
+-   Added bounties page to accounts

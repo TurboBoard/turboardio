@@ -2,7 +2,7 @@ import { rte } from "@Lib";
 
 import { PageProps } from "@Props";
 
-const Page = ({ content, title }: PageProps) => (
+const Layout = ({ content, title }: PageProps) => (
     <div>
         <section className="rte">
             <h1>{title}</h1>
@@ -12,4 +12,4 @@ const Page = ({ content, title }: PageProps) => (
     </div>
 );
 
-export default Page;
+export default Layout;

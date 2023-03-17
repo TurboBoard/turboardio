@@ -1,19 +1,33 @@
-import Form from "@Forms/edit/Bounty";
+import Delete from "@Components/delete/Bounty";
+import Edit from "@Components/edit/Bounty";
+import Game from "@Components/Game";
 
 import { EditBountyProps } from "@Props";
 
-const Page = ({ bounty: { details, end_date, start_date } }: EditBountyProps) => (
-    <section>
-        <h1>Edit Bounty</h1>
+const Layout = ({ bounty: { details, game, end_date, start_date } }: EditBountyProps) => (
+    <div>
+        <section>
+            <h1>Edit Bounty</h1>
 
-        <Form
-            initial_state={{
-                details,
-                end_date: end_date || "",
-                start_date: start_date || "",
-            }}
-        />
-    </section>
+            <div className="mb-9">
+                <Game {...game} />
+            </div>
+
+            <Edit
+                initial_state={{
+                    details,
+                    end_date: end_date || "",
+                    start_date: start_date || "",
+                }}
+            />
+        </section>
+
+        <section>
+            <h1>Delete Bounty</h1>
+
+            <Delete />
+        </section>
+    </div>
 );
 
-export default Page;
+export default Layout;

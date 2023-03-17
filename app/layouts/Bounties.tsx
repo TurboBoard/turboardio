@@ -4,7 +4,7 @@ import Bounties from "@Components/Bounties";
 
 import { BountiesProps } from "@Props";
 
-const Page = ({ bounties }: BountiesProps) => (
+const Layout = ({ bounties }: BountiesProps) => (
     <div>
         <section>
             <h1>Search</h1>
@@ -21,4 +21,4 @@ const Page = ({ bounties }: BountiesProps) => (
     </div>
 );
 
-export default Page;
+export default Layout;

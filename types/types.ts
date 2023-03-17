@@ -4,7 +4,9 @@ import { UserProfile } from "@auth0/nextjs-auth0/client";
 
 export type Entry = EntryType<any>;
 
-export type Bounties = {
+export type Bounties = BountiesItem[];
+
+export type BountiesItem = {
     admin: {
         id: TurboardioUser["id"];
         name: TurboardioUser["name"];
@@ -15,7 +17,7 @@ export type Bounties = {
     id: Bounty["id"];
     is_claimed: Bounty["is_claimed"];
     pledges: Bounty["pledges"];
-}[];
+};
 
 export type Bounty = {
     admin: TurboardioUser;
@@ -27,6 +29,7 @@ export type Bounty = {
     game: Game;
     id: string;
     is_claimed: boolean;
+    is_claimable: boolean;
     pledges: Pledge[] | null;
     start_date: string | null;
 };

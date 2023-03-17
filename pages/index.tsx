@@ -35,7 +35,9 @@ const get_latest_winning_claim = async (): Promise<HomeProps["claim"]> => {
 
         const claims = Items.map((Item) => aws.dynamo.unmarshall(Item)).sort((a, b) => b.amount - a.amount);
 
-        const { claim_id, created_at, comment, link, user_id } = claims[0];
+        const { amount, claim_id, created_at, comment, link, user_id } = claims[0];
+
+        if (!amount) continue;
 
         const video = convert.link_to_video(link);
 

@@ -14,7 +14,11 @@ const Component = ({ id, name, pronouns, src_handle, twitch_handle, twitter_hand
             <div className="mb-6">
                 <div className="heading text-accent text-3xl lg:text-4xl leading-none">{name}</div>
 
-                {pronouns && <div className="mt-3 text-silver">{pronouns}</div>}
+                {pronouns && (
+                    <div className="mt-3">
+                        <small>{pronouns}</small>
+                    </div>
+                )}
             </div>
 
             <div className="flex space-x-6">

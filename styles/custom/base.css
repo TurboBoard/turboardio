@@ -14,13 +14,11 @@
         --grey: theme("colors.grey");
         --accent: theme("colors.pink");
         --highlight: theme("colors.byzantium");
-        --silver: #404040;
     }
 
     body.dark {
         --body: theme("colors.dark");
         --copy: theme("colors.light");
-        --silver: #e5e5e5;
     }
 
     body {
@@ -97,7 +95,7 @@
     }
 
     small {
-        @apply text-silver;
+        @apply text-xs;
     }
 
     a {
@@ -130,9 +128,6 @@
     }
 
     hr {
-        @apply border-dark;
-        @apply dark:border-light;
-
-        @apply opacity-25;
+        @apply border-silver;
     }
 }

@@ -8,7 +8,7 @@ import { EditBountyProps } from "@Props";
 import Layout from "@Layouts/edit/Bounty";
 
 const Page = (props: EditBountyProps) => {
-    if (Object.keys(props).length === 0) return null;
+    if (!props.bounty) return null;
 
     return <Layout {...props} />;
 };

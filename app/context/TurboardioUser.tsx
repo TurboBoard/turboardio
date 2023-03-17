@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 
 export const TurboardioUserContext = createContext(null);
 
-import { TurboardioUser } from "@Types";
+import { EditDetailsState } from "@States";
 
 const get_turboardio_user = async (set_user: Function) => {
     const response = await fetch("/api/get/turboardio_user");
@@ -30,25 +30,13 @@ export const TurboardioUserProvider = ({ children }) => {
         get_turboardio_user(set_turboardio_user);
     }, []);
 
-    const edit_details = async ({
-        name,
-        pronouns,
-        src_handle,
-        twitch_handle,
-        twitter_handle,
-    }: {
-        name: TurboardioUser["name"];
-        pronouns: TurboardioUser["pronouns"];
-        src_handle: TurboardioUser["src_handle"];
-        twitch_handle: TurboardioUser["twitch_handle"];
-        twitter_handle: TurboardioUser["twitter_handle"];
-    }): Promise<boolean> => {
+    const edit_details = async ({ name, pronouns, src_handle, twitch_handle, twitter_handle }: EditDetailsState) => {
         const body: string = JSON.stringify({
             name,
-            pronouns,
-            src_handle,
-            twitch_handle,
-            twitter_handle,
+            pronouns: pronouns || null,
+            src_handle: src_handle || null,
+            twitch_handle: twitch_handle || null,
+            twitter_handle: twitter_handle || null,
         });
 
         const { success } = await handle_edit_details(body);
@@ -65,8 +53,6 @@ export const TurboardioUserProvider = ({ children }) => {
             twitch_handle,
             twitter_handle,
         });
-
-        return true;
     };
 
     return <TurboardioUserContext.Provider value={{ edit_details, turboardio_user }}>{children}</TurboardioUserContext.Provider>;

@@ -10,7 +10,7 @@ import Video from "@Components/Video";
 
 import { HomeProps } from "@Props";
 
-const Page = ({ claim: { comment, user, video }, leaderboard }: HomeProps) => (
+const Layout = ({ claim: { comment, user, video }, leaderboard }: HomeProps) => (
     <div>
         <section className="sm:flex sm:justify-center sm:items-center sm:space-x-8 md:space-x-9 lg:space-x-10">
             <div>
@@ -95,4 +95,4 @@ const Page = ({ claim: { comment, user, video }, leaderboard }: HomeProps) => (
     </div>
 );
 
-export default Page;
+export default Layout;

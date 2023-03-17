@@ -4,7 +4,7 @@ import Bounties from "@Components/Bounties";
 
 import { GameProps } from "@Props";
 
-const Page = ({ bounties, game }: GameProps) => (
+const Layout = ({ bounties, game }: GameProps) => (
     <div>
         <section>
             <div className="mb-9">
@@ -41,4 +41,4 @@ const Page = ({ bounties, game }: GameProps) => (
     </div>
 );
 
-export default Page;
+export default Layout;

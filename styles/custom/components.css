@@ -78,7 +78,7 @@
 
         @apply bg-transparent;
 
-        @apply border-grey;
+        @apply border-silver;
 
         @apply outline-0;
 
@@ -251,7 +251,7 @@
         }
 
         &-item {
-            @apply border-grey;
+            @apply border-silver;
 
             &__button {
                 @apply fade-link;
@@ -306,7 +306,7 @@
             @apply border-l;
             @apply border-r;
             @apply border-b;
-            @apply border-grey;
+            @apply border-silver;
 
             @apply rounded-bl;
             @apply rounded-br;

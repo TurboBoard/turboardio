@@ -1,7 +1,7 @@
+import Link from "next/link";
+
 import ArrowUpRight from "@Svgs/ArrowUpRight";
-import Claim from "@Forms/create/Claim";
 import Game from "@Components/Game";
-import Pledge from "@Forms/create/Pledge";
 
 import { LinkItUrl } from "react-linkify-it";
 
@@ -9,9 +9,9 @@ import { BountyProps } from "@Props";
 
 import { format } from "@Lib";
 
-const Page = ({ bounty: { admin, amount, claims, created_at, details, end_date, game, id, is_claimed, pledges, start_date } }: BountyProps) => (
+const Layout = ({ bounty: { admin, amount, claims, created_at, details, end_date, game, id, is_claimed, is_claimable, pledges, start_date } }: BountyProps) => (
     <div>
-        {/* The Game and Bounty Details are always shown */}
+        {/* Bounty Information */}
         <section>
             <div className="flex justify-between mb-9">
                 <Game {...game} />
@@ -47,7 +47,7 @@ const Page = ({ bounty: { admin, amount, claims, created_at, details, end_date, 
                             <div>
                                 <h3>Start Date</h3>
 
-                                <p>{format.iso(start_date)}</p>
+                                <p className="mb-0">{format.iso(start_date)}</p>
                             </div>
                         )}
 
@@ -55,7 +55,7 @@ const Page = ({ bounty: { admin, amount, claims, created_at, details, end_date, 
                             <div>
                                 <h3>End Date</h3>
 
-                                <p>{format.iso(end_date)}</p>
+                                <p className="mb-0">{format.iso(end_date)}</p>
                             </div>
                         )}
                     </div>
@@ -67,103 +67,83 @@ const Page = ({ bounty: { admin, amount, claims, created_at, details, end_date, 
             <hr />
         </div>
 
-        {/* Only show claims if there are claims */}
-        {claims && (
-            <>
-                <section>
-                    <h2>Claims</h2>
+        {/* Claims */}
+        <section>
+            <h2>Claims</h2>
 
-                    <div className="divide-y">
-                        {claims.map(({ comment, created_at, id, is_winner, link, user }) => (
-                            <div key={id} className="relative py-7">
-                                {is_winner && (
-                                    <div className="jumbo">
-                                        <div className="jumbo__text">winner</div>
-                                    </div>
-                                )}
+            {claims ? (
+                <div className="divide-y">
+                    {claims.map(({ comment, created_at, id, is_winner, link, user }) => (
+                        <div key={id} className="relative py-7">
+                            {is_winner && (
+                                <div className="jumbo">
+                                    <div className="jumbo__text">winner</div>
+                                </div>
+                            )}
 
-                                <div className="sm:flex sm:items-center">
-                                    <div className="shrink-0 flex justify-center sm:justify-start mb-5 sm:mb-0">
-                                        <img alt={`{user.name} profile picture`} className="circle-image h-10 w-10 lg:h-11 lg:w-11" src={`${process.env.NEXT_PUBLIC_USER_IMAGES_CDN}/${user.id}.jpg`} />
-                                    </div>
-
-                                    {comment && <p className="w-3/4 mx-auto text-center whitespace-pre-line">{comment}</p>}
-
-                                    <div className="shrink-0">
-                                        <div className="absolute top-7 right-0">
-                                            <a className="highlight-link block h-7 lg:h-8" href={link} target="_blank">
-                                                <ArrowUpRight />
-                                            </a>
-                                        </div>
-                                    </div>
+                            <div className="sm:flex">
+                                <div className="sm:flex-1 flex justify-center sm:justify-start mb-6">
+                                    <img alt={`{user.name} profile picture`} className="circle-image h-10 w-10 lg:h-11 lg:w-11" src={`${process.env.NEXT_PUBLIC_USER_IMAGES_CDN}/${user.id}.jpg`} />
                                 </div>
 
-                                <div className="text-center">
-                                    {/* prettier-ignore */}
-                                    <small>
-                                Claim submitted on {created_at} by <span className="text-copy">{user.name}</span>
-                            </small>
+                                <div className="sm:flex-1 sm:flex sm:items-center">{comment && <p className="w-3/4 mx-auto text-center whitespace-pre-line">{comment}</p>}</div>
+
+                                <div className="absolute top-7 right-0 sm:static sm:flex-1 sm:flex sm:justify-end sm:items-start">
+                                    <a className="fade-link block h-7 lg:h-8 text-byzantium" href={link} target="_blank">
+                                        <ArrowUpRight />
+                                    </a>
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                </section>
 
-                <div className="gutter">
-                    <hr />
-                </div>
-            </>
-        )}
-
-        {/* Only show the claim form if the bounty has not been claimed */}
-        {!is_claimed && (
-            <>
-                <section>
-                    <h2>Claim</h2>
-
-                    <Claim bounty_id={id} />
-                </section>
-
-                <div className="gutter">
-                    <hr />
-                </div>
-            </>
-        )}
-
-        {/* Only show pledges if there are pledges */}
-        {pledges && (
-            <>
-                <section>
-                    <h2>Pledges</h2>
-
-                    <div className="flex space-x-7">
-                        {pledges.map(({ amount, id, user_id }) => (
-                            <div key={id} className="text-center">
-                                <img alt="User profile picture" className="circle-image h-10 w-10 mx-auto mb-5" src={`${process.env.NEXT_PUBLIC_USER_IMAGES_CDN}/${user_id}.jpg`} />
-
-                                <div className="heading text-accent text-4xl">${amount}</div>
+                            <div className="text-center">
+                                {/* prettier-ignore */}
+                                <small>
+                                    Claim submitted on {created_at} by <span className="text-copy">{user.name}</span>
+                                </small>
                             </div>
-                        ))}
-                    </div>
-                </section>
-
-                <div className="gutter">
-                    <hr />
+                        </div>
+                    ))}
                 </div>
-            </>
-        )}
+            ) : (
+                <p>There are currently no claims on this bounty.</p>
+            )}
 
-        {/* Only show pledge form if the bounty has not been claimed */}
-        {!is_claimed && (
-            <>
-                <section>
-                    <h2>Pledge</h2>
+            {is_claimable && (
+                <Link className="button button--anchor" href={`/create/claim/${id}`}>
+                    Submit Claim
+                </Link>
+            )}
+        </section>
 
-                    <Pledge bounty_id={id} />
-                </section>
-            </>
-        )}
+        <div className="gutter">
+            <hr />
+        </div>
+
+        {/* Pledges */}
+        <section>
+            <h2>Pledges</h2>
+
+            {pledges ? (
+                <div className="flex space-x-7 mb-7">
+                    {pledges.map(({ amount, id, user_id }) => (
+                        <div key={id} className="text-center">
+                            <img alt="User profile picture" className="circle-image h-10 w-10 mx-auto mb-5" src={`${process.env.NEXT_PUBLIC_USER_IMAGES_CDN}/${user_id}.jpg`} />
+
+                            <div className="heading text-accent text-4xl">${amount}</div>
+                        </div>
+                    ))}
+                </div>
+            ) : (
+                <p>There are currently no pledges on this bounty.</p>
+            )}
+
+            {is_claimable && (
+                <Link className="button button--anchor" href={`/create/pledge/${id}`}>
+                    Submit Pledge
+                </Link>
+            )}
+        </section>
     </div>
 );
 
-export default Page;
+export default Layout;

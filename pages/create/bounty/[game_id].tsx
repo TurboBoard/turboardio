@@ -6,7 +6,7 @@ import { Game } from "@Types";
 import { CreateBountyProps } from "@Props";
 
 const Page = (props: CreateBountyProps) => {
-    if (Object.keys(props).length === 0) return null;
+    if (!props.game) return null;
 
     return <Layout {...props} />;
 };
