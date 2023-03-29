@@ -93,7 +93,7 @@ const get_leaderboard = async (): Promise<HomeProps["leaderboard"]> => {
 
     return Object.values(users)
         .sort((a, b) => b.amount - a.amount)
-        .slice(0, 5);
+        .slice(0, 6);
 };
 
 export async function getStaticProps() {

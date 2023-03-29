@@ -1,66 +1,16 @@
 import Link from "next/link";
 
-import ArrowUpRight from "@Svgs/ArrowUpRight";
-import Game from "@Components/Game";
+import Bounty from "@Components/bounty/Bounty";
 
-import { LinkItUrl } from "react-linkify-it";
+import ArrowUpRight from "@Svgs/ArrowUpRight";
 
 import { BountyProps } from "@Props";
 
-import { format } from "@Lib";
-
-const Layout = ({ bounty: { admin, amount, claims, created_at, details, end_date, game, id, is_claimed, is_claimable, pledges, start_date } }: BountyProps) => (
+const Layout = ({ bounty: { admin, amount, claims, created_at, details, end_date, game, id, is_claimable, pledges, start_date } }: BountyProps) => (
     <div>
         {/* Bounty Information */}
         <section>
-            <div className="flex justify-between mb-9">
-                <Game {...game} />
-
-                {amount && (
-                    <div className="hidden sm:block">
-                        <div className="heading text-accent text-4xl lg:text-6xl">${amount}</div>
-                    </div>
-                )}
-            </div>
-
-            <div className="space-y-8">
-                <div>
-                    <h2>Details</h2>
-
-                    <div className="rte">
-                        <LinkItUrl>
-                            <p className="whitespace-pre-line">{details}</p>
-                        </LinkItUrl>
-                    </div>
-
-                    <div>
-                        {/* prettier-ignore */}
-                        <small>
-                            Bounty created on {created_at} by <span className="text-black">{admin.name}</span>
-                        </small>
-                    </div>
-                </div>
-
-                {(start_date || end_date) && (
-                    <div className="grid grid-cols-2 space-x-8">
-                        {start_date && (
-                            <div>
-                                <h3>Start Date</h3>
-
-                                <p className="mb-0">{format.iso(start_date)}</p>
-                            </div>
-                        )}
-
-                        {end_date && (
-                            <div>
-                                <h3>End Date</h3>
-
-                                <p className="mb-0">{format.iso(end_date)}</p>
-                            </div>
-                        )}
-                    </div>
-                )}
-            </div>
+            <Bounty admin={admin} amount={amount} created_at={created_at} details={details} end_date={end_date} game={game} start_date={start_date} />
         </section>
 
         <div className="gutter">
@@ -137,11 +87,13 @@ const Layout = ({ bounty: { admin, amount, claims, created_at, details, end_date
                 <p>There are currently no pledges on this bounty.</p>
             )}
 
-            {is_claimable && (
-                <Link className="button button--anchor" href={`/create/pledge/${id}`}>
-                    Submit Pledge
-                </Link>
-            )}
+            {
+                // is_claimable && (
+                //     <Link className="button button--anchor" href={`/create/pledge/${id}`}>
+                //         Submit Pledge
+                //     </Link>
+                // )
+            }
         </section>
     </div>
 );

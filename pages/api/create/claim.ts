@@ -9,6 +9,8 @@ import aws from "@Apis/aws";
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
     const { bounty_id, comment, link } = JSON.parse(req.body);
 
+    console.log(req.body);
+
     const {
         user: { turboardio_user_id },
     } = await getSession(req, res);

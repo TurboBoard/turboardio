@@ -4,6 +4,11 @@ export type CreateBountyState = {
     start_date: string;
 };
 
+export type CreateClaimState = {
+    comment: string;
+    link: string;
+};
+
 export type ContactState = {
     email: string;
     message: string;

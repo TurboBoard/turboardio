@@ -24,6 +24,11 @@ export type CreateBountyProps = {
     meta: Meta;
 };
 
+export type CreateClaimProps = {
+    bounty: Bounty;
+    meta: Meta;
+};
+
 export type EditBountyProps = {
     bounty: Bounty;
 };

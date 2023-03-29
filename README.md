@@ -41,3 +41,8 @@
 
 -   Refactored components, layouts and folder structures
 -   Added bounties page to accounts
+
+**Version 1.2.1**
+
+-   Fixed wrapping of links in rte component
+-   Added create/claim page

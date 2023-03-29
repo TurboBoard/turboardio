@@ -20,6 +20,8 @@
 
         a {
             @apply generic-link;
+
+            @apply break-all;
         }
 
         ul {
