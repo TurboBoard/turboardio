@@ -7,32 +7,25 @@ import { nanoid } from "nanoid";
 import aws from "@Apis/aws";
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
-    const { bounty_id, comment, link } = JSON.parse(req.body);
+    const { amount, bounty_id } = JSON.parse(req.body);
 
     const {
         user: { turboardio_user_id },
     } = await getSession(req, res);
 
-    const claim_id = nanoid();
-
-    const created_at = new Date().toISOString();
+    const pledge_id = nanoid();
 
     let Item = {
-        claim_id: aws.dynamo.input(claim_id),
+        pledge_id: aws.dynamo.input(pledge_id),
         bounty_id: aws.dynamo.input(bounty_id),
-        created_at: aws.dynamo.input(created_at),
-        link: aws.dynamo.input(link),
+        amount: aws.dynamo.input(amount),
         user_id: aws.dynamo.input(turboardio_user_id),
     } as {
         [key: string]: any;
     };
 
-    if (comment) {
-        Item.comment = aws.dynamo.input(comment);
-    }
-
     await aws.dynamo.put_item({
-        TableName: "turboardio_claims",
+        TableName: "turboardio_pledges",
         Item,
     });
 

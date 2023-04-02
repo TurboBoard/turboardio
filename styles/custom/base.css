@@ -111,10 +111,6 @@
         outline: none;
     }
 
-    label {
-        @apply label;
-    }
-
     input {
         @apply input;
     }

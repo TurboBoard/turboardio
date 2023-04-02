@@ -87,13 +87,11 @@ const Layout = ({ bounty: { admin, amount, claims, created_at, details, end_date
                 <p>There are currently no pledges on this bounty.</p>
             )}
 
-            {
-                // is_claimable && (
-                //     <Link className="button button--anchor" href={`/create/pledge/${id}`}>
-                //         Submit Pledge
-                //     </Link>
-                // )
-            }
+            {is_claimable && (
+                <Link className="button button--anchor" href={`/create/pledge/${id}`}>
+                    Create Pledge
+                </Link>
+            )}
         </section>
     </div>
 );

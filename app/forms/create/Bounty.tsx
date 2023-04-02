@@ -8,6 +8,7 @@ import { CreateBountyState } from "@States";
 
 const Form = ({ handle_create, is_loading }) => {
     const [state, set_state] = useState<CreateBountyState>({
+        amount: "",
         details: "",
         end_date: "",
         start_date: "",
@@ -28,6 +29,8 @@ const Form = ({ handle_create, is_loading }) => {
     return (
         <form className="space-y-8" onSubmit={handle_submit}>
             <TextArea id="details" label="Bounty Details" handle_change={handle_change} max_length={1024} required={true} value={state.details} />
+
+            <Input handle_change={handle_change} id="amount" label="Pledge Amount in USD" min={0} placeholder="5" required={false} type="number" value={state.amount} />
 
             <div className="grid grid-cols-2 space-x-8">
                 <Input handle_change={handle_change} id="start_date" label="Start Date" required={false} type="date" value={state.start_date} />

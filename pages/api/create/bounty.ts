@@ -7,7 +7,7 @@ import { nanoid } from "nanoid";
 import aws from "@Apis/aws";
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
-    const { details, end_date, game_id, start_date } = JSON.parse(req.body);
+    const { amount, details, end_date, game_id, start_date } = JSON.parse(req.body);
 
     const {
         user: { turboardio_user_id },
@@ -33,6 +33,20 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (start_date) {
         Item.start_date = aws.dynamo.input(start_date);
+    }
+
+    if (amount) {
+        const pledge_id = nanoid();
+
+        await aws.dynamo.put_item({
+            TableName: "turboardio_pledges",
+            Item: {
+                pledge_id: aws.dynamo.input(pledge_id),
+                bounty_id: aws.dynamo.input(bounty_id),
+                amount: aws.dynamo.input(amount),
+                user_id: aws.dynamo.input(turboardio_user_id),
+            },
+        });
     }
 
     await aws.dynamo.put_item({

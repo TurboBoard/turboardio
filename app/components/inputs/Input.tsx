@@ -6,13 +6,14 @@ type Input = {
     id: string;
     label: string;
     max_length?: number;
+    min?: number;
     placeholder?: string;
     required?: boolean;
     type?: string;
     value: string | number;
 };
 
-const Component = ({ disabled, handle_change, id, label, max_length, placeholder, required = false, type = "text", value }: Input) => {
+const Component = ({ disabled, handle_change, id, label, max_length, min, placeholder, required = false, type = "text", value }: Input) => {
     const props = {
         id,
         label,
@@ -23,6 +24,7 @@ const Component = ({ disabled, handle_change, id, label, max_length, placeholder
         id: Input["id"];
         label: Input["label"];
         maxLength: Input["max_length"];
+        min: Input["min"];
         placeholder: Input["placeholder"];
         required: Input["required"];
         type: Input["type"];
@@ -34,6 +36,8 @@ const Component = ({ disabled, handle_change, id, label, max_length, placeholder
     if (handle_change) props.onChange = (e: React.FormEvent<HTMLInputElement>) => handle_change(id, e.currentTarget.value);
 
     if (max_length) props.maxLength = max_length;
+
+    if (min) props.min = min;
 
     if (placeholder) props.placeholder = placeholder;
 

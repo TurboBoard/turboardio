@@ -85,7 +85,17 @@ const Layout = ({ claim: { comment, user, video }, leaderboard }: HomeProps) => 
             </section>
         </div>
 
-        {/* TODO: Featured Bounty */}
+        {/* <div>
+            <div className="divider divider--left-down bg-pink" />
+
+            <div className="bg-pink">
+                <section>
+                    <h1 className="text-white text-center">Featured Bounty</h1>
+                </section>
+            </div>
+
+            <div className="divider divider--right-up bg-pink" />
+        </div> */}
 
         <section className="md:w-2/3 md:mx-auto">
             <h1 className="text-center">Get In Touch</h1>

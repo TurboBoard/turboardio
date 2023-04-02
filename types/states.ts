@@ -1,4 +1,5 @@
 export type CreateBountyState = {
+    amount: string;
     details: string;
     end_date: string;
     start_date: string;
@@ -7,6 +8,11 @@ export type CreateBountyState = {
 export type CreateClaimState = {
     comment: string;
     link: string;
+};
+
+export type CreatePledgeState = {
+    amount: string;
+    checked: boolean;
 };
 
 export type ContactState = {

@@ -1,4 +1,3 @@
-import Delete from "@Components/delete/Bounty";
 import Edit from "@Components/edit/Bounty";
 import Game from "@Components/Game";
 
@@ -20,12 +19,6 @@ const Layout = ({ bounty: { details, game, end_date, start_date } }: EditBountyP
                     start_date: start_date || "",
                 }}
             />
-        </section>
-
-        <section>
-            <h1>Delete Bounty</h1>
-
-            <Delete />
         </section>
     </div>
 );

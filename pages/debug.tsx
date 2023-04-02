@@ -1,9 +1,9 @@
-import { nanoid } from "nanoid";
+// import { nanoid } from "nanoid";
 
 const Page = () => <div>debug</div>;
 
 export async function getStaticProps() {
-    console.log(nanoid());
+    // console.log(nanoid());
     return {
         props: {},
     };

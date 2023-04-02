@@ -46,3 +46,8 @@
 
 -   Fixed wrapping of links in rte component
 -   Added create/claim page
+
+**Version 1.2.2**
+
+-   Added create/pledge page
+-   Added option to add a pledge when creating a bounty

@@ -22,10 +22,11 @@ const Component = ({ game }: { game: GameType }) => {
 
     const [is_loading, set_is_loading] = useState<boolean>(false);
 
-    const handle_create = async ({ details, end_date, start_date }: CreateBountyState) => {
+    const handle_create = async ({ amount, details, end_date, start_date }: CreateBountyState) => {
         set_is_loading(true);
 
         const body: string = JSON.stringify({
+            amount: amount ? parseInt(amount, 10) : null,
             details,
             end_date: end_date || null,
             game_id: game.id,
