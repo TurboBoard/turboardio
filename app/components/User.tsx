@@ -23,19 +23,19 @@ const Component = ({ id, name, pronouns, src_handle, twitch_handle, twitter_hand
 
             <div className="flex space-x-6">
                 {src_handle && (
-                    <a className="highlight-link h-6.5" href={`https://www.speedrun.com/user/${src_handle}`} target="_blank">
+                    <a className="fade-link h-6.5 text-highlight" href={`https://www.speedrun.com/user/${src_handle}`} target="_blank">
                         <Trophy />
                     </a>
                 )}
 
                 {twitch_handle && (
-                    <a className="highlight-link h-6.5" href={`https://www.twitch.tv/${twitch_handle}`} target="_blank">
+                    <a className="fade-link h-6.5 text-highlight" href={`https://www.twitch.tv/${twitch_handle}`} target="_blank">
                         <Twitch />
                     </a>
                 )}
 
                 {twitter_handle && (
-                    <a className="highlight-link h-6.5" href={`https://twitter.com/${twitter_handle}`} target="_blank">
+                    <a className="fade-link h-6.5 text-highlight" href={`https://twitter.com/${twitter_handle}`} target="_blank">
                         <Twitter />
                     </a>
                 )}

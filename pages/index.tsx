@@ -1,10 +1,13 @@
 import aws from "@Apis/aws";
+import contentful from "@Apis/contentful";
 
 import { TurboardioUserHelper } from "@Helpers";
 
+import get_bounty from "@Services/get_bounty";
+
 import Layout from "@Layouts/Index";
 
-import { Claim, TurboardioUser } from "@Types";
+import { Bounty, Claim, Entry, TurboardioUser } from "@Types";
 import { HomeProps } from "@Props";
 
 import { convert } from "@Lib";
@@ -13,6 +16,12 @@ const Page = (props: HomeProps) => {
     if (Object.keys(props).length === 0) return null;
 
     return <Layout {...props} />;
+};
+
+const get_featured = async (): Promise<HomeProps["bounty"]> => {
+    const { fields }: Entry = await contentful.getEntry("1At94411COxnmsOMi8OtwB");
+
+    return await get_bounty(fields.featuredBounty);
 };
 
 const get_latest_winning_claim = async (): Promise<HomeProps["claim"]> => {
@@ -97,11 +106,14 @@ const get_leaderboard = async (): Promise<HomeProps["leaderboard"]> => {
 };
 
 export async function getStaticProps() {
+    const featured: Bounty = await get_featured();
+
     const latest_winning_claim: Claim = await get_latest_winning_claim();
 
     const leaderboard = await get_leaderboard();
 
     const props: HomeProps = {
+        bounty: featured,
         claim: latest_winning_claim,
         leaderboard,
         meta: {

@@ -51,6 +51,7 @@ export type GameProps = {
 };
 
 export type HomeProps = {
+    bounty: Bounty;
     claim: Claim;
     leaderboard: Leaderboard;
     meta: Meta;

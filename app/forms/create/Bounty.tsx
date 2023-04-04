@@ -28,7 +28,7 @@ const Form = ({ handle_create, is_loading }) => {
 
     return (
         <form className="space-y-8" onSubmit={handle_submit}>
-            <TextArea id="details" label="Bounty Details" handle_change={handle_change} max_length={1024} required={true} value={state.details} />
+            <TextArea id="details" label="Bounty Details" handle_change={handle_change} max_length={2048} required={true} value={state.details} />
 
             <Input handle_change={handle_change} id="amount" label="Pledge Amount in USD" min={0} placeholder="5" required={false} type="number" value={state.amount} />
 

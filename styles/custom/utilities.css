@@ -89,10 +89,6 @@
         @apply underline-offset-4;
     }
 
-    .highlight-link {
-        @apply focus:text-highlight;
-        @apply hover:text-highlight;
-    }
     /*
 		Effects
 	*/

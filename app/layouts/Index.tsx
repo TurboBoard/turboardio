@@ -2,18 +2,20 @@ import Contact from "@Components/Contact";
 
 import Link from "next/link";
 
-import Discord from "@Svgs/Discord";
-import Github from "@Svgs/Github";
-import Tiger from "@Svgs/Tiger";
+import Featured from "@Components/Featured";
 import User from "@Components/User";
 import Video from "@Components/Video";
 
+import Discord from "@Svgs/Discord";
+import Github from "@Svgs/Github";
+import Tiger from "@Svgs/Tiger";
+
 import { HomeProps } from "@Props";
 
-const Layout = ({ claim: { comment, user, video }, leaderboard }: HomeProps) => (
+const Layout = ({ bounty, claim: { comment, user, video }, leaderboard }: HomeProps) => (
     <div>
         <section className="sm:flex sm:justify-center sm:items-center sm:space-x-8 md:space-x-9 lg:space-x-10">
-            <div>
+            <div className="text-center sm:text-left">
                 <h1 className="mb-6">
                     Video Game
                     <br />
@@ -85,17 +87,7 @@ const Layout = ({ claim: { comment, user, video }, leaderboard }: HomeProps) => 
             </section>
         </div>
 
-        {/* <div>
-            <div className="divider divider--left-down bg-pink" />
-
-            <div className="bg-pink">
-                <section>
-                    <h1 className="text-white text-center">Featured Bounty</h1>
-                </section>
-            </div>
-
-            <div className="divider divider--right-up bg-pink" />
-        </div> */}
+        {/* <Featured {...bounty} /> */}
 
         <section className="md:w-2/3 md:mx-auto">
             <h1 className="text-center">Get In Touch</h1>

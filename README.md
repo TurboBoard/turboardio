@@ -51,3 +51,9 @@
 
 -   Added create/pledge page
 -   Added option to add a pledge when creating a bounty
+
+**Version 1.2.3**
+
+-   Bounty description max length increased from 1024 to 2048
+-   Minor homepage design edits
+-   Improved heading typography on mobile

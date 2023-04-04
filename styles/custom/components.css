@@ -179,6 +179,13 @@
 
         @apply space-x-7;
 
+        &--light {
+            .game__released,
+            .game__title {
+                @apply text-light;
+            }
+        }
+
         &--small {
             @apply space-x-6;
 
