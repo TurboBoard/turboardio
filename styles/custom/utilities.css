@@ -25,10 +25,6 @@
         background-color: var(--copy);
     }
 
-    .bg-grey {
-        background-color: var(--grey);
-    }
-
     .bg-highlight {
         background-color: var(--highlight);
     }
@@ -45,10 +41,6 @@
         border-color: var(--copy);
     }
 
-    .border-grey {
-        border-color: var(--grey);
-    }
-
     .border-highlight {
         border-color: var(--highlight);
     }
@@ -63,10 +55,6 @@
 
     .text-copy {
         color: var(--copy);
-    }
-
-    .text-grey {
-        color: var(--grey);
     }
 
     .text-highlight {

@@ -47,7 +47,7 @@ const Component = ({ game }: { game: GameType }) => {
     return (
         <div>
             <div className="mb-8">
-                <Game {...game} />
+                <Game game={game} href={null} />
             </div>
 
             <Form handle_create={handle_create} is_loading={is_loading} />

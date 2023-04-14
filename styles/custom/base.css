@@ -11,7 +11,6 @@
     body {
         --body: theme("colors.light");
         --copy: theme("colors.dark");
-        --grey: theme("colors.grey");
         --accent: theme("colors.pink");
         --highlight: theme("colors.byzantium");
     }
@@ -127,9 +126,5 @@
 
     section {
         @apply section;
-    }
-
-    hr {
-        @apply border-silver;
     }
 }

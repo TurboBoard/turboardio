@@ -27,10 +27,10 @@ const Form = ({ handle_create, is_loading }) => {
         <form className="space-y-8" onSubmit={handle_submit}>
             <Input handle_change={handle_change} id="amount" label="Pledge Amount in USD" min={1} placeholder="5" required={true} type="number" value={state.amount} />
 
-            <div className="flex flex-row-reverse justify-start items-center gap-x-7">
+            <div className="flex flex-row-reverse justify-start items-center gap-x-6">
                 {/* prettier-ignore */}
                 <label className="flex-1 text-sm" htmlFor="confirm">
-                    TurboBoard operates on an honour system. When you create a pledge you are making a promise to pay the winner the amount you specified. Please click on the checkbox to confirm.
+                    TurboBoard operates on an honour system. When you create a pledge you are making a promise to pay the winner the amount you specified. Click here to confirm you understand the rules.
                 </label>
 
                 <div>

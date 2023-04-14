@@ -1,12 +1,12 @@
 import Link from "next/link";
 
-import Bounty from "@Components/bounty/Bounty";
+import Bounty from "@Components/Bounty";
 
 import ArrowUpRight from "@Svgs/ArrowUpRight";
 
 import { BountyProps } from "@Props";
 
-const Layout = ({ bounty: { admin, amount, claims, created_at, details, end_date, game, id, is_claimable, pledges, start_date } }: BountyProps) => (
+const Layout = ({ bounty: { admin, amount, claims, created_at, details, end_date, game, id, is_claimed, is_expired, pledges, start_date } }: BountyProps) => (
     <div>
         {/* Bounty Information */}
         <section>
@@ -48,17 +48,17 @@ const Layout = ({ bounty: { admin, amount, claims, created_at, details, end_date
                             <div className="text-center">
                                 {/* prettier-ignore */}
                                 <small>
-                                    Claim submitted on {created_at} by <span className="text-copy">{user.name}</span>
-                                </small>
+                                Claim submitted on {created_at} by <span className="text-copy">{user.name}</span>
+                            </small>
                             </div>
                         </div>
                     ))}
                 </div>
             ) : (
-                <p>There are currently no claims on this bounty.</p>
+                <p>There are no claims on this bounty.</p>
             )}
 
-            {is_claimable && (
+            {!is_claimed && !is_expired && (
                 <Link className="button button--anchor" href={`/create/claim/${id}`}>
                     Submit Claim
                 </Link>
@@ -84,10 +84,10 @@ const Layout = ({ bounty: { admin, amount, claims, created_at, details, end_date
                     ))}
                 </div>
             ) : (
-                <p>There are currently no pledges on this bounty.</p>
+                <p>There are no pledges on this bounty.</p>
             )}
 
-            {is_claimable && (
+            {!is_claimed && !is_expired && (
                 <Link className="button button--anchor" href={`/create/pledge/${id}`}>
                     Create Pledge
                 </Link>

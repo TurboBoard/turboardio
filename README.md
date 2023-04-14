@@ -57,3 +57,13 @@
 -   Bounty description max length increased from 1024 to 2048
 -   Minor homepage design edits
 -   Improved heading typography on mobile
+
+**Version 1.2.4**
+
+-   Added is_expired boolean to bounties
+
+**Version 1.2.5**
+
+-   Several QoL changes
+-   Tightened up design
+-   Finally added featured bounty to homepage

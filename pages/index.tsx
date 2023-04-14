@@ -24,7 +24,7 @@ const get_featured = async (): Promise<HomeProps["bounty"]> => {
     return await get_bounty(fields.featuredBounty);
 };
 
-const get_latest_winning_claim = async (): Promise<HomeProps["claim"]> => {
+const get_latest_winning_claim = async (): Promise<HomeProps["latest_winning_claim"]> => {
     const { Items } = await aws.dynamo.scan({
         TableName: "turboardio_bounties",
     });
@@ -44,7 +44,7 @@ const get_latest_winning_claim = async (): Promise<HomeProps["claim"]> => {
 
         const claims = Items.map((Item) => aws.dynamo.unmarshall(Item)).sort((a, b) => b.amount - a.amount);
 
-        const { amount, claim_id, created_at, comment, link, user_id } = claims[0];
+        const { amount, comment, link, user_id } = claims[0];
 
         if (!amount) continue;
 
@@ -55,17 +55,16 @@ const get_latest_winning_claim = async (): Promise<HomeProps["claim"]> => {
 
         const user = await TurboardioUserHelper.get_turboardio_user(user_id);
 
-        const claim: Claim = {
+        const latest_winning_claim = {
             comment,
-            created_at,
-            id: claim_id,
-            is_winner: true,
-            link,
-            user,
             video,
+            winner: {
+                amount,
+                user,
+            },
         };
 
-        return claim;
+        return latest_winning_claim;
     }
 };
 
@@ -108,13 +107,13 @@ const get_leaderboard = async (): Promise<HomeProps["leaderboard"]> => {
 export async function getStaticProps() {
     const featured: Bounty = await get_featured();
 
-    const latest_winning_claim: Claim = await get_latest_winning_claim();
+    const latest_winning_claim = await get_latest_winning_claim();
 
     const leaderboard = await get_leaderboard();
 
     const props: HomeProps = {
         bounty: featured,
-        claim: latest_winning_claim,
+        latest_winning_claim,
         leaderboard,
         meta: {
             description: "Video Game Bounty Board. Create/Pledge/Claim.",

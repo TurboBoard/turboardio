@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import Game from "@Components/Game";
 import Bounties from "@Components/Bounties";
 
 import { GameProps } from "@Props";
@@ -8,15 +9,7 @@ const Layout = ({ bounties, game }: GameProps) => (
     <div>
         <section>
             <div className="mb-9">
-                <div className="game">
-                    <img className="game__image" alt={`${game.title} cover`} src={game.cover} />
-
-                    <div>
-                        <div className="game__title">{game.title}</div>
-
-                        <div className="game__released">{game.released}</div>
-                    </div>
-                </div>
+                <Game game={game} href={null} />
             </div>
 
             <div>

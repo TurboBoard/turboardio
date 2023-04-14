@@ -2,18 +2,36 @@ import Link from "next/link";
 
 import { Game } from "@Types";
 
-const Component = ({ cover, id, released, title }: Game) => (
+const Component = ({ game: { cover, developers, platforms, released, title }, href }: { game: Game; href: string | null }) => (
     <div className="game">
-        <Link className="fade-link" href={`/game/${id}`} tabIndex={-1}>
+        {href ? (
+            <Link className="fade-link shrink-0" href={href} tabIndex={-1}>
+                <img className="game__image" alt={`${title} cover`} src={cover} />
+            </Link>
+        ) : (
             <img className="game__image" alt={`${title} cover`} src={cover} />
-        </Link>
+        )}
 
         <div>
-            <Link className="fade-link game__title" href={`/game/${id}`}>
-                {title}
-            </Link>
+            {href ? (
+                <Link className="fade-link game__title" href={href}>
+                    {title}
+                </Link>
+            ) : (
+                <div className="game__title">{title}</div>
+            )}
 
-            <div className="game__released">{released}</div>
+            <ul className="game__details">
+                <li>
+                    <strong>Released:</strong> <span>{released}</span>
+                </li>
+                <li>
+                    <strong>Platforms:</strong> <span>{platforms}</span>
+                </li>
+                <li>
+                    <strong>Developers:</strong> <span>{developers}</span>
+                </li>
+            </ul>
         </div>
     </div>
 );

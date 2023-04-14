@@ -52,7 +52,7 @@ const Layout = ({}: SearchProps) => {
                         <Input handle_change={handle_change} id="query" label="Search by Game Title" placeholder="Super Mario 64, Legend of Zelda, Mega Man X..." type="search" value={query} />
 
                         {/* prettier-ignore */}
-                        <div><small>Powered by <a className="highlight-link" href="https://www.igdb.com/" target="_blank">IGDB</a></small></div>
+                        <div><small>Powered by <a className="generic-link" href="https://www.igdb.com/" target="_blank">IGDB</a></small></div>
                     </div>
 
                     <Button is_disabled={query.length === 0} is_loading={is_loading} text="Search" />

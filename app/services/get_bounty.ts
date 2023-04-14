@@ -15,11 +15,11 @@ const get_bounty = async (bounty_id: Bounty["id"]): Promise<Bounty> => {
 
     const pledges = await PledgeHelper.get_pledges(bounty_id);
 
-    const today = new Date().toISOString().substring(0, 10);
-
     const is_claimed = claims ? claims.some((e) => e.is_winner) : false;
 
-    const is_claimable = is_claimed ? false : !end_date ? true : end_date > today;
+    const today = new Date().toISOString().substring(0, 10);
+
+    const is_expired = !end_date ? false : end_date < today;
 
     const bounty: Bounty = {
         admin,
@@ -31,7 +31,7 @@ const get_bounty = async (bounty_id: Bounty["id"]): Promise<Bounty> => {
         game,
         id: bounty_id,
         is_claimed,
-        is_claimable,
+        is_expired,
         pledges,
         start_date: start_date || null,
     };

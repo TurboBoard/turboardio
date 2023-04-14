@@ -78,8 +78,6 @@
 
         @apply bg-transparent;
 
-        @apply border-silver;
-
         @apply outline-0;
 
         @apply caret-byzantium;
@@ -97,8 +95,6 @@
         @apply border-b;
 
         &:disabled {
-            @apply text-grey;
-
             @apply cursor-not-allowed;
         }
 
@@ -142,6 +138,16 @@
     /*
 		Custom Elements
 	*/
+    .bounties-item {
+        &--light {
+            @apply text-light;
+
+            a {
+                @apply text-light;
+            }
+        }
+    }
+
     .circle-image {
         @apply object-cover;
 
@@ -174,25 +180,24 @@
 
     .game {
         @apply flex;
+        @apply flex-col;
+
+        @apply sm:flex-row;
 
         @apply items-center;
 
-        @apply space-x-7;
+        @apply sm:space-x-7;
 
-        &--light {
-            .game__released,
-            .game__title {
-                @apply text-light;
-            }
-        }
+        @apply space-y-6;
+        @apply sm:space-y-0;
 
-        &--small {
-            @apply space-x-6;
+        @apply text-center;
+        @apply sm:text-left;
 
-            .game__image {
-                @apply h-9;
-                @apply w-9;
-            }
+        &__details {
+            @apply space-y-3;
+
+            @apply text-sm;
         }
 
         &__image {
@@ -200,12 +205,6 @@
 
             @apply h-10.5;
             @apply w-10.5;
-
-            @apply shrink-0;
-        }
-
-        &__released {
-            @apply text-grey;
         }
 
         &__title {
@@ -239,8 +238,6 @@
 
             @apply opacity-10;
 
-            @apply text-grey;
-
             @apply text-7xl;
             @apply lg:text-8xl;
 
@@ -258,8 +255,6 @@
         }
 
         &-item {
-            @apply border-silver;
-
             &__button {
                 @apply fade-link;
 
@@ -290,8 +285,6 @@
             }
 
             &__released {
-                @apply text-grey;
-
                 @apply text-sm;
             }
 
@@ -313,7 +306,6 @@
             @apply border-l;
             @apply border-r;
             @apply border-b;
-            @apply border-silver;
 
             @apply rounded-bl;
             @apply rounded-br;

@@ -27,7 +27,7 @@ const Form = ({ handle_edit, initial_state, is_loading }: { handle_edit: Functio
 
     return (
         <form className="space-y-8" onSubmit={handle_submit}>
-            <TextArea id="details" label="Bounty Details" handle_change={handle_change} max_length={1024} required={true} value={state.details} />
+            <TextArea id="details" label="Bounty Details" handle_change={handle_change} max_length={2048} required={true} value={state.details} />
 
             <div className="grid grid-cols-2 space-x-8">
                 <Input handle_change={handle_change} id="start_date" label="Start Date" required={false} type="date" value={state.start_date} />

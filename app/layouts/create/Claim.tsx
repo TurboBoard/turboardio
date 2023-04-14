@@ -1,4 +1,4 @@
-import Bounty from "@Components/bounty/Bounty";
+import Bounty from "@Components/Bounty";
 import CreateClaim from "@Components/create/Claim";
 
 import { CreateClaimProps } from "@Props";

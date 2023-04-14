@@ -9,7 +9,7 @@ const Layout = ({ bounty: { details, game, end_date, start_date } }: EditBountyP
             <h1>Edit Bounty</h1>
 
             <div className="mb-9">
-                <Game {...game} />
+                <Game game={game} href={`/game/${game.id}`} />
             </div>
 
             <Edit

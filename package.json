@@ -1,6 +1,6 @@
 {
     "name": "turboardio",
-    "version": "1.2.3",
+    "version": "1.2.5",
     "description": "The Turbo Board",
     "scripts": {
         "dev": "next dev",

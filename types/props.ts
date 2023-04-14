@@ -1,4 +1,4 @@
-import { Bounties, Bounty, Claim, Game, Leaderboard, Meta, User } from "@Types";
+import { Bounties, Bounty, Claim, Game, Meta, User, Winner } from "@Types";
 
 export type AccountProps = {
     user: User;
@@ -52,8 +52,12 @@ export type GameProps = {
 
 export type HomeProps = {
     bounty: Bounty;
-    claim: Claim;
-    leaderboard: Leaderboard;
+    latest_winning_claim: {
+        comment: Claim["comment"];
+        video: Claim["video"];
+        winner: Winner;
+    };
+    leaderboard: Winner[];
     meta: Meta;
 };
 

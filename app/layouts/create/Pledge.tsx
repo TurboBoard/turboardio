@@ -1,4 +1,4 @@
-import Bounty from "@Components/bounty/Bounty";
+import Bounty from "@Components/Bounty";
 import CreatePledge from "@Components/create/Pledge";
 
 import { CreatePledgeProps } from "@Props";
