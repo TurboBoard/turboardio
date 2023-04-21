@@ -1,9 +1,9 @@
 import Bounty from "@Components/Bounty";
-import CreatePledge from "@Components/create/Pledge";
+import DeletePledge from "@Components/delete/Pledge";
 
-import { CreatePledgeProps } from "@Props";
+import { DeletePledgeProps } from "@Props";
 
-const Layout = ({ bounty }: CreatePledgeProps) => (
+const Layout = ({ bounty, pledge }: DeletePledgeProps) => (
     <div>
         <section>
             <Bounty {...bounty} />
@@ -14,7 +14,7 @@ const Layout = ({ bounty }: CreatePledgeProps) => (
         </div>
 
         <section>
-            <CreatePledge bounty_id={bounty.id} />
+            <DeletePledge bounty_id={bounty.id} pledge={pledge} />
         </section>
     </div>
 );

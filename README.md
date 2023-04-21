@@ -67,3 +67,7 @@
 -   Several QoL changes
 -   Tightened up design
 -   Finally added featured bounty to homepage
+
+**Version 1.2.6**
+
+-   Added delete pledge option

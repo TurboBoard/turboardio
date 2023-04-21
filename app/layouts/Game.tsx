@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import Game from "@Components/Game";
-import Bounties from "@Components/Bounties";
+import BountiesItem from "@Components/BountiesItem";
 
 import { GameProps } from "@Props";
 
@@ -17,7 +17,11 @@ const Layout = ({ bounties, game }: GameProps) => (
 
                 <div className="mb-9">
                     {bounties.length ? (
-                        <Bounties bounties={bounties} />
+                        <div className="divide-y">
+                            {bounties.map((bounties_item) => (
+                                <BountiesItem key={bounties_item.id} {...bounties_item} />
+                            ))}
+                        </div>
                     ) : (
                         /* prettier-ignore */
                         <p className="mb-0">There are currently no bounties for this game.</p>

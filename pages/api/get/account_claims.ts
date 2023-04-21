@@ -4,7 +4,7 @@ import { withApiAuthRequired, getSession } from "@auth0/nextjs-auth0";
 
 import aws from "@Apis/aws";
 
-import get_bounties_item from "@Services/get_bounties_item";
+import get_bounty from "@Services/get_bounty";
 
 import { Bounties } from "@Types";
 
@@ -14,10 +14,10 @@ const get_bounties = async (req: NextApiRequest, res: NextApiResponse) => {
     } = await getSession(req, res);
 
     const { Items } = await aws.dynamo.scan({
-        TableName: "turboardio_bounties",
-        FilterExpression: "admin_id = :admin_id",
+        TableName: "turboardio_claims",
+        FilterExpression: "user_id = :user_id",
         ExpressionAttributeValues: {
-            ":admin_id": aws.dynamo.input(turboardio_user_id),
+            ":user_id": aws.dynamo.input(turboardio_user_id),
         },
     });
 
@@ -32,9 +32,19 @@ const get_bounties = async (req: NextApiRequest, res: NextApiResponse) => {
     const sorted: any[] = Items.map((Item) => aws.dynamo.unmarshall(Item)).sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf());
 
     for (const item of sorted) {
-        const bounty_item = await get_bounties_item(item);
+        const { admin, amount, created_at, end_date, game, id, is_claimed, is_locked, pledges } = await get_bounty(item.bounty_id);
 
-        bounties.push(bounty_item);
+        bounties.push({
+            admin,
+            amount,
+            created_at,
+            end_date,
+            game,
+            id,
+            is_claimed,
+            is_expired: is_locked,
+            pledges,
+        });
     }
 
     res.status(200).json({ bounties });

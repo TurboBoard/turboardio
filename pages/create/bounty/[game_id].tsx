@@ -34,9 +34,9 @@ export async function getStaticProps({ params }: { params: { game_id: string } }
     const props: CreateBountyProps = {
         game,
         meta: {
-            description: "Search through 200,000+ video games for your favourite game and add a bounty to the bounty board.",
-            title: "Create a Bounty",
-            url: "https://turboboard.io/create/bounty",
+            description: "Search through 200,000+ video games for your favourite game and add a bounty to the board.",
+            title: `Create ${game.title} Bounty`,
+            url: `https://turboboard.io/create/bounty/${game.id}`,
         },
     };
 

@@ -6,7 +6,7 @@ import Loading from "@Components/Loading";
 import { Bounties } from "@Types";
 
 const get_bounties = async (set_bounties: Function) => {
-    const response = await fetch("/api/get/account_bounties");
+    const response = await fetch("/api/get/account_claims");
 
     const { bounties } = await response.json();
 

@@ -5,9 +5,7 @@ import { TurboardioUserContext } from "@Context/TurboardioUser";
 import Loading from "@Components/Loading";
 import User from "@Components/User";
 
-import { AccountProps } from "@Props";
-
-const Layout = ({}: AccountProps) => (
+const Layout = () => (
     <TurboardioUserContext.Consumer>
         {({ turboardio_user }) => {
             if (!turboardio_user)
@@ -20,85 +18,79 @@ const Layout = ({}: AccountProps) => (
             return (
                 <div>
                     <section>
-                        <h1 className="mb-7">Welcome</h1>
-
                         <div className="mb-9">
+                            <h1 className="mb-7">Welcome</h1>
+
                             <User {...turboardio_user} />
                         </div>
 
-                        <div className="space-y-8">
-                            <div>
-                                <h2>Your Details</h2>
+                        <div className="mb-8">
+                            <h3>Your Details</h3>
 
-                                <p>Edit your username, pronouns and social links.</p>
+                            <p>Edit your username, pronouns and social links.</p>
 
-                                <Link className="button fade-link inline-block" href="/edit/details">
-                                    Edit Details
-                                </Link>
-                            </div>
-
-                            <div>
-                                <h2>Your Avatar</h2>
-
-                                <p>Change your avatar.</p>
-
-                                <Link className="button fade-link inline-block" href="/edit/image">
-                                    Edit Avatar
-                                </Link>
-                            </div>
-
-                            <hr />
-
-                            <div>
-                                <h2>Your Bounties</h2>
-
-                                <p>View your bounties.</p>
-
-                                <Link className="button fade-link inline-block" href="/account/bounties">
-                                    View Bounties
-                                </Link>
-                            </div>
-
-                            <hr />
-
-                            <div>
-                                <h2>Your Claims</h2>
-
-                                <p>View your claims.</p>
-
-                                {/* <Link className="button fade-link inline-block" href="/account/claims">
-                            Edit Claims
-                        </Link> */}
-                                <Link className="button inline-block button--disabled" href="/account/bounties">
-                                    Coming Soon
-                                </Link>
-                            </div>
-
-                            <hr />
-
-                            <div>
-                                <h2>Your Pledges</h2>
-
-                                <p>Edit and delete your pledges.</p>
-
-                                {/* <Link className="button fade-link inline-block" href="/account/pledges">
-                            Edit Pledges
-                        </Link> */}
-                                <Link className="button inline-block button--disabled" href="/account/bounties">
-                                    Coming Soon
-                                </Link>
-                            </div>
-
-                            <hr />
-
-                            <div>
-                                <h3>Goodbye</h3>
-
-                                <a className="button button--anchor" href="/api/auth/logout">
-                                    Logout
-                                </a>
-                            </div>
+                            <Link className="button fade-link inline-block" href="/edit/details">
+                                Edit Details
+                            </Link>
                         </div>
+
+                        <div>
+                            <h3>Your Avatar</h3>
+
+                            <p>Change your avatar.</p>
+
+                            <Link className="button fade-link inline-block" href="/edit/image">
+                                Edit Avatar
+                            </Link>
+                        </div>
+                    </section>
+
+                    <div className="gutter">
+                        <hr />
+                    </div>
+
+                    <section className="space-y-8">
+                        <div>
+                            <h3>Your Bounties</h3>
+
+                            <p>View bounties you have created.</p>
+
+                            <Link className="button fade-link inline-block" href="/account/bounties">
+                                View Bounties
+                            </Link>
+                        </div>
+
+                        <div>
+                            <h3>Your Claims</h3>
+
+                            <p>View bounties you've submitted claims for.</p>
+
+                            <Link className="button fade-link inline-block" href="/account/claims">
+                                View Claims
+                            </Link>
+                        </div>
+
+                        <div>
+                            <h3>Your Pledges</h3>
+
+                            <p>View bounties you've pledged to.</p>
+
+                            <Link className="button fade-link inline-block" href="/account/pledges">
+                                View Pledges
+                            </Link>
+                        </div>
+                    </section>
+
+                    <div className="gutter">
+                        <hr />
+                    </div>
+
+                    <section>
+                        <h3>Goodbye</h3>
+
+                        <a className="button button--anchor" href="/api/auth/logout">
+                            Logout
+                        </a>
                     </section>
                 </div>
             );

@@ -45,6 +45,10 @@
         border-color: var(--highlight);
     }
 
+    .border-silver {
+        border-color: var(--silver);
+    }
+
     .text-accent {
         color: var(--accent);
     }

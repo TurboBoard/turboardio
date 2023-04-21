@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import Bounties from "@Components/Bounties";
+import BountiesItem from "@Components/BountiesItem";
 
 import { BountiesProps } from "@Props";
 
@@ -16,7 +16,11 @@ const Layout = ({ bounties }: BountiesProps) => (
         <section>
             <h1>Latest Bounties</h1>
 
-            <Bounties bounties={bounties} />
+            <div className="divide-y">
+                {bounties.map((bounties_item) => (
+                    <BountiesItem key={bounties_item.id} {...bounties_item} />
+                ))}
+            </div>
         </section>
     </div>
 );

@@ -17,7 +17,7 @@ export type BountiesItem = {
     game: Bounty["game"];
     id: Bounty["id"];
     is_claimed: Bounty["is_claimed"];
-    is_expired: Bounty["is_expired"];
+    is_expired: boolean;
     pledges: Bounty["pledges"];
 };
 
@@ -31,7 +31,7 @@ export type Bounty = {
     game: Game;
     id: string;
     is_claimed: boolean;
-    is_expired: boolean;
+    is_locked: boolean;
     pledges: Pledge[] | null;
     start_date: string | null;
 };
@@ -84,9 +84,4 @@ export interface User extends UserProfile {
 export type Video = {
     id: string;
     type: "twitch" | "youtube";
-};
-
-export type Winner = {
-    amount: Bounty["amount"];
-    user: TurboardioUser;
 };

@@ -2,9 +2,7 @@ import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 
 import Layout from "@Layouts/edit/Details";
 
-import { EditDetailsProps } from "@Props";
-
-const Page = (props: EditDetailsProps) => <Layout {...props} />;
+const Page = () => <Layout />;
 
 export async function getStaticProps() {
     return {

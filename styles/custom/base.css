@@ -13,11 +13,13 @@
         --copy: theme("colors.dark");
         --accent: theme("colors.pink");
         --highlight: theme("colors.byzantium");
+        --silver: #d4d4d4; /* Neutral 300 */
     }
 
     body.dark {
         --body: theme("colors.dark");
         --copy: theme("colors.light");
+        --silver: #404040; /* Neutral 700 */
     }
 
     body {
@@ -126,5 +128,9 @@
 
     section {
         @apply section;
+    }
+
+    hr {
+        @apply border-silver;
     }
 }

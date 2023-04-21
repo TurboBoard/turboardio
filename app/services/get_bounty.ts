@@ -21,6 +21,8 @@ const get_bounty = async (bounty_id: Bounty["id"]): Promise<Bounty> => {
 
     const is_expired = !end_date ? false : end_date < today;
 
+    const is_locked = is_claimed ? (true ? is_expired : true) : false;
+
     const bounty: Bounty = {
         admin,
         amount: pledges ? pledges.reduce((acc, { amount }) => acc + amount, 0) : null,
@@ -31,7 +33,7 @@ const get_bounty = async (bounty_id: Bounty["id"]): Promise<Bounty> => {
         game,
         id: bounty_id,
         is_claimed,
-        is_expired,
+        is_locked,
         pledges,
         start_date: start_date || null,
     };

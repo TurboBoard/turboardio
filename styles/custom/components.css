@@ -76,6 +76,8 @@
     .textarea {
         @apply w-full;
 
+        @apply border-silver;
+
         @apply bg-transparent;
 
         @apply outline-0;
@@ -96,18 +98,6 @@
 
         &:disabled {
             @apply cursor-not-allowed;
-        }
-
-        &:invalid:not([value=""]) {
-            @apply border-warning;
-        }
-
-        &:valid {
-            @apply border-copy;
-
-            &:focus {
-                @apply border-highlight;
-            }
         }
     }
 
@@ -144,6 +134,12 @@
 
             a {
                 @apply text-light;
+            }
+
+            .jumbo {
+                &__text {
+                    @apply opacity-25;
+                }
             }
         }
     }
@@ -225,13 +221,14 @@
 
     .jumbo {
         @apply absolute;
-        @apply z-[-1];
         @apply top-1/2;
         @apply left-1/2;
 
         @apply transform;
         @apply -translate-x-1/2;
         @apply -translate-y-1/2;
+
+        @apply pointer-events-none;
 
         &__text {
             @apply heading;

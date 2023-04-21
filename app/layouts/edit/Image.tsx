@@ -3,9 +3,7 @@ import { TurboardioUserContext } from "@Context/TurboardioUser";
 import Edit from "@Components/edit/Image";
 import Loading from "@Components/Loading";
 
-import { EditImageProps } from "@Props";
-
-const Layout = ({}: EditImageProps) => (
+const Layout = () => (
     <TurboardioUserContext.Consumer>
         {({ turboardio_user }) => {
             if (!turboardio_user)

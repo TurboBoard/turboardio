@@ -3,9 +3,7 @@ import { TurboardioUserContext } from "@Context/TurboardioUser";
 import Edit from "@Components/edit/Details";
 import Loading from "@Components/Loading";
 
-import { EditDetailsProps } from "@Props";
-
-const Layout = ({}: EditDetailsProps) => (
+const Layout = () => (
     <TurboardioUserContext.Consumer>
         {({ edit_details, turboardio_user }) => {
             if (!turboardio_user)

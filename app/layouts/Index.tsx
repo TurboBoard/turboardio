@@ -3,8 +3,8 @@ import Contact from "@Components/Contact";
 import Link from "next/link";
 
 import BountiesItem from "@Components/BountiesItem";
+import User from "@Components/User";
 import Video from "@Components/Video";
-import Winner from "@Components/Winner";
 
 import Discord from "@Svgs/Discord";
 import Github from "@Svgs/Github";
@@ -12,7 +12,7 @@ import Tiger from "@Svgs/Tiger";
 
 import { HomeProps } from "@Props";
 
-const Layout = ({ bounty, latest_winning_claim, leaderboard }: HomeProps) => (
+const Layout = ({ featured, latest_winning_claim, leaderboard }: HomeProps) => (
     <div>
         <section className="sm:flex sm:justify-center sm:items-center sm:space-x-8 md:space-x-9 lg:space-x-10">
             <div className="text-center sm:text-left">
@@ -65,15 +65,23 @@ const Layout = ({ bounty, latest_winning_claim, leaderboard }: HomeProps) => (
                     )}
                 </div>
 
-                <Winner {...latest_winning_claim.winner} />
+                <div key={latest_winning_claim.winner.user.id} className="flex justify-between items-center">
+                    <User {...latest_winning_claim.winner.user} />
+
+                    <div className="hidden xs:block heading text-accent text-4xl 2xl:text-5xl">${latest_winning_claim.winner.amount}</div>
+                </div>
             </section>
 
             <section className="lg:w-1/2">
                 <h1 className="text-center">Leaderboard</h1>
 
                 <div className="space-y-7">
-                    {leaderboard.map((winner) => (
-                        <Winner key={winner.user.id} {...winner} />
+                    {leaderboard.map(({ amount, user }) => (
+                        <div key={user.id} className="flex justify-between items-center">
+                            <User {...user} />
+
+                            <div className="hidden xs:block heading text-accent text-4xl 2xl:text-5xl">${amount}</div>
+                        </div>
                     ))}
                 </div>
             </section>
@@ -87,7 +95,7 @@ const Layout = ({ bounty, latest_winning_claim, leaderboard }: HomeProps) => (
                     <h1 className="mb-5 text-white text-center">Featured Bounty</h1>
 
                     <div className="bounties-item--light">
-                        <BountiesItem {...bounty} />
+                        <BountiesItem {...featured} />
                     </div>
                 </div>
             </div>

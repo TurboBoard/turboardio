@@ -2,7 +2,7 @@ import aws from "@Apis/aws";
 
 import TurboardioUserHelper from "./turboardio_user";
 
-import { Bounty, Claim } from "@Types";
+import { BountiesItem, Bounty, Claim } from "@Types";
 
 import { format } from "@Lib";
 
@@ -39,7 +39,7 @@ const get_claims = async (bounty_id: Bounty["id"]): Promise<Bounty["claims"]> =>
     return claims;
 };
 
-const get_is_claimed = async (bounty_id: Bounty["id"]): Promise<Bounty["is_claimed"]> => {
+const get_is_claimed = async (bounty_id: Bounty["id"]): Promise<BountiesItem["is_claimed"]> => {
     const { Count, Items } = await aws.dynamo.scan({
         TableName: "turboardio_claims",
         FilterExpression: "bounty_id = :bounty_id",

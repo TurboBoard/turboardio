@@ -1,13 +1,4 @@
-import { Bounties, Bounty, Claim, Game, Meta, User, Winner } from "@Types";
-
-export type AccountProps = {
-    user: User;
-};
-
-export type AccountBountiesProps = {
-    bounties: Bounties;
-    user: User;
-};
+import { Bounties, BountiesItem, Bounty, Claim, Game, Meta, Pledge, TurboardioUser } from "@Types";
 
 export type BountiesProps = {
     bounties: Bounties;
@@ -34,14 +25,13 @@ export type CreatePledgeProps = {
     meta: Meta;
 };
 
-export type EditBountyProps = {
+export type DeletePledgeProps = {
     bounty: Bounty;
+    pledge: Pledge;
 };
 
-export type EditDetailsProps = {};
-
-export type EditImageProps = {
-    user: User;
+export type EditBountyProps = {
+    bounty: Bounty;
 };
 
 export type GameProps = {
@@ -51,13 +41,19 @@ export type GameProps = {
 };
 
 export type HomeProps = {
-    bounty: Bounty;
+    featured: BountiesItem;
     latest_winning_claim: {
         comment: Claim["comment"];
         video: Claim["video"];
-        winner: Winner;
+        winner: {
+            amount: Bounty["amount"];
+            user: TurboardioUser;
+        };
     };
-    leaderboard: Winner[];
+    leaderboard: {
+        amount: Bounty["amount"];
+        user: TurboardioUser;
+    }[];
     meta: Meta;
 };
 

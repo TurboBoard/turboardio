@@ -3,11 +3,13 @@ import contentful from "@Apis/contentful";
 
 import { TurboardioUserHelper } from "@Helpers";
 
-import get_bounty from "@Services/get_bounty";
+import get_bounties_item from "@Services/get_bounties_item";
+
+import { BountyHelper } from "@Helpers";
 
 import Layout from "@Layouts/Index";
 
-import { Bounty, Claim, Entry, TurboardioUser } from "@Types";
+import { Entry, TurboardioUser } from "@Types";
 import { HomeProps } from "@Props";
 
 import { convert } from "@Lib";
@@ -18,10 +20,12 @@ const Page = (props: HomeProps) => {
     return <Layout {...props} />;
 };
 
-const get_featured = async (): Promise<HomeProps["bounty"]> => {
+const get_featured = async (): Promise<HomeProps["featured"]> => {
     const { fields }: Entry = await contentful.getEntry("1At94411COxnmsOMi8OtwB");
 
-    return await get_bounty(fields.featuredBounty);
+    const item = await BountyHelper.get_bounty(fields.featuredBounty);
+
+    return await get_bounties_item(item);
 };
 
 const get_latest_winning_claim = async (): Promise<HomeProps["latest_winning_claim"]> => {
@@ -105,14 +109,14 @@ const get_leaderboard = async (): Promise<HomeProps["leaderboard"]> => {
 };
 
 export async function getStaticProps() {
-    const featured: Bounty = await get_featured();
+    const featured = await get_featured();
 
     const latest_winning_claim = await get_latest_winning_claim();
 
     const leaderboard = await get_leaderboard();
 
     const props: HomeProps = {
-        bounty: featured,
+        featured,
         latest_winning_claim,
         leaderboard,
         meta: {
