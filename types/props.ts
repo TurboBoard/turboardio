@@ -25,6 +25,15 @@ export type CreatePledgeProps = {
     meta: Meta;
 };
 
+export type DeleteBountyProps = {
+    bounty: Bounty;
+};
+
+export type DeleteClaimProps = {
+    bounty: Bounty;
+    claim: Claim;
+};
+
 export type DeletePledgeProps = {
     bounty: Bounty;
     pledge: Pledge;

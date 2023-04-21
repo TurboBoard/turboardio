@@ -26,6 +26,11 @@ export type EditBountyState = {
     start_date: string;
 };
 
+export type EditClaimState = {
+    comment: string;
+    link: string;
+};
+
 export type EditDetailsState = {
     name: string;
     pronouns: string;

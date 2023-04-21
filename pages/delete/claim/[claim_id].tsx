@@ -5,11 +5,11 @@ import aws from "@Apis/aws";
 import get_bounty from "@Services/get_bounty";
 
 import { Bounty, Claim } from "@Types";
-import { EditClaimProps } from "@Props";
+import { DeleteClaimProps } from "@Props";
 
-import Layout from "@Layouts/edit/Claim";
+import Layout from "@Layouts/delete/Claim";
 
-const Page = (props: EditClaimProps) => {
+const Page = (props: DeleteClaimProps) => {
     if (!props.bounty) return null;
 
     return <Layout {...props} />;
@@ -35,7 +35,7 @@ export async function getStaticProps({ params: { claim_id } }: { params: { claim
 
     const claim: Claim = bounty.claims.find(({ id }) => id === claim_id);
 
-    const props: EditClaimProps = {
+    const props: DeleteClaimProps = {
         bounty,
         claim,
     };

@@ -3,9 +3,9 @@ import Link from "next/link";
 import { TurboardioUserContext } from "@Context/TurboardioUser";
 
 import Bounty from "@Components/Bounty";
+import Claim from "@Components/Claim";
 import Pledge from "@Components/Pledge";
 
-import ArrowUpRight from "@Svgs/ArrowUpRight";
 import Edit from "@Svgs/Edit";
 import Trash from "@Svgs/Trash";
 
@@ -16,8 +16,26 @@ const Layout = ({ bounty }: BountyProps) => (
         {({ turboardio_user }) => (
             <div>
                 {/* Bounty Information */}
-                <section>
+                <section className="relative">
                     <Bounty {...bounty} />
+
+                    {turboardio_user?.id === bounty.admin.id && !bounty.is_locked && (
+                        <div className="gutter absolute top-0 right-0">
+                            <div className="flex justify-end space-x-5 lg:space-x-6 text-byzantium">
+                                <Link className="fade-link" href={`/edit/bounty/${bounty.id}`}>
+                                    <span className="block h-7">
+                                        <Edit />
+                                    </span>
+                                </Link>
+
+                                <Link className="fade-link" href={`/delete/bounty/${bounty.id}`}>
+                                    <span className="block h-7">
+                                        <Trash />
+                                    </span>
+                                </Link>
+                            </div>
+                        </div>
+                    )}
                 </section>
 
                 <div className="gutter">
@@ -30,59 +48,30 @@ const Layout = ({ bounty }: BountyProps) => (
 
                     {bounty.claims ? (
                         <div className="divide-y">
-                            {bounty.claims.map(({ comment, created_at, id, is_winner, link, user }) => {
-                                const is_admin = turboardio_user?.id === user.id;
+                            {bounty.claims.map((claim) => {
+                                const is_admin = turboardio_user?.id === claim.user.id;
 
                                 return (
-                                    <div key={id} className="relative py-7">
-                                        {is_winner && (
-                                            <div className="jumbo">
-                                                <div className="jumbo__text">winner</div>
-                                            </div>
-                                        )}
+                                    <div key={claim.id} className="relative">
+                                        <Claim {...claim} />
 
-                                        <div className="sm:flex">
-                                            <div className="sm:flex-1 flex justify-center sm:justify-start mb-6">
-                                                <img
-                                                    alt={`{user.name} profile picture`}
-                                                    className="circle-image h-10 w-10 lg:h-11 lg:w-11"
-                                                    src={`${process.env.NEXT_PUBLIC_USER_IMAGES_CDN}/${user.id}.jpg`}
-                                                />
-                                            </div>
+                                        {is_admin && !bounty.is_locked && (
+                                            <div className="absolute top-7 sm:top-0 left-0 sm:left-auto sm:right-0">
+                                                <div className="flex justify-end space-x-5 lg:space-x-6 text-byzantium">
+                                                    <Link className="fade-link" href={`/edit/claim/${claim.id}`}>
+                                                        <span className="block h-7">
+                                                            <Edit />
+                                                        </span>
+                                                    </Link>
 
-                                            <div className="sm:flex-1 sm:flex sm:items-center">{comment && <p className="w-3/4 mx-auto text-center whitespace-pre-line">{comment}</p>}</div>
-
-                                            <div className="absolute top-7 right-0 sm:static sm:flex-1">
-                                                <div className="flex justify-end space-x-6 lg:space-x-7 text-byzantium">
-                                                    <a className="fade-link block h-7 lg:h-8" href={link} target="_blank">
-                                                        <ArrowUpRight />
-                                                    </a>
-
-                                                    {/* is_admin && !bounty.is_locked && (
-                                                        <>
-                                                            <Link className="fade-link" href={`/edit/claim/${id}`}>
-                                                                <span className="block h-7 lg:h-8">
-                                                                    <Edit />
-                                                                </span>
-                                                            </Link>
-
-                                                            <Link className="fade-link" href={`/delete/claim/${id}`}>
-                                                                <span className="block h-7 lg:h-8">
-                                                                    <Trash />
-                                                                </span>
-                                                            </Link>
-                                                        </>
-                                                    ) */}
+                                                    <Link className="fade-link" href={`/delete/claim/${claim.id}`}>
+                                                        <span className="block h-7">
+                                                            <Trash />
+                                                        </span>
+                                                    </Link>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div className="text-center">
-                                            {/* prettier-ignore */}
-                                            <small>
-                                                Claim submitted on {created_at} by <span className="text-copy">{user.name}</span>
-                                            </small>
-                                        </div>
+                                        )}
                                     </div>
                                 );
                             })}

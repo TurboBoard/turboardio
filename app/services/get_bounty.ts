@@ -4,6 +4,14 @@ import { Bounty } from "@Types";
 
 import { format } from "@Lib";
 
+const get_is_locked = (is_claimed: boolean, is_expired: boolean) => {
+    if (is_claimed) return true;
+
+    if (is_expired) return true;
+
+    return false;
+};
+
 const get_bounty = async (bounty_id: Bounty["id"]): Promise<Bounty> => {
     const { admin_id, created_at, details, end_date, game_id, start_date } = await BountyHelper.get_bounty(bounty_id);
 
@@ -21,7 +29,7 @@ const get_bounty = async (bounty_id: Bounty["id"]): Promise<Bounty> => {
 
     const is_expired = !end_date ? false : end_date < today;
 
-    const is_locked = is_claimed ? (true ? is_expired : true) : false;
+    const is_locked = get_is_locked(is_claimed, is_expired);
 
     const bounty: Bounty = {
         admin,

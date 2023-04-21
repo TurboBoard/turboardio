@@ -1,22 +1,25 @@
-import Edit from "@Components/edit/Bounty";
-import Game from "@Components/Game";
+import Bounty from "@Components/Bounty";
+import Edit from "@Components/edit/Claim";
 
 import { EditClaimProps } from "@Props";
 
-const Layout = ({ bounty: { details, game, end_date, start_date } }: EditClaimProps) => (
+const Layout = ({ bounty, claim }: EditClaimProps) => (
     <div>
         <section>
-            <h1>Edit Bounty</h1>
+            <Bounty {...bounty} />
+        </section>
 
-            <div className="mb-9">
-                <Game game={game} href={`/game/${game.id}`} />
-            </div>
+        <div className="gutter">
+            <hr />
+        </div>
 
+        <section>
             <Edit
+                bounty_id={bounty.id}
+                claim_id={claim.id}
                 initial_state={{
-                    details,
-                    end_date: end_date || "",
-                    start_date: start_date || "",
+                    comment: claim.comment,
+                    link: claim.link,
                 }}
             />
         </section>

@@ -72,3 +72,9 @@
 
 -   Added delete pledge option
 -   Fixed issue with Search
+
+**Version 1.2.7**
+
+-   Added edit/delete to claims
+-   Added edit/delete to bounties
+-   User Claims and Pledges are now available in the Acccount page
