@@ -58,7 +58,7 @@ const Layout = ({ bounty }: BountyProps) => (
                                                         <ArrowUpRight />
                                                     </a>
 
-                                                    {is_admin && !bounty.is_locked && (
+                                                    {/* is_admin && !bounty.is_locked && (
                                                         <>
                                                             <Link className="fade-link" href={`/edit/claim/${id}`}>
                                                                 <span className="block h-7 lg:h-8">
@@ -72,7 +72,7 @@ const Layout = ({ bounty }: BountyProps) => (
                                                                 </span>
                                                             </Link>
                                                         </>
-                                                    )}
+                                                    ) */}
                                                 </div>
                                             </div>
                                         </div>

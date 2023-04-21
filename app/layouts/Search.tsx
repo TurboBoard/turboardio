@@ -63,7 +63,7 @@ const Layout = ({}: SearchProps) => {
                 <div className="divide-y">
                     {items.map((game) => (
                         <div key={game.id} className="py-7">
-                            <Game {...game} />
+                            <Game game={game} href={`/game/${game.id}`} />
                         </div>
                     ))}
                 </div>

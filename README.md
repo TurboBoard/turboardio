@@ -71,3 +71,4 @@
 **Version 1.2.6**
 
 -   Added delete pledge option
+-   Fixed issue with Search
