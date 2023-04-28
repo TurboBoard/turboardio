@@ -13,9 +13,16 @@ const Component = () => (
                     </Link>
                 </div>
 
-                <Link className="fade-link font-heading text-xl md:text-2xl lg:text-4xl leading-none tracking-wide whitespace-nowrap" href="/bounties">
-                    Bounty Board
-                </Link>
+                <div className="flex justify-center space-x-7 md:space-x-8 lg:space-x-9">
+                    <Link className="fade-link font-heading text-xl md:text-2xl lg:text-4xl leading-none tracking-wide whitespace-nowrap" href="/bounties">
+                        <span className="xs:hidden">Bounties</span>
+                        <span className="hidden xs:inline">Bounty Board</span>
+                    </Link>
+
+                    <Link className="fade-link font-heading text-xl md:text-2xl lg:text-4xl leading-none tracking-wide whitespace-nowrap" href="/zone">
+                        <span className="hidden xs:inline">Turbo</span> Zone
+                    </Link>
+                </div>
 
                 <div className="flex-1 flex justify-end">
                     <User />

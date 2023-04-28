@@ -2,7 +2,7 @@ import aws from "@Apis/aws";
 
 import type { NextApiRequest, NextApiResponse } from "next";
 
-const search = async (req: NextApiRequest, res: NextApiResponse) => {
+const contact = async (req: NextApiRequest, res: NextApiResponse) => {
     const { email, message } = JSON.parse(req.body);
 
     const params = {
@@ -31,4 +31,4 @@ const search = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(200).json({ success: true });
 };
 
-export default search;
+export default contact;
