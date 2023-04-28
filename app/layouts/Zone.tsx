@@ -14,7 +14,7 @@ const Layout = () => {
     const embed = useRef<any>();
 
     useEffect(() => {
-        const interval = setInterval(set_channel, 30000);
+        const interval = setInterval(set_channel, 5000);
 
         set_channel();
 
@@ -35,7 +35,6 @@ const Layout = () => {
     };
 
     const set_channel = async () => {
-        console.log("set channel");
         const twitch_channel = await get_twitch_channel();
 
         if (!embed.current && !twitch_channel) return;
