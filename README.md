@@ -78,3 +78,7 @@
 -   Added edit/delete to claims
 -   Added edit/delete to bounties
 -   User Claims and Pledges are now available in the Acccount page
+
+**Version 1.3.0**
+
+-   Launched The Zone
