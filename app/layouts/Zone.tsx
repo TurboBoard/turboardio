@@ -14,13 +14,9 @@ const Layout = () => {
     const embed = useRef<any>();
 
     useEffect(() => {
-        const interval = setInterval(async () => {
-            const twitch_channel = await get_twitch_channel();
+        const interval = setInterval(set_channel, 30000);
 
-            if (!embed.current && !twitch_channel) return;
-
-            embed.current.setChannel(twitch_channel);
-        }, 5000);
+        set_channel();
 
         return () => clearInterval(interval);
     }, []);
@@ -34,6 +30,17 @@ const Layout = () => {
             height: "100%",
             channel: "twitch",
         });
+
+        set_channel();
+    };
+
+    const set_channel = async () => {
+        console.log("set channel");
+        const twitch_channel = await get_twitch_channel();
+
+        if (!embed.current && !twitch_channel) return;
+
+        embed.current.setChannel(twitch_channel);
     };
 
     return (
