@@ -41,8 +41,6 @@ const Component = () => {
 
         const new_results = await get_results(JSON.stringify(body));
 
-        console.log(new_results);
-
         if (new_results) {
             set_results(new_results);
         }
