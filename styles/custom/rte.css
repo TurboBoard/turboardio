@@ -1,11 +1,14 @@
 @layer components {
     .rte {
-        h2,
+        h2 {
+            @apply mb-8;
+        }
+
         h3,
         h4,
         h5,
         h6 {
-            @apply mb-6;
+            @apply mb-5;
         }
 
         p {
@@ -39,6 +42,10 @@
 
                 @apply last:mb-0;
             }
+        }
+
+        hr {
+            @apply my-9;
         }
     }
 }

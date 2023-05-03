@@ -73,6 +73,7 @@
     }
 
     .input,
+    .select,
     .textarea {
         @apply w-full;
 
@@ -91,7 +92,8 @@
         }
     }
 
-    .input {
+    .input,
+    .select {
         @apply py-4;
 
         @apply border-b;
@@ -217,6 +219,14 @@
 
             @apply leading-none;
         }
+    }
+
+    .header-icon {
+        @apply fade-link;
+
+        @apply h-[16px];
+
+        @apply lg:h-7;
     }
 
     .jumbo {

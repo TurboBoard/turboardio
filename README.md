@@ -82,3 +82,9 @@
 **Version 1.3.0**
 
 -   Launched The Zone
+
+**Version 1.3.1**
+
+-   Improved Search page
+-   Added search link to header
+-   Improved FAQ

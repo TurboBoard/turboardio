@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const search = async (req: NextApiRequest, res: NextApiResponse) => {
-    const { query } = JSON.parse(req.body);
+    const { platform, query, year } = JSON.parse(req.body);
 
     const response = await fetch(process.env.IGDB_SEARCH_ENDPOINT, {
         method: "post",
@@ -10,7 +10,9 @@ const search = async (req: NextApiRequest, res: NextApiResponse) => {
             "X-Turbo-Key": process.env.CLOUDFLARE_API_TOKEN,
         },
         body: JSON.stringify({
+            platform,
             query,
+            year,
         }),
     });
 

@@ -9,7 +9,7 @@ const Component = () => (
         {({ turboardio_user }) => {
             if (turboardio_user) {
                 return (
-                    <Link className="fade-link block h-[17px] md:h-7 lg:h-[26px]" href="/account">
+                    <Link className="header-icon" href="/account">
                         <User />
                     </Link>
                 );

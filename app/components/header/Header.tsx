@@ -3,6 +3,8 @@ import Link from "next/link";
 import Logo from "@Svgs/Logo";
 import User from "@Components/header/User";
 
+import Glass from "@Svgs/Glass";
+
 const Component = () => (
     <div className="relative bg-byzantium bg-cover bg-top" style={{ backgroundImage: "url(/img/header.jpg)" }}>
         <div className="gutter pt-7 pb-6 lg:pb-5">
@@ -24,7 +26,11 @@ const Component = () => (
                     </Link>
                 </div>
 
-                <div className="flex-1 flex justify-end">
+                <div className="flex-1 flex justify-end items-center space-x-6 lg:space-x-7">
+                    <Link className="header-icon" href="/search">
+                        <Glass />
+                    </Link>
+
                     <User />
                 </div>
             </div>

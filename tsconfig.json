@@ -19,6 +19,7 @@
             "@Apis/*": ["app/apis/*"],
             "@Components/*": ["app/components/*"],
             "@Context/*": ["app/context/*"],
+            "@Data/*": ["app/data/*"],
             "@Forms/*": ["app/forms/*"],
             "@Helpers": ["app/helpers/index.ts"],
             "@Layouts/*": ["app/layouts/*"],
