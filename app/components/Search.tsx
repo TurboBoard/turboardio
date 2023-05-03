@@ -4,6 +4,8 @@ import Game from "@Components/Game";
 
 import Form from "@Forms/Search";
 
+import { Game as GameType } from "@Types";
+
 const get_results = async (body: string) => {
     const response = await fetch("/api/game/search", {
         method: "post",
@@ -16,7 +18,7 @@ const get_results = async (body: string) => {
 const Component = () => {
     const [is_loading, set_is_loading] = useState<boolean>(false);
 
-    const [results, set_results] = useState([]);
+    const [results, set_results] = useState<GameType[] | null>(null);
 
     const handle_search = async ({ platform, query, year }) => {
         set_is_loading(true);
@@ -50,16 +52,18 @@ const Component = () => {
         <div className="space-y-7">
             <Form handle_search={handle_search} is_loading={is_loading} />
 
-            {results.length > 0 ? (
+            {results !== null && (
                 <div className="divide-y">
-                    {results.map((game) => (
-                        <div key={game.id} className="py-7">
-                            <Game game={game} href={`/game/${game.id}`} />
-                        </div>
-                    ))}
+                    {results.length > 1 ? (
+                        results.map((game) => (
+                            <div key={game.id} className="py-7">
+                                <Game game={game} href={`/game/${game.id}`} />
+                            </div>
+                        ))
+                    ) : (
+                        <p className="text-center">Unfortunately there were no games that matched your search criteria.</p>
+                    )}
                 </div>
-            ) : (
-                <p className="text-center">Unfortunately there were no games that matched your search criteria.</p>
             )}
         </div>
     );
