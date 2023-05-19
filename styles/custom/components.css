@@ -128,13 +128,28 @@
     }
 
     /*
-		Custom Elements
+		Components
 	*/
+    .account-buttons {
+        @apply flex;
+        @apply flex-col;
+        @apply sm:flex-row;
+
+        @apply sm:justify-center;
+
+        @apply space-y-6;
+        @apply sm:space-y-0;
+        @apply sm:space-x-6;
+
+        @apply text-center;
+    }
+
     .bounties-item {
         &--light {
             @apply text-light;
 
-            a {
+            .game__title,
+            .reward {
                 @apply text-light;
             }
 

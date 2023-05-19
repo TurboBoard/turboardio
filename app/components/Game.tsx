@@ -28,9 +28,11 @@ const Component = ({ game: { cover, developers, platforms, released, title }, hr
                 <li>
                     <strong>Platforms:</strong> <span>{platforms}</span>
                 </li>
-                <li>
-                    <strong>Developers:</strong> <span>{developers}</span>
-                </li>
+                {developers && (
+                    <li>
+                        <strong>Developers:</strong> <span>{developers}</span>
+                    </li>
+                )}
             </ul>
         </div>
     </div>

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import Link from "next/link";
+
 import BountiesItem from "@Components/BountiesItem";
 import Loading from "@Components/Loading";
 
@@ -45,9 +47,29 @@ const Layout = () => {
         <section>
             <h1 className="mb-7">Your Bounties</h1>
 
-            <div className="divide-y">
+            <div className="divide-y divide-silver">
                 {bounties.map((bounties_item) => (
-                    <BountiesItem key={bounties_item.id} {...bounties_item} />
+                    <div key={bounties_item.id}>
+                        <BountiesItem {...bounties_item} />
+
+                        <div className="account-buttons">
+                            <Link className="button fade-link inline-block" href={`/bounty/${bounties_item.id}`}>
+                                View Bounty
+                            </Link>
+
+                            {/* <Link className="button fade-link inline-block" href={`/`}>
+                                Select Winners
+                            </Link> */}
+
+                            <Link className="button fade-link inline-block" href={`/edit/bounty/${bounties_item.id}`}>
+                                Edit Bounty
+                            </Link>
+
+                            <Link className="button fade-link inline-block" href={`/delete/bounty/${bounties_item.id}`}>
+                                Delete Bounty
+                            </Link>
+                        </div>
+                    </div>
                 ))}
             </div>
         </section>

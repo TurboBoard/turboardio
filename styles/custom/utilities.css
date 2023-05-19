@@ -81,6 +81,11 @@
         @apply underline-offset-4;
     }
 
+    .opacity-link {
+        @apply focus:opacity-75;
+        @apply hover:opacity-75;
+    }
+
     /*
 		Effects
 	*/

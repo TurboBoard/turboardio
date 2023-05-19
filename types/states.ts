@@ -31,6 +31,10 @@ export type EditClaimState = {
     link: string;
 };
 
+export type EditPledgeState = {
+    amount: string;
+};
+
 export type EditDetailsState = {
     name: string;
     pronouns: string;

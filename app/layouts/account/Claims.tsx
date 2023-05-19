@@ -1,28 +1,30 @@
 import { useEffect, useState } from "react";
 
-import BountiesItem from "@Components/BountiesItem";
+import Link from "next/link";
+
+import Claim from "@Components/Claim";
 import Loading from "@Components/Loading";
 
-import { Bounties } from "@Types";
+import { ClaimsItem } from "@Types";
 
-const get_bounties = async (set_bounties: Function) => {
+const get_claims = async (set_claims: Function) => {
     const response = await fetch("/api/get/account_claims");
 
-    const { bounties } = await response.json();
+    const { claims } = await response.json();
 
-    if (bounties) {
-        set_bounties(bounties);
+    if (claims) {
+        set_claims(claims);
     }
 };
 
 const Layout = () => {
-    const [bounties, set_bounties] = useState<Bounties | null>(null);
+    const [claims, set_claims] = useState<ClaimsItem[] | null>(null);
 
     useEffect(() => {
-        get_bounties(set_bounties);
+        get_claims(set_claims);
     }, []);
 
-    if (!bounties)
+    if (!claims)
         return (
             <section>
                 <div className="h-[30vw]">
@@ -31,23 +33,39 @@ const Layout = () => {
             </section>
         );
 
-    if (!bounties.length) {
+    if (!claims.length) {
         return (
             <section>
-                <h1 className="mb-7">Your Bounties</h1>
+                <h1 className="mb-7">Your Claims</h1>
 
-                <p>You currently do not have any bounties.</p>
+                <p>You currently do not have any claims.</p>
             </section>
         );
     }
 
     return (
         <section>
-            <h1 className="mb-7">Your Bounties</h1>
+            <h1 className="mb-7">Your Claims</h1>
 
-            <div className="divide-y">
-                {bounties.map((bounties_item) => (
-                    <BountiesItem key={bounties_item.id} {...bounties_item} />
+            <div className="divide-y divide-silver">
+                {claims.map((item) => (
+                    <div key={item.id}>
+                        <Claim {...item} />
+
+                        <div className="account-buttons">
+                            <Link className="button fade-link inline-block" href={`/bounty/${item.bounty_id}`}>
+                                View Bounty
+                            </Link>
+
+                            <Link className="button fade-link inline-block" href={`/edit/claim/${item.id}`}>
+                                Edit Claim
+                            </Link>
+
+                            <Link className="button fade-link inline-block" href={`/delete/claim/${item.id}`}>
+                                Delete Claim
+                            </Link>
+                        </div>
+                    </div>
                 ))}
             </div>
         </section>

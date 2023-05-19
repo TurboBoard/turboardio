@@ -6,7 +6,7 @@ import aws from "@Apis/aws";
 
 import get_bounty from "@Services/get_bounty";
 
-import { Bounties } from "@Types";
+import { PledgeItem } from "@Types";
 
 const get_bounties = async (req: NextApiRequest, res: NextApiResponse) => {
     const {
@@ -21,7 +21,7 @@ const get_bounties = async (req: NextApiRequest, res: NextApiResponse) => {
         },
     });
 
-    const bounties: Bounties = [];
+    const bounties: PledgeItem[] = [];
 
     if (!Items.length) {
         res.status(200).json({ bounties });
@@ -43,6 +43,7 @@ const get_bounties = async (req: NextApiRequest, res: NextApiResponse) => {
             id,
             is_claimed,
             is_expired: is_locked,
+            pledge_id: item.pledge_id,
             pledges,
         });
     }

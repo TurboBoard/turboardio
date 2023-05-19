@@ -1,9 +1,9 @@
 import Bounty from "@Components/Bounty";
-import Edit from "@Components/edit/Claim";
+import Edit from "@Components/edit/Pledge";
 
-import { EditClaimProps } from "@Props";
+import { EditPledgeProps } from "@Props";
 
-const Layout = ({ bounty, claim }: EditClaimProps) => (
+const Layout = ({ bounty, pledge }: EditPledgeProps) => (
     <div>
         <section>
             <Bounty {...bounty} />
@@ -14,14 +14,13 @@ const Layout = ({ bounty, claim }: EditClaimProps) => (
         </div>
 
         <section>
-            <h1>Edit Claim</h1>
+            <h1>Edit Pledge</h1>
 
             <Edit
                 bounty_id={bounty.id}
-                claim_id={claim.id}
+                pledge_id={pledge.id}
                 initial_state={{
-                    comment: claim.comment,
-                    link: claim.link,
+                    amount: pledge.amount.toString(),
                 }}
             />
         </section>

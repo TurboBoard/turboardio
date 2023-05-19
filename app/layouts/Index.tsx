@@ -94,9 +94,9 @@ const Layout = ({ featured, latest_winning_claim, leaderboard }: HomeProps) => (
                 <div className="lg:w-2/3 lg:mx-auto">
                     <h1 className="mb-5 text-white text-center">Featured Bounty</h1>
 
-                    <div className="bounties-item--light">
+                    <Link key={featured.id} className="bounties-item--light opacity-link" href={`/bounty/${featured.id}`}>
                         <BountiesItem {...featured} />
-                    </div>
+                    </Link>
                 </div>
             </div>
 

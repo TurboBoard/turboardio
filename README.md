@@ -88,3 +88,7 @@
 -   Improved Search page
 -   Added search link to header
 -   Improved FAQ
+
+**Version 1.3.2**
+
+-   Added edit/delete buttons to account bounties/claims/pledges

@@ -4,9 +4,11 @@ import { withApiAuthRequired, getSession } from "@auth0/nextjs-auth0";
 
 import aws from "@Apis/aws";
 
-import get_bounty from "@Services/get_bounty";
+import { TurboardioUserHelper } from "@Helpers";
 
-import { Bounties } from "@Types";
+import { ClaimsItem } from "@Types";
+
+import { format } from "@Lib";
 
 const get_bounties = async (req: NextApiRequest, res: NextApiResponse) => {
     const {
@@ -21,33 +23,33 @@ const get_bounties = async (req: NextApiRequest, res: NextApiResponse) => {
         },
     });
 
-    const bounties: Bounties = [];
+    const claims: ClaimsItem[] = [];
 
     if (!Items.length) {
-        res.status(200).json({ bounties });
+        res.status(200).json({ claims });
 
         return;
     }
 
-    const sorted: any[] = Items.map((Item) => aws.dynamo.unmarshall(Item)).sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf());
+    const sorted = Items.map((Item) => aws.dynamo.unmarshall(Item)).sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf());
 
-    for (const item of sorted) {
-        const { admin, amount, created_at, end_date, game, id, is_claimed, is_locked, pledges } = await get_bounty(item.bounty_id);
+    const user = await TurboardioUserHelper.get_turboardio_user(turboardio_user_id);
 
-        bounties.push({
-            admin,
-            amount,
-            created_at,
-            end_date,
-            game,
-            id,
-            is_claimed,
-            is_expired: is_locked,
-            pledges,
-        });
+    for (const { amount, bounty_id, comment, created_at, claim_id, link } of sorted) {
+        const claim: ClaimsItem = {
+            bounty_id,
+            comment: comment || null,
+            created_at: format.iso(created_at),
+            id: claim_id,
+            is_winner: amount ? true : false,
+            link,
+            user,
+        };
+
+        claims.push(claim);
     }
 
-    res.status(200).json({ bounties });
+    res.status(200).json({ claims });
 };
 
 export default withApiAuthRequired(get_bounties);

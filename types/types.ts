@@ -13,11 +13,11 @@ export type BountiesItem = {
     };
     amount: Bounty["amount"];
     created_at: Bounty["created_at"];
-    end_date: string | null;
+    end_date: Bounty["end_date"];
     game: Bounty["game"];
     id: Bounty["id"];
     is_claimed: Bounty["is_claimed"];
-    is_expired: boolean;
+    is_expired: Bounty["is_expired"];
     pledges: Bounty["pledges"];
 };
 
@@ -31,6 +31,7 @@ export type Bounty = {
     game: Game;
     id: string;
     is_claimed: boolean;
+    is_expired: boolean;
     is_locked: boolean;
     pledges: Pledge[] | null;
     start_date: string | null;
@@ -45,6 +46,10 @@ export type Claim = {
     user: TurboardioUser;
     video?: Video;
 };
+
+export interface ClaimsItem extends Claim {
+    bounty_id: string;
+}
 
 export type Game = {
     cover: string;
@@ -67,6 +72,10 @@ export type Pledge = {
     id: string;
     user_id: TurboardioUser["id"];
 };
+
+export interface PledgeItem extends BountiesItem {
+    pledge_id: string;
+}
 
 export type TurboardioUser = {
     id: string;

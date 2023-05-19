@@ -48,6 +48,11 @@ export type EditClaimProps = {
     claim: Claim;
 };
 
+export type EditPledgeProps = {
+    bounty: Bounty;
+    pledge: Pledge;
+};
+
 export type GameProps = {
     bounties: Bounties;
     game: Game;
