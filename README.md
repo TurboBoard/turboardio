@@ -97,3 +97,8 @@
 
 -   Fixed spacing issues with Claim
 -   Added Select/Edit Winners feature
+
+**Version 1.3.4**
+
+-   Fixed issue with selecting winners if there are no claims
+-   Fixed minor issues with pledges page

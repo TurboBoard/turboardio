@@ -32,20 +32,24 @@ const get_bounties = async (req: NextApiRequest, res: NextApiResponse) => {
     const sorted: any[] = Items.map((Item) => aws.dynamo.unmarshall(Item)).sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf());
 
     for (const item of sorted) {
-        const { admin, amount, created_at, end_date, game, id, is_claimed, is_locked, pledges } = await get_bounty(item.bounty_id);
+        try {
+            const { admin, amount, created_at, end_date, game, id, is_claimed, is_locked, pledges } = await get_bounty(item.bounty_id);
 
-        bounties.push({
-            admin,
-            amount,
-            created_at,
-            end_date,
-            game,
-            id,
-            is_claimed,
-            is_expired: is_locked,
-            pledge_id: item.pledge_id,
-            pledges,
-        });
+            bounties.push({
+                admin,
+                amount,
+                created_at,
+                end_date,
+                game,
+                id,
+                is_claimed,
+                is_expired: is_locked,
+                pledge_id: item.pledge_id,
+                pledges,
+            });
+        } catch (e) {
+            console.log(item);
+        }
     }
 
     res.status(200).json({ bounties });

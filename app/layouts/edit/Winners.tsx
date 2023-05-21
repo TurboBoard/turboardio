@@ -16,7 +16,7 @@ const Layout = ({ bounty }: EditWinnersProps) => (
         <section>
             <h1>Edit Winners</h1>
 
-            <Edit {...bounty} />
+            {bounty.claims ? <Edit {...bounty} /> : <p>There are currently no claims on this bounty.</p>}
         </section>
     </div>
 );

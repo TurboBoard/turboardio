@@ -49,7 +49,7 @@ const Layout = () => {
 
             <div className="divide-y divide-silver">
                 {bounties.map((bounties_item) => (
-                    <div key={bounties_item.id}>
+                    <div className="mb-8" key={bounties_item.id}>
                         <BountiesItem {...bounties_item} />
 
                         <div className="account-buttons">
