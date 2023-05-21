@@ -35,6 +35,10 @@ export type EditPledgeState = {
     amount: string;
 };
 
+export type EditWinnersState = {
+    [id: string]: string;
+};
+
 export type EditDetailsState = {
     name: string;
     pronouns: string;

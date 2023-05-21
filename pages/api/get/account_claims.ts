@@ -37,6 +37,7 @@ const get_bounties = async (req: NextApiRequest, res: NextApiResponse) => {
 
     for (const { amount, bounty_id, comment, created_at, claim_id, link } of sorted) {
         const claim: ClaimsItem = {
+            amount: amount || null,
             bounty_id,
             comment: comment || null,
             created_at: format.iso(created_at),

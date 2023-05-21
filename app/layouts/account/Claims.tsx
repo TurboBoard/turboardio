@@ -49,7 +49,7 @@ const Layout = () => {
 
             <div className="divide-y divide-silver">
                 {claims.map((item) => (
-                    <div key={item.id}>
+                    <div className="mb-8" key={item.id}>
                         <Claim {...item} />
 
                         <div className="account-buttons">

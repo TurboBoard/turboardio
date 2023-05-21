@@ -1,6 +1,6 @@
 import aws from "@Apis/aws";
 
-import { Bounty } from "@Types";
+import { Bounty, TurboardioUser } from "@Types";
 
 const get_bounty = async (
     bounty_id: Bounty["id"]
@@ -33,8 +33,22 @@ const get_bounty = async (
     };
 };
 
+const is_admin = async (bounty_id: Bounty["id"], user_id: TurboardioUser["id"]) => {
+    const { Item } = await aws.dynamo.get_item({
+        TableName: "turboardio_bounties",
+        Key: {
+            bounty_id: aws.dynamo.input(bounty_id),
+        },
+    });
+
+    const { admin_id } = aws.dynamo.unmarshall(Item);
+
+    return admin_id === user_id;
+};
+
 const helper = {
     get_bounty,
+    is_admin,
 };
 
 export default helper;

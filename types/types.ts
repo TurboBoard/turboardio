@@ -38,6 +38,7 @@ export type Bounty = {
 };
 
 export type Claim = {
+    amount: number | null;
     comment: string | null;
     created_at: string;
     id: string;

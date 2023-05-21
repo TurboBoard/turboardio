@@ -249,6 +249,8 @@
         @apply top-1/2;
         @apply left-1/2;
 
+        @apply opacity-50;
+
         @apply transform;
         @apply -translate-x-1/2;
         @apply -translate-y-1/2;

@@ -25,6 +25,7 @@ const get_claims = async (bounty_id: Bounty["id"]): Promise<Bounty["claims"]> =>
         const user = await TurboardioUserHelper.get_turboardio_user(user_id);
 
         const claim: Claim = {
+            amount: amount || null,
             comment: comment || null,
             created_at: format.iso(created_at),
             id: claim_id,

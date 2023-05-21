@@ -92,3 +92,8 @@
 **Version 1.3.2**
 
 -   Added edit/delete buttons to account bounties/claims/pledges
+
+**Version 1.3.3**
+
+-   Fixed spacing issues with Claim
+-   Added Select/Edit Winners feature

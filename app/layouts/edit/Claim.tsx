@@ -20,7 +20,7 @@ const Layout = ({ bounty, claim }: EditClaimProps) => (
                 bounty_id={bounty.id}
                 claim_id={claim.id}
                 initial_state={{
-                    comment: claim.comment,
+                    comment: claim.comment || "",
                     link: claim.link,
                 }}
             />

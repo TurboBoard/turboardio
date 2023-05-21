@@ -32,7 +32,7 @@ const Layout = ({ bounty }: BountyProps) => (
             )}
 
             {!bounty.is_locked && (
-                <Link className="button button--anchor" href={`/create/claim/${bounty.id}`}>
+                <Link className="button button--anchor mt-7" href={`/create/claim/${bounty.id}`}>
                     Submit Claim
                 </Link>
             )}

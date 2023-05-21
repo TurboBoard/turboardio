@@ -57,9 +57,9 @@ const Layout = () => {
                                 View Bounty
                             </Link>
 
-                            {/* <Link className="button fade-link inline-block" href={`/`}>
+                            <Link className="button fade-link inline-block" href={`/edit/winners/${bounties_item.id}`}>
                                 Select Winners
-                            </Link> */}
+                            </Link>
 
                             <Link className="button fade-link inline-block" href={`/edit/bounty/${bounties_item.id}`}>
                                 Edit Bounty

@@ -53,6 +53,10 @@ export type EditPledgeProps = {
     pledge: Pledge;
 };
 
+export type EditWinnersProps = {
+    bounty: Bounty;
+};
+
 export type GameProps = {
     bounties: Bounties;
     game: Game;
